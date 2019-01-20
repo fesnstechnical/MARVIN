@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -13,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeTolerance: 0.000001
   fullPath: /actions/buggy/in/Throttle
-  actionSet: {fileID: 11400000, guid: e50c26fa5d5b38e4998b9b0af19b2252, type: 2}
+  actionSet: {fileID: 11400000, guid: 95af54b3d6670c146ad7bdf1376e602d, type: 2}
   direction: 0

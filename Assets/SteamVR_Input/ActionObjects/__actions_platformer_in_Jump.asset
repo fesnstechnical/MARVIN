@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -13,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeTolerance: 0.000001
   fullPath: /actions/platformer/in/Jump
-  actionSet: {fileID: 11400000, guid: 346fd35c20fef6c43908673850c6c6bb, type: 2}
+  actionSet: {fileID: 11400000, guid: b3a433fc5ee6bd74db4330cfe3ced2cb, type: 2}
   direction: 0

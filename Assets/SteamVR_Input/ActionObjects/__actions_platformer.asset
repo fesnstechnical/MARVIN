@@ -4,23 +4,24 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f50bf4dbfd823bb45a3f25fff4d15936, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cec54b1f2f9486468b56cd0022248aa, type: 3}
   m_Name: __actions_platformer
   m_EditorClassIdentifier: 
   allActions:
-  - {fileID: 11400000, guid: a94c4c30217024848b0049cbbdf89627, type: 2}
-  - {fileID: 11400000, guid: d49c0ac61e0e325449e227d8e0ec3f6d, type: 2}
+  - {fileID: 11400000, guid: 260a185ac0b57e2479988f2ac434baa1, type: 2}
+  - {fileID: 11400000, guid: 9538b824534dfdc41ac06b77c107d5d9, type: 2}
   nonVisualInActions:
-  - {fileID: 11400000, guid: a94c4c30217024848b0049cbbdf89627, type: 2}
-  - {fileID: 11400000, guid: d49c0ac61e0e325449e227d8e0ec3f6d, type: 2}
+  - {fileID: 11400000, guid: 260a185ac0b57e2479988f2ac434baa1, type: 2}
+  - {fileID: 11400000, guid: 9538b824534dfdc41ac06b77c107d5d9, type: 2}
   visualActions: []
   poseActions: []
   skeletonActions: []
   outActionArray: []
   fullPath: /actions/platformer
   usage: single
-  inActions: {fileID: 11400000, guid: da5eae98e9849c34db559ad16eb48dd7, type: 2}
+  inActions: {fileID: 11400000, guid: 9fada0a38ba71624b997cccf9948c586, type: 2}

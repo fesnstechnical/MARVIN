@@ -59,7 +59,7 @@ public class UIHologram : MonoBehaviour {
         size = plane.GetComponent<RectTransform>().localScale.z * sizeModifier;
         displayText = this.GetComponentInChildren<Text>();
         GetComponentInChildren<Renderer>().material.color = planeColor; //  set rendering color
-        GetComponentInChildren<Material>().color = GetComponentInChildren<Renderer>().material.color;   //  set this material color to render as the rendering color
+       // GetComponentInChildren<Material>().color = GetComponentInChildren<Renderer>().material.color;   //  set this material color to render as the rendering color
     }
 
     // Update is called once per frame

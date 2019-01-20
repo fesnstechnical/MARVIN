@@ -48,7 +48,8 @@ public class sonic_controller : MonoBehaviour {
 				}
 
 
-			} else {
+			}
+            else {
 
 				render.material = unlitMaterial;
 

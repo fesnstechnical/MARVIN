@@ -22,7 +22,7 @@ public class UIHologram_Scroll : MonoBehaviour{
     private void Start()
     {
         GetComponentInChildren<Renderer>().material.color = color;  //  set rendering color
-        GetComponentInChildren<Material>().color = GetComponentInChildren<Renderer>().material.color;   //  set this material color to render as the rendering color
+        //GetComponentInChildren<Material>().color = GetComponentInChildren<Renderer>().material.color;   //  set this material color to render as the rendering color
     }
 
     // Update is called once per frame
