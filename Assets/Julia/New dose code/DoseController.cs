@@ -25,12 +25,13 @@ public class DoseController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if ( t == 90 ) {
-            Debug.Log("Re");
+        if ( t == 90 * 1 ) {
+       
             calculateDose();
             t = 0;
 
         }
+
         t++;
 
 	}
@@ -60,12 +61,17 @@ public class DoseController : MonoBehaviour {
     private float calculateCountRateForDoseBody( DoseBody doseBody , List<Source> sources , List<Shield> shields) {
 
         float countRate = 0;
-        
+
+
+
+        Debug.Log(doseBody.getDoseReceptors().Count + ":" + shields.Count );
+
         foreach ( DoseReceptor doseReceptor in doseBody.getDoseReceptors() ) {
 
             foreach ( Source source in sources ) {
 
                 float attenuatedActivity = source.getActivity();
+                
                 Vector3 origin = doseReceptor.getPosistion();
 
                 //Sort shields
@@ -178,6 +184,8 @@ public class DoseController : MonoBehaviour {
                 }
 
                 attenuatedActivity = materialAttenuate(attenuatedActivity , airAttenuation , Vector3.Distance(origin , source.getPosistion() ) );
+
+                countRate += attenuatedActivity;
 
             }
 

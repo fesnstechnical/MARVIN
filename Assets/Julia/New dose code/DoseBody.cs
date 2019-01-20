@@ -5,21 +5,23 @@ using UnityEngine;
 public abstract class DoseBody : MonoBehaviour {
 
     public abstract List<DoseReceptor> getDoseReceptors();
+    public abstract void secondaryStart();
 
     private float doseRate;
     private float countRate;
-    private Transform transform;
+    private Transform hiddenTransform;
 
 
     public Transform getTransform() {
 
-        return transform;
+        return hiddenTransform;
 
     }
 
     void Start() {
-
-        transform = GetComponent<Transform>();
+        
+        hiddenTransform = GetComponent<Transform>();
+        secondaryStart();
 
     }
 

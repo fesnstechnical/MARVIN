@@ -10,10 +10,10 @@ public class User : DoseBody {
     private List<DoseReceptor> doseReceptors = new List<DoseReceptor>();
     
 
-    public User() {
+    public override void secondaryStart() {
         
-        doseReceptors.Add( new DoseReceptor( 77 , 1.7 , getTransform() ) );
-
+        doseReceptors.Add(new DoseReceptor(77, 1.7, getTransform()));
+   
     }
 
     public void Update() {
@@ -38,9 +38,11 @@ public class User : DoseBody {
  
     private void updateControllerRate ( float doseRate , float countRate ) {
 
-
+        
         //Only update if dose has changed
-        if ( doseRate != lastDoseRate && updateClick != lastCountRate && countRate > updateClicks ) {
+        if ( ( doseRate != lastDoseRate || updateClick != lastCountRate ) && countRate > updateClicks ) {
+
+            Debug.Log("Unga bunga");
 
             //If its null find the text mesh in the game
             if ( textMesh == null ) {

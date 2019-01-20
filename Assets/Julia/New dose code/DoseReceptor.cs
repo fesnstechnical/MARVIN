@@ -8,13 +8,13 @@ public class DoseReceptor {
 
     private double mass; //Constant
     private double surfaceArea; //Constant
-    private Transform transform;
+    private Transform receptorTransform;
 
-    public DoseReceptor( double mass , double surfaceArea , Transform transform ) {
+    public DoseReceptor( double mass , double surfaceArea , Transform receptorTransform) {
 
         this.mass = mass;
         this.surfaceArea = surfaceArea;
-        this.transform = transform;
+        this.receptorTransform = receptorTransform;
 
     }
 
@@ -32,7 +32,7 @@ public class DoseReceptor {
 
     public Vector3 getPosistion() {
 
-        return transform.position;
+        return receptorTransform.position;
 
 
     }
