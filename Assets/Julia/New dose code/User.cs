@@ -41,9 +41,7 @@ public class User : DoseBody {
         
         //Only update if dose has changed
         if ( ( doseRate != lastDoseRate || updateClick != lastCountRate ) && countRate > updateClicks ) {
-
-            Debug.Log("Unga bunga");
-
+            
             //If its null find the text mesh in the game
             if ( textMesh == null ) {
 
