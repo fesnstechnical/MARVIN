@@ -48,9 +48,7 @@ public class DoseController : MonoBehaviour {
 
             float countRate = calculateCountRateForDoseBody(body , sources , shields);
             float doseRate = calculateDoseRateForDoseBody(body , countRate , sources , shields);
-
-            Debug.Log(countRate);
-
+            
             body.setCountRate(countRate);
             body.setDoseRate(doseRate);
 
@@ -61,11 +59,7 @@ public class DoseController : MonoBehaviour {
     private float calculateCountRateForDoseBody( DoseBody doseBody , List<Source> sources , List<Shield> shields) {
 
         float countRate = 0;
-
-
-
-        Debug.Log(doseBody.getDoseReceptors().Count + ":" + shields.Count );
-
+        
         foreach ( DoseReceptor doseReceptor in doseBody.getDoseReceptors() ) {
 
             foreach ( Source source in sources ) {
@@ -80,11 +74,11 @@ public class DoseController : MonoBehaviour {
                 for ( int i = 0 ; i < shields.Count ; i++ ) {
 
                     Shield shield = shields[i];
-
+                    
                     Vector3[] points = lineShieldIntersection( origin , source.getPosistion() , shield );
 
                     if ( points[0] != Vector3.zero && points[1] != Vector3.zero ) {
-
+                        
                         //This is our thickness
                         float thickness = Vector3.Distance(points[0] , points[1]);
 
@@ -111,9 +105,8 @@ public class DoseController : MonoBehaviour {
 
 
                         string assumed = "Concrete (Ordinary)";
-                        string renderName = shield.GetComponent<Renderer>().material.name;
-                        renderName = renderName.Replace(" (Instance)" , "");
-
+                        string renderName = shield.getName();
+       
                         if ( !attenConstants.ContainsKey(renderName) ) {
 
                             assumed = renderName;
@@ -218,14 +211,14 @@ public class DoseController : MonoBehaviour {
 
         //Checks to see if the source hit one face
         if ( collider.Raycast(new Ray(origin , ( ( origin - destination ) * -1f ).normalized) , out hitA , 1000f) ) {
-
+            
             if ( hitA.transform.name == shield.name ) {
 
                 startA = hitA.point;
 
                 //Now that we get a hit, we work backwards to get another ray cast, from the target to the source
                 if ( collider.Raycast(new Ray(destination , ( ( destination - origin ) * -1f ).normalized) , out hitB , 1000f) ) {
-
+                    
                     if ( hitB.transform.name == shield.name ) {
 
                         startB = hitB.point;
@@ -410,14 +403,21 @@ public class DoseController : MonoBehaviour {
 
     }
 
-    private void DrawLine(Vector3 start , Vector3 end , Color color , float duration = 0.052f) {
+    private void DrawLine(Vector3 start , Vector3 end , Color color , float duration = 1f) {
         GameObject myLine = new GameObject();
         myLine.transform.position = start;
         myLine.AddComponent<LineRenderer>();
         LineRenderer lr = myLine.GetComponent<LineRenderer>();
-        //lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
-        lr.SetColors(color , color);
-        lr.SetWidth(0.01f , 0.01f);
+        lr.material = new Material(Shader.Find("Sprites/Default"));
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(color , 1.0f) } ,
+            new GradientAlphaKey[] {  new GradientAlphaKey(1 , 1.0f) }
+        );
+
+        lr.startWidth = 0.01f;
+        lr.endWidth = 0.01f;
+        lr.colorGradient = gradient;
         lr.SetPosition(0 , start);
         lr.SetPosition(1 , end);
         GameObject.Destroy(myLine , duration);

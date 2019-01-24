@@ -5,11 +5,11 @@ using UnityEngine;
 public class Shield : MonoBehaviour {
 
     //Used to contain information
-    public string name;
+    public string nom;
 
     public string getName() {
 
-        return name;
+        return nom;
 
     }
 

@@ -51,7 +51,7 @@ public class User : DoseBody {
 
             if ( textMesh != null ) {
 
-                textMesh.text = Math.Round(doseRate , 2) + "\n" + "mSv/h" + Math.Round(countRate , 2) + "\n" + "CPS"; //Rounds to two decimals and updates text
+                textMesh.text = Math.Round(doseRate , 2) + "\n" + "mSv/h" + "\n" + Math.Round(countRate , 2) + "\n" + "CPS"; //Rounds to two decimals and updates text
 
             }
 

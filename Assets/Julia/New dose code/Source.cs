@@ -13,18 +13,12 @@ public class Source : MonoBehaviour {
     private float[] energies = new float[]{ 661.7F }; //In keV
 
     
-    private Transform transform;
-
-    public Source() {
-
-        
-
-    }
+    private Transform sourceTransform;
 
     //Used to contain information
     void Start() {
 
-        this.transform = GetComponent<Transform>();
+        this.sourceTransform = GetComponent<Transform>();
 
     }
 
@@ -36,7 +30,14 @@ public class Source : MonoBehaviour {
 
     public Vector3 getPosistion() {
 
-        return transform.position;
+        if ( this.sourceTransform == null ){
+
+            return new Vector3(0 , 0 , 0);
+
+        }
+        
+
+        return sourceTransform.position;
 
     }
 
