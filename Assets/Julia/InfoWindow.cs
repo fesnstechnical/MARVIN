@@ -37,10 +37,10 @@ public class InfoWindow : MonoBehaviour {
 
 		if (show) {
 
-			if (name == "source") {
+			if ( GetComponent<Source>() != null ) { 
 
-				source sourceCode = GetComponent<source> ();
-				mesh.text = sourceCode.radioNuke + "\n" + sourceCode.sourceActivity + " mCi";
+				Source sourceCode = GetComponent<Source> ();
+				mesh.text = sourceCode.getName() + "\n" + sourceCode.getActivity( "mCi" ) + " mCi";
 
 			}
 

@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DoseController : MonoBehaviour {
 
     private Dictionary<string , Dictionary<float , float>> attenConstants = new Dictionary<string , Dictionary<float , float>>();
-    private float airAttenuation = 1; //Please change and update later
+    private float airAttenuation = 0; //Please change and update later
 
     public bool debug;
 
@@ -14,19 +15,19 @@ public class DoseController : MonoBehaviour {
     //Only one of these per scene
 
     // Use this for initialization
-    void Start () {
+    void Start() {
 
         readCSV();
 
-	}
+    }
 
     int t = 0;
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update() {
 
         if ( t == 90 * 1 ) {
-       
+
             calculateDose();
             t = 0;
 
@@ -34,7 +35,7 @@ public class DoseController : MonoBehaviour {
 
         t++;
 
-	}
+    }
 
 
 
@@ -46,8 +47,10 @@ public class DoseController : MonoBehaviour {
 
         foreach ( DoseBody body in doseBodies ) {
 
-            float countRate = calculateCountRateForDoseBody(body , sources , shields);
-            float doseRate = calculateDoseRateForDoseBody(body , countRate , sources , shields);
+            float[] rates = calculateCountAndDoseRateForDoseBody(body , sources , shields);
+
+            float countRate = rates[ 0 ];
+            float doseRate = rates[ 1 ];
             
             body.setCountRate(countRate);
             body.setDoseRate(doseRate);
@@ -56,49 +59,50 @@ public class DoseController : MonoBehaviour {
 
     }
 
-    private float calculateCountRateForDoseBody( DoseBody doseBody , List<Source> sources , List<Shield> shields) {
+    private float[] calculateCountAndDoseRateForDoseBody( DoseBody doseBody , List<Source> sources , List<Shield> shields ) {
 
         float countRate = 0;
-        
+        float doseRate = 0;
+
         foreach ( DoseReceptor doseReceptor in doseBody.getDoseReceptors() ) {
 
             foreach ( Source source in sources ) {
 
                 float attenuatedActivity = source.getActivity();
-                
+
                 Vector3 origin = doseReceptor.getPosistion();
 
                 //Sort shields
-                shields = sortShields( shields , doseReceptor.getPosistion() );
+                shields = sortShields(shields , doseReceptor.getPosistion());
 
                 for ( int i = 0 ; i < shields.Count ; i++ ) {
 
-                    Shield shield = shields[i];
-                    
-                    Vector3[] points = lineShieldIntersection( origin , source.getPosistion() , shield );
+                    Shield shield = shields[ i ];
 
-                    if ( points[0] != Vector3.zero && points[1] != Vector3.zero ) {
-                        
+                    Vector3[] points = lineShieldIntersection(origin , source.getPosistion() , shield);
+
+                    if ( points[ 0 ] != Vector3.zero && points[ 1 ] != Vector3.zero ) {
+
                         //This is our thickness
-                        float thickness = Vector3.Distance(points[0] , points[1]);
+                        float thickness = Vector3.Distance(points[ 0 ] , points[ 1 ]);
 
-                        Vector3 closestPoint = points[0];
-                        Vector3 furthestPoint = points[1];
+                        Vector3 closestPoint = points[ 0 ];
+                        Vector3 furthestPoint = points[ 1 ];
 
-                        if ( Vector3.Distance(origin , points[1]) < Vector3.Distance(origin  , points[0]) ) {
+                        if ( Vector3.Distance(origin , points[ 1 ]) < Vector3.Distance(origin , points[ 0 ]) ) {
 
                             closestPoint = points[ 1 ];
-                            furthestPoint = points[0 ];
+                            furthestPoint = points[ 0 ];
 
                         }
 
-                        float airAttenuationDistance = Vector3.Distance( origin , closestPoint);
+                        float airAttenuationDistance = Vector3.Distance(origin , closestPoint);
 
-                        attenuatedActivity = materialAttenuate( attenuatedActivity , airAttenuation , airAttenuationDistance );
+                        attenuatedActivity = materialAttenuate(attenuatedActivity , airAttenuation , airAttenuationDistance);
 
                         if ( debug ) {
 
-                            DrawLine( origin , closestPoint , Color.red);
+                            DrawLine(origin , closestPoint , Color.red);
                             DrawLine(closestPoint , furthestPoint , Color.green);
 
                         }
@@ -106,8 +110,8 @@ public class DoseController : MonoBehaviour {
 
                         string assumed = "Concrete (Ordinary)";
                         string renderName = shield.getName();
-       
-                        if ( !attenConstants.ContainsKey(renderName) ) {
+
+                        if ( attenConstants.ContainsKey(renderName) ) {
 
                             assumed = renderName;
 
@@ -115,26 +119,26 @@ public class DoseController : MonoBehaviour {
 
                         if ( attenConstants.ContainsKey(assumed) ) {
 
-                            Dictionary<float , float> attenData = attenConstants[assumed];
+                            Dictionary<float , float> attenData = attenConstants[ assumed ];
 
                             float materialAttenuationConstant = 10; //Concrete for 1000 keV, uses this if it cant find a useful energy
 
                             List<float> keyList = new List<float>(attenData.Keys);
 
-                            if ( source.getParticleEnergy() < keyList[0] ) { //If the particle energy is below the lowest energy
+                            if ( source.getParticleEnergy() < keyList[ 0 ] ) { //If the particle energy is below the lowest energy
 
                                 //y = mx + b
-                                float m = ( attenData[keyList[1]] - attenData[keyList[0]] ) / ( keyList[1] - keyList[0] );
-                                float b = attenData[keyList[1]] - ( m * keyList[1] );
+                                float m = ( attenData[ keyList[ 1 ] ] - attenData[ keyList[ 0 ] ] ) / ( keyList[ 1 ] - keyList[ 0 ] );
+                                float b = attenData[ keyList[ 1 ] ] - ( m * keyList[ 1 ] );
 
                                 materialAttenuationConstant = ( m * source.getParticleEnergy() ) + b;
 
                             }
-                            else if ( source.getParticleEnergy() > keyList[attenData.Keys.Count - 1] ) { //If the particle energy is larger than the highest particle energy
+                            else if ( source.getParticleEnergy() > keyList[ attenData.Keys.Count - 1 ] ) { //If the particle energy is larger than the highest particle energy
 
                                 //y = mx + b
-                                float m = ( attenData[keyList[attenData.Keys.Count - 2]] - attenData[keyList[attenData.Keys.Count - 1]] ) / ( keyList[attenData.Keys.Count - 2] - keyList[attenData.Keys.Count - 1] );
-                                float b = attenData[keyList[attenData.Keys.Count - 1]] - ( m * keyList[attenData.Keys.Count - 1] );
+                                float m = ( attenData[ keyList[ attenData.Keys.Count - 2 ] ] - attenData[ keyList[ attenData.Keys.Count - 1 ] ] ) / ( keyList[ attenData.Keys.Count - 2 ] - keyList[ attenData.Keys.Count - 1 ] );
+                                float b = attenData[ keyList[ attenData.Keys.Count - 1 ] ] - ( m * keyList[ attenData.Keys.Count - 1 ] );
 
                                 materialAttenuationConstant = ( m * source.getParticleEnergy() ) + b;
 
@@ -143,11 +147,11 @@ public class DoseController : MonoBehaviour {
 
                                 for ( int k = 1 ; k < attenData.Keys.Count - 2 ; k++ ) {
 
-                                    if ( source.getParticleEnergy() >= keyList[k] && source.getParticleEnergy() <= keyList[k + 1] ) {
+                                    if ( source.getParticleEnergy() >= keyList[ k ] && source.getParticleEnergy() <= keyList[ k + 1 ] ) {
 
                                         //y = mx + b
-                                        float m = ( attenData[keyList[k + 1]] - attenData[keyList[k]] ) / ( keyList[k + 1] - keyList[k] );
-                                        float b = attenData[keyList[k]] - ( m * keyList[k] );
+                                        float m = ( attenData[ keyList[ k + 1 ] ] - attenData[ keyList[ k ] ] ) / ( keyList[ k + 1 ] - keyList[ k ] );
+                                        float b = attenData[ keyList[ k ] ] - ( m * keyList[ k ] );
 
                                         materialAttenuationConstant = ( m * source.getParticleEnergy() ) + b;
 
@@ -176,27 +180,28 @@ public class DoseController : MonoBehaviour {
 
                 }
 
-                attenuatedActivity = materialAttenuate(attenuatedActivity , airAttenuation , Vector3.Distance(origin , source.getPosistion() ) );
+                attenuatedActivity = materialAttenuate(attenuatedActivity , airAttenuation , Vector3.Distance(origin , source.getPosistion()));
+
+                //Attenuate distance
+                attenuatedActivity = ( ( attenuatedActivity ) / ( 4 * Mathf.PI * Mathf.Pow(( doseReceptor.getPosistion() - source.getPosistion() ).magnitude , 2) ) ) * doseReceptor.getSurfaceArea();
 
                 countRate += attenuatedActivity;
+
+                //Dose rate
+                //averageActivity * particleEnergies[ i ] yields keV/s
+                //keV/s / 6241506479963235 yields j/s, conversion factor
+                //Dividing that by weight yields j/kg*s, and a Sv=j/kg
+                doseRate += ( attenuatedActivity * source.getParticleEnergy() * 1000 * 3600 ) / ( 6241506479963235 * doseReceptor.getMass() ); //Yields mSv/hr
 
             }
 
         }
 
-        return countRate;
+        return new float[]{  countRate , doseRate };
 
     }
 
-    private float calculateDoseRateForDoseBody(DoseBody doseBody , double countRate , List<Source> sources , List<Shield> shields) {
-
-        float doseRate = 0;
-
-
-
-        return doseRate;
-
-    }
+   
 
     //Will return 2 points if line intersects box, will return 1 point if it 'knicks' the box, or return 0 points. Well the array length will always be 2 but they're just filled with zero vectors
     private Vector3[] lineShieldIntersection(Vector3 origin , Vector3 destination , Shield shield ) {
@@ -372,6 +377,7 @@ public class DoseController : MonoBehaviour {
 
             }
 
+            
 
             for ( int y = 1 ; y < j ; y++ ) {
 
@@ -389,6 +395,7 @@ public class DoseController : MonoBehaviour {
                         //2 is for column Energy (kEV)
                         //5 is for column Linear Attenuation Coeffficient(m-1)
                         attenConstants[rawData[0 , y]].Add(float.Parse(rawData[2 , y]) , float.Parse(rawData[5 , y]));
+                   
 
                     }
 

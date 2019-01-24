@@ -6,11 +6,11 @@ public class DoseReceptor {
 
     //Used to store information
 
-    private double mass; //Constant
-    private double surfaceArea; //Constant
+    private float mass; //Constant
+    private float surfaceArea; //Constant
     private Transform receptorTransform;
 
-    public DoseReceptor( double mass , double surfaceArea , Transform receptorTransform) {
+    public DoseReceptor( float mass , float surfaceArea , Transform receptorTransform) {
 
         this.mass = mass;
         this.surfaceArea = surfaceArea;
@@ -18,13 +18,13 @@ public class DoseReceptor {
 
     }
 
-    public double getMass() {
+    public float getMass() {
 
         return mass;
 
     }
 
-    public double getSurfaceArea() {
+    public float getSurfaceArea() {
 
         return surfaceArea;
 

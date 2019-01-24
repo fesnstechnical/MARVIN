@@ -7,7 +7,7 @@ public class Source : MonoBehaviour {
 
    
     public RadioIsotopes radioIsotope = 0;
-    public float initialActivity;
+    public float initialActivity; //in mCi
 
     private float[] halfLife = new float[]{ 9.51441e+8F }; //In seconds
     private float[] energies = new float[]{ 661.7F }; //In keV
@@ -43,7 +43,19 @@ public class Source : MonoBehaviour {
 
     public float getActivity() {
 
-        return initialActivity;
+        return initialActivity * 37000000; //mCi to Bq
+
+    }
+
+    public float getActivity( string unit ) {
+
+        if ( unit == "mCi" ) {
+
+            return initialActivity;
+
+        }
+        
+        return initialActivity * 37000000; //mCi to Bq
 
     }
 
@@ -70,6 +82,13 @@ public class Source : MonoBehaviour {
         return 0;
 
     }
+
+    public string getName() {
+
+        return new string[] { "Cesium-137" }[ ( int ) radioIsotope ];
+
+    }
+    
 
     public enum RadioIsotopes {
 
