@@ -17,8 +17,7 @@ public class User : DoseBody {
     }
 
     public void Update() {
-        
-        checkInputs();
+
 
 
     }
@@ -30,33 +29,6 @@ public class User : DoseBody {
     }
 
 
-    private bool lastState = false;
-
-    private void checkInputs() { 
-    
-
-        float input = SteamVR_Input.__actions_default_in_ControllerTrigger.GetAxis(SteamVR_Input_Sources.Any);
-
-        bool triggerDown = input == 1f;
-        
-        if ( lastState != triggerDown ){
-
-            lastState = triggerDown;
-
-            if ( lastState ) {
-
-
-
-
-            }
-            else {
-
-            }
-
-        }
-
-    }
-    
 
 
 }

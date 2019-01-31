@@ -25,6 +25,8 @@ public abstract class DoseBody : MonoBehaviour {
 
     }
 
+
+
     public void setDoseRate( float doseRate ) {
 
         this.doseRate = doseRate;
