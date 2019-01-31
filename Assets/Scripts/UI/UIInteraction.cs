@@ -8,7 +8,7 @@ public class UIInteraction : MonoBehaviour
     {
         if(col.gameObject.name == "NRUCollider")
         {
-            if(SteamVR_Input_ActionSet_default.)
+           // if(SteamVR_Input_ActionSet_default.)
         }
 
     }

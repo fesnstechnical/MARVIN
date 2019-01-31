@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.marvin.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\repo\\MARVIN2\\actions.json",
+      "action_manifest_path": "C:\\Users\\Julia\\Projects\\MARVIN\\actions.json",
       "strings": {
         "en_us": {
           "name": "MARVIN [Testing]"

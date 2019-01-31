@@ -5,8 +5,7 @@
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
-        "iOS",
-        "WindowsStandalone64"
+        "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

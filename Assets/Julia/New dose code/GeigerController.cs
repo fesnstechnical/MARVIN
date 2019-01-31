@@ -106,37 +106,42 @@ public class GeigerController : DoseBody {
 
         }
 
+        checkInputs();
+
     }
 
     private void checkInputs() {
 
-        //float inputTrigger = SteamVR_Input.__actions_default_in_ControllerTrigger.GetAxis(SteamVR_Input_Sources.RightHand);
-        //float inputOther = SteamVR_Input.__
+        if ( pickedUp ) {
 
-        bool triggerDown = false;//inputTrigger == 1f;
+            float inputTrigger = SteamVR_Actions.default_ControllerTrigger.GetAxis(SteamVR_Input_Sources.RightHand);
 
-        if ( lastStateTrigger != triggerDown ) {
+            bool triggerDown = inputTrigger == 1f;
 
-            lastStateTrigger = triggerDown;
+            if ( lastStateTrigger != triggerDown ) {
 
-            if ( lastStateTrigger ) {
+                lastStateTrigger = triggerDown;
 
-                //Change modes
-                if ( ( mode + 1 ) > modes.Length ) {
+                if ( lastStateTrigger ) {
 
-                    mode = 0;
+                    //Change modes
+                    if ( ( mode + 1 ) > modes.Length ) {
 
+                        mode = 0;
+
+                    }
+                    else {
+
+                        mode++;
+
+                    }
+
+                    //Play sound
+                    
                 }
-                else {
-
-                    mode++;
-
-                }
-
-                //Play sound
 
             }
-         
+
         }
 
     }
