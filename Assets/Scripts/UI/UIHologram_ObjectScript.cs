@@ -11,7 +11,7 @@ public class UIHologram_ObjectScript : MonoBehaviour {
     public Color planeColor;
     public Color textColor;
     public float displayHeight; //  how high from the spawn point the plane should be
-
+    public bool enableUIOnSpawn;    //  dev option to enable the UI as soon as the game starts
     private GameObject UIClone;  //  instantiated UI element
     #endregion
 
@@ -25,7 +25,7 @@ public class UIHologram_ObjectScript : MonoBehaviour {
 
     private void Awake()
     {
-       // spawnUI();
+        if (enableUIOnSpawn) { spawnUI(); }
     }
 
     private void spawnUI()
