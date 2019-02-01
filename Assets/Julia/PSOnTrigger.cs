@@ -5,130 +5,129 @@ using System.Linq;
 
 public class PSOnTrigger : MonoBehaviour {
 
-    public ParticleSystem ps;
-    int oldnum = 0;
-    int ind = 0;
+    private DoseController doseController;
+    private Transform ceTransform;
+    private ParticleSystem ps;
 
     public List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
-    //public List<ParticleSystem.Particle> exit = new List<ParticleSystem.Particle>();
-
     
-    void OnEnable()
-    {
+
+    void OnEnable() {
+
+        //Finds the dose controller
+        //We need the dose controller to find the shields
+        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+
+        foreach ( GameObject gameObject in allObjects ) {
+
+            if ( gameObject.GetComponent<DoseController>() != null ) {
+
+                doseController = gameObject.GetComponent<DoseController>();
+                break;
+
+            }
+
+        }
+
+        ceTransform = GetComponentInChildren<Transform>(); 
         ps = GetComponent<ParticleSystem>();
 
-        GameObject[] sceneObj = GameObject.FindGameObjectsWithTag("Barrier");
+        setColliders();
 
-
-        Debug.Log(ps.trigger.maxColliderCount);
-
-        for (int i = 0; i < sceneObj.Length; i++)
-        {
-
-            ps.trigger.SetCollider(i, sceneObj[i].GetComponent<Collider>());
-            Debug.Log(i);
-        }
-        //Debug.Log(ps.trigger.GetCollider(8).name);
-        //float thickness = gameObject.GetComponent<SizeControl>().thickness;
     }
+
+    int frameCount = 0;
+
+    void Update() {
+
+        if ( frameCount == 90 ) {
+
+            setColliders();
+            frameCount = 0;
+
+        }
+        frameCount++;
+   
+
+    }
+
+    //She a thicc
     
-    void Update()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(ps.transform.position, 40);
-        List<GameObject> obj = new List<GameObject>();
-        int numbarrier = 0;
-        int num = 0;
-        int newnum = hitColliders.Length;
-        //hitColliders = hitColliders.OrderBy(x => Vector2.Distance(this.transform.position, x.transform.position)).ToList();
-        Debug.Log(newnum);
-        Debug.Log(oldnum);
-        //if (newnum != oldnum)
-        //{
-        for (int i = 0; i < hitColliders.Length; i++)
-        {
-            if (hitColliders[i].gameObject.tag == "Barrier")
-            {
-                obj.Add(hitColliders[i].gameObject);
-                numbarrier++;
-                
-            }
-        }
-        obj = obj.OrderBy(x => Vector3.Distance(this.transform.position, x.transform.position)).ToList();
-        for (int i = 0; i < 5; i++)
-        {
-            if (obj[i].tag == "Barrier")//hitColliders[i].gameObject.tag == "Barrier")
-            {
-                ps.trigger.SetCollider(num, obj[i].GetComponent<Collider>());
-                ind++;
-                num++;
+    private void setColliders() {
 
-                if (ind == 5)
-                {
-                    ind = 0;
-                }
-            }
-            oldnum = newnum;
+        List<Shield> shields = doseController.getShields(); //Gets all shields on the map from the dose controller
+        shields = doseController.sortShields( shields , ceTransform.position ); //Sorts the shields closest to the source
+
+        int max = 5;
+        int count = shields.Count < max ? shields.Count : max; //If the number of shields is less than the max then iterate through all shields, else go up to 6 of the closest
+        
+        for ( int i = 0 ; i < count ; i++ ) {
+
+            ps.trigger.SetCollider( i , shields[ i ].GetComponent<Collider>() );
+      
+            //Set to these colliders
+
         }
-        //}
 
     }
-    private void OnParticleTrigger()
-    {
+
+    //Called when a particle collides with a shield
+    private void OnParticleTrigger() {
+    
         
         int enterParticleNumber = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
-        //SizeControl size = GameObject.Find("Wall").GetComponent<SizeControl>();
-        Vector3 exitpoint = new Vector3(0,0,0);
-        Vector3 entrypoint = new Vector3(0, 0, 0);
-        //Debug.Log(size.thickness);
-        
-        //int exitParticleNumber = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
 
-        for (int i=0; i< enterParticleNumber; i++)
-        {
-            ParticleSystem.Particle p = enter[i];
+        Vector3 exitpoint = new Vector3( 0 ,0 , 0 );
+        Vector3 entrypoint = new Vector3( 0, 0 , 0 );
+        
+        //Interates over particles that have collided
+        for ( int i=0 ; i < enterParticleNumber ; i++ ) { 
+        
+            ParticleSystem.Particle p = enter[ i ]; //Gets the particle
+
             Ray ray = new Ray(p.position+p.velocity, -p.velocity.normalized);
             Ray namehit = new Ray(p.position, p.velocity.normalized);
             RaycastHit[] hits = Physics.RaycastAll(ray,p.velocity.magnitude);
             RaycastHit getName;
             string colliderhit = "N/A";
 
-            if (Physics.Raycast (namehit,out getName,0.1F))
-            {
-                colliderhit = getName.collider.name;
-               // Debug.Log(colliderhit);
-            }
-
+            if (Physics.Raycast (namehit,out getName , 0.1F ) ) { 
             
+                colliderhit = getName.collider.name;
+         
 
+            }
+            
             entrypoint = p.position;
 
+           
+            foreach (RaycastHit hit in hits ) { 
             
-            foreach (RaycastHit hit in hits)
-            {
-                //Debug.DrawLine(hit.point, hit.point + Vector3.up * 5, Color.red);
-                //Debug.Log(hit.collider.gameObject.name);
-                if (hit.collider.gameObject.name == colliderhit)
-                {
-                    //Debug.Log(colliderhit);
+                if (hit.collider.gameObject.name == colliderhit){
+                 
                     exitpoint = hit.point;
-                    Debug.DrawLine(exitpoint, entrypoint,Color.red);
-                    //Debug.Log(hit.point);
-                    //Debug.Log((exitpoint - entrypoint).magnitude);
+                 
                     break;
+
                 }
+
             }
 
-            if (Random.Range(0, 1000) < 1000*(1-Mathf.Exp(-1.2F*(exitpoint-entrypoint).magnitude)))
-            {
+            if (Random.Range(0, 1000) < 1000 * ( 1 - Mathf.Exp( -1.2F * ( exitpoint - entrypoint ).magnitude ) ) ) {
                 
-                //Debug.Log(1000*(1-Mathf.Exp(-0.5F * (exitpoint - entrypoint).magnitude)));
                 p.velocity = new Vector3(0, 0, 0);
                 p.remainingLifetime = 1;      
                 
             }
+
             enter[i] = p;
 
+
         }
+
+
+        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
+
 
         //for (int i = 0; i < exitParticleNumber; i++)
         //{
@@ -140,16 +139,15 @@ public class PSOnTrigger : MonoBehaviour {
         //}
 
 
-        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
-        //ps.SetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
+
+    }
+
+    void Start () {
 
         
+
     }
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	
+
+    
+
 }

@@ -9,7 +9,7 @@ public class DoseController : MonoBehaviour {
     private float airAttenuation = 0; //Please change and update later
 
     public bool debug;
-
+    public bool particleSystem;
 
     //This class is the controller for the dose system
     //Only one of these per scene
@@ -257,7 +257,7 @@ public class DoseController : MonoBehaviour {
 
     }
 
-    private List<Shield> sortShields( List<Shield> shields , Vector3 origin) {
+    public List<Shield> sortShields( List<Shield> shields , Vector3 origin) {
 
         float[] distances = new float[ shields.Count ];
         for ( int i = 0 ; i < shields.Count ; i++ ) {
@@ -317,7 +317,7 @@ public class DoseController : MonoBehaviour {
     }
 
     //Finds all game objects with a 'Shield' component and returns a list of type Shield
-    private List<Shield> getShields() {
+    public List<Shield> getShields() {
 
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
         List<Shield> shields = new List<Shield>();
