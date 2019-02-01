@@ -22,9 +22,7 @@ public class GeigerController : DoseBody {
     private GameObject handRenderPrefab;
 
     private List<DoseReceptor> doseReceptors = new List<DoseReceptor>();
-
-    private bool lastStateTrigger = false;
-
+    
     //Components
     TextMesh doseTextMesh;
     AudioSource audioSourceGeigerClick;
@@ -37,7 +35,7 @@ public class GeigerController : DoseBody {
     private string[] prefixes = { "m" , "" , "k" , "M" };
 
     int mode = 0;
-    int scale = 0;
+    int scale = 2;
 
     public override void secondaryStart() {
 
@@ -48,15 +46,64 @@ public class GeigerController : DoseBody {
         handTransform = rightHand.GetComponent<Transform>();
         hand = rightHand.GetComponent<Hand>();
 
-        doseReceptors.Add(new DoseReceptor( 1 , 0.002f , getTransform()));
+        doseReceptors.Add(new DoseReceptor( 1 , 0.02f , getTransform()) );
 
         //components
         doseTextMesh = GetComponentInChildren<TextMesh>();
-        audioSourceGeigerClick = GetComponents<AudioSource>()[ 0 ];
         audioSourceGeigerClick = GetComponents<AudioSource>()[ 1 ];
+        audioSourceEffects = GetComponents<AudioSource>()[ 0 ];
 
         doseTextMesh.text = "";
         
+
+    }
+
+    public bool getActive() {
+
+        return active;
+
+    }
+
+
+    //On a scale of 1 to 100
+    public float getIntensity() {
+
+        float value = getValue();
+
+        if ( value > 1000 ) {
+
+            value = 1000;
+
+        }
+
+        return value / 10;
+
+    }
+
+    public float getValue() {
+
+        float value;
+
+        if ( mode == 0 || mode == 1 ) { //Counts
+
+            value = getCountRate();
+
+            if ( mode == 1 ) {
+
+                value = value / 60; //CPS to CPM
+
+            }
+
+        }
+        else { //Dose
+
+            value = getDoseRate() / 1000;
+
+        }
+
+        value = value / scales[ scale ];
+
+        return value;
 
     }
 
@@ -76,28 +123,9 @@ public class GeigerController : DoseBody {
 
         if ( active ) {
 
-            float value;
+            
 
-            if ( mode == 0 || mode == 1 ) { //Counts
-
-                value = getCountRate();
-
-                if ( mode == 1 ) {
-
-                    value = value / 60; //CPS to CPM
-
-                }
-
-            }
-            else { //Dose
-
-                value = getDoseRate();
-
-            }
-
-            value = value / scales[ scale ];
-
-            doseTextMesh.text = value + "\n" + prefixes[ scale ] + modes[ mode ];
+            doseTextMesh.text = ( ( int ) getValue() ) + "\n" + prefixes[ scale ] + modes[ mode ]; //Cast to int so we dont get long decimals
 
         }
         else {
@@ -110,6 +138,8 @@ public class GeigerController : DoseBody {
 
     }
 
+    private float totalTime = 0f;
+
     private void checkInputs() {
 
         if ( pickedUp ) {
@@ -118,30 +148,56 @@ public class GeigerController : DoseBody {
 
             bool triggerDown = inputTrigger == 1f;
 
-            if ( lastStateTrigger != triggerDown ) {
+            if ( triggerDown ) {
 
-                lastStateTrigger = triggerDown;
-
-                if ( lastStateTrigger ) {
-
-                    //Change modes
-                    if ( ( mode + 1 ) > modes.Length ) {
-
-                        mode = 0;
-
-                    }
-                    else {
-
-                        mode++;
-
-                    }
-
-                    //Play sound
-                    
-                }
+                totalTime += Time.deltaTime;
 
             }
 
+            if ( !triggerDown ) {
+
+                if ( totalTime != 0 ) {
+
+                    audioSourceEffects.Play();
+
+                    if ( totalTime < 1f ) {
+
+                        //Change modes
+                        if ( ( mode + 1 ) >= modes.Length ) {
+
+                            mode = 0;
+
+                        }
+                        else {
+
+                            mode++;
+
+                        }
+
+                    }
+                    else { //Long click
+
+                        //Change scale
+                        if ( ( scale + 1 ) >= scales.Length ) {
+
+                            scale = 0;
+
+                        }
+                        else {
+
+                            scale++;
+
+                        }
+
+                    }
+
+                        
+                }
+            
+                totalTime = 0f;
+
+            }
+            
         }
 
     }

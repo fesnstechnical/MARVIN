@@ -44,8 +44,9 @@ public class DoseController : MonoBehaviour {
         List<Source> sources = getSources();
         List<Shield> shields = getShields();
         List<DoseBody> doseBodies = getDoseBodies();
-
+        
         foreach ( DoseBody body in doseBodies ) {
+
 
             float[] rates = calculateCountAndDoseRateForDoseBody(body , sources , shields);
 
@@ -343,7 +344,7 @@ public class DoseController : MonoBehaviour {
 
         foreach( GameObject gameObject in allObjects ){
 
-            if ( gameObject.GetComponent<User>() != null ) {
+            if ( gameObject.GetComponent<DoseBody>() != null ) {
 
                 doseBodies.Add( gameObject.GetComponent<DoseBody>() );
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-//(BETA - Code not fully optimize, for DEMO and Testing purposes only)
 public class PSOnTrigger : MonoBehaviour {
 
     public ParticleSystem ps;
@@ -18,10 +17,10 @@ public class PSOnTrigger : MonoBehaviour {
     {
         ps = GetComponent<ParticleSystem>();
 
-        GameObject[] sceneObj = GameObject.FindGameObjectsWithTag("Shielding");
+        GameObject[] sceneObj = GameObject.FindGameObjectsWithTag("Barrier");
 
 
-        //Debug.Log(ps.trigger.maxColliderCount);
+        Debug.Log(ps.trigger.maxColliderCount);
 
         for (int i = 0; i < sceneObj.Length; i++)
         {
@@ -35,52 +34,42 @@ public class PSOnTrigger : MonoBehaviour {
     
     void Update()
     {
-        
-        Collider[] hitColliders = Physics.OverlapSphere(ps.transform.position , 40);
+        Collider[] hitColliders = Physics.OverlapSphere(ps.transform.position, 40);
         List<GameObject> obj = new List<GameObject>();
         int numbarrier = 0;
         int num = 0;
         int newnum = hitColliders.Length;
         //hitColliders = hitColliders.OrderBy(x => Vector2.Distance(this.transform.position, x.transform.position)).ToList();
-        //Debug.Log(newnum);
-        //Debug.Log(oldnum);
+        Debug.Log(newnum);
+        Debug.Log(oldnum);
         //if (newnum != oldnum)
         //{
-        for ( int i = 0 ; i < hitColliders.Length ; i++ ) {
-            if ( hitColliders[i].gameObject.tag == "Shielding" ) {
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+            if (hitColliders[i].gameObject.tag == "Barrier")
+            {
                 obj.Add(hitColliders[i].gameObject);
                 numbarrier++;
-
+                
             }
         }
-        
-        obj = obj.OrderBy(x => Vector3.Distance(this.transform.position , x.transform.position)).ToList();
-
-        int n = obj.Count;
-
-        if ( n > 6 ) {
-
-            n = 6;
-
-        }
-
-        for ( int i = 0 ; i < n ; i++ ) {
-            if ( obj[i].tag == "Shielding" )//hitColliders[i].gameObject.tag == "Barrier")
+        obj = obj.OrderBy(x => Vector3.Distance(this.transform.position, x.transform.position)).ToList();
+        for (int i = 0; i < 5; i++)
+        {
+            if (obj[i].tag == "Barrier")//hitColliders[i].gameObject.tag == "Barrier")
             {
-                ps.trigger.SetCollider(num , obj[i].GetComponent<Collider>());
+                ps.trigger.SetCollider(num, obj[i].GetComponent<Collider>());
                 ind++;
                 num++;
 
-                if ( ind == 5 ) {
+                if (ind == 5)
+                {
                     ind = 0;
                 }
             }
             oldnum = newnum;
         }
-            
         //}
-
-        
 
     }
     private void OnParticleTrigger()
