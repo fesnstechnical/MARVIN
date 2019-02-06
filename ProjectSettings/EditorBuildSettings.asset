@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MainScene.unity
     guid: e5bf3ba2b5090db429a2e5e4dfcc7c5c
+  - enabled: 1
+    path: Assets/NRU.unity
+    guid: f5bd38824bc921743a3b1cf61ee92519
   m_configObjects: {}
