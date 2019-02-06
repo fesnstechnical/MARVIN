@@ -11,21 +11,26 @@ public class UIHologram_ObjectScript : MonoBehaviour {
     public Color planeColor;
     public Color textColor;
     public float displayHeight; //  how high from the spawn point the plane should be
+    public bool spawnUIOnStart;
 
     private GameObject UIClone;  //  instantiated UI element
     #endregion
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Player"))    //  if player triggers with object, spawn UI and set lines
+        if (col.gameObject.CompareTag("Player") && !spawnUIOnStart && !UIClone.GetComponent<UIHologram>().isActive)    //  if player triggers with object, spawn UI and set lines
         {
+            Debug.Log("HI");
             spawnUI();
         }
     }
 
     private void Awake()
     {
-       // spawnUI();
+        if (spawnUIOnStart)
+        {
+            spawnUI();
+        }
     }
 
     private void spawnUI()
