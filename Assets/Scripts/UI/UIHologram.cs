@@ -22,6 +22,7 @@ public class UIHologram : MonoBehaviour {
     private GameObject extensionClone;
     private float size;
     private string extensionMeaurementScale;
+    private bool extensionActive = false;
     #endregion
 
     public void setLines(string s, int index) { text.Add(s); }
@@ -33,12 +34,16 @@ public class UIHologram : MonoBehaviour {
     public void setMeasurement(string s) { extensionMeaurementScale = s; }
 
     public void openExtension()
-    {       
-        extensionClone = Instantiate(UI_HologramExtension, this.transform);
-        extensionClone.transform.position = new Vector3(this.transform.position.x + extensionDistance, this.transform.position.y, this.transform.position.z);
-        extensionClone.transform.SetParent(this.transform);
-        extensionClone.GetComponent<UIHologram_Scroll>().setColor(planeColor);
-        extensionClone.GetComponent<UIHologram_Scroll>().setMeasurementText(extensionMeaurementScale);
+    {
+        if (!extensionActive)
+        {
+            extensionClone = Instantiate(UI_HologramExtension, this.transform);
+            extensionClone.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + extensionDistance);
+            extensionClone.transform.SetParent(this.transform);
+            extensionClone.GetComponent<UIHologram_Scroll>().setColor(planeColor);
+            extensionClone.GetComponent<UIHologram_Scroll>().setMeasurementText(extensionMeaurementScale);
+            extensionActive = true;
+        }
     }
 
     public void closeExtension()
@@ -46,6 +51,7 @@ public class UIHologram : MonoBehaviour {
         if(extensionClone != null)
         {
             Destroy(extensionClone);
+            extensionActive = false;
         }
     }
 
@@ -73,11 +79,12 @@ public class UIHologram : MonoBehaviour {
                 plane.GetComponent<RectTransform>().localScale += new Vector3(0, 0, size);
                 plane.transform.position += new Vector3(0, size * (sizeModifier - sizeModifierReducer), 0);    //  shift the plane into its proper position. 0.4f is just a number to reduce themodifier
             }
+
             /*
                 * issue with plane sizes. they physically change but editor says they're the same size? moving extend button for time being
                 *  extendButton.transform.position -= new Vector3(0, (plane.GetComponent<RectTransform>().localScale.y / 2) + (sizeModifier - sizeModifierReducer), 0);
             */
-            openExtension();
+
             isActive = true;
             displayText.color = textColor;
         }
