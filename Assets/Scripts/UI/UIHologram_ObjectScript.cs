@@ -14,16 +14,16 @@ public class UIHologram_ObjectScript : MonoBehaviour {
     public bool spawnUIOnStart;
 
     private GameObject UIClone;  //  instantiated UI element
+    private bool spawned = false;
     #endregion
 
-    private void OnTriggerEnter(Collider col)
+   /* private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player") && !spawnUIOnStart && !UIClone.GetComponent<UIHologram>().isActive)    //  if player triggers with object, spawn UI and set lines
         {
-            Debug.Log("HI");
             spawnUI();
         }
-    }
+    }*/
 
     private void Awake()
     {
@@ -45,6 +45,22 @@ public class UIHologram_ObjectScript : MonoBehaviour {
         for (int i = 0; i < lines.Count; i++)
         {
             UIClone.GetComponent<UIHologram>().setLines(lines[i], i);
+        }
+    }
+
+    private void Update()
+    {
+        float dist = Mathf.Sqrt(Mathf.Pow((this.transform.position.x - GameObject.Find("Player").transform.position.x), 2) + Mathf.Pow((this.transform.position.y - GameObject.Find("Player").transform.position.y), 2) + Mathf.Pow((this.transform.position.z - GameObject.Find("Player").transform.position.z), 2));
+
+        if (dist < 5 && !spawned)
+        {
+            spawnUI();
+            spawned = true;
+        }
+        else if(dist > 5 && spawned)
+        {
+            Destroy(UIClone);
+            spawned = false;
         }
     }
 }
