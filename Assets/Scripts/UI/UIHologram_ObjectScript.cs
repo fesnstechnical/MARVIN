@@ -15,6 +15,7 @@ public class UIHologram_ObjectScript : MonoBehaviour {
 
     private GameObject UIClone;  //  instantiated UI element
     private bool spawned = false;
+    private Transform tf;
     #endregion
 
    /* private void OnTriggerEnter(Collider col)
@@ -35,9 +36,8 @@ public class UIHologram_ObjectScript : MonoBehaviour {
 
     private void spawnUI()
     {
-        UIClone = Instantiate(UI_HologramElement, this.transform);
+        UIClone = Instantiate(UI_HologramElement, this.transform.position, this.transform.rotation);
         UIClone.transform.Translate(new Vector3(0, displayHeight, 0));  //  move the UI clone upwards
-        UIClone.transform.SetParent(this.transform);    //  set this object as parent to the instantiated UI element
         UIClone.GetComponent<UIHologram>().setPlaneColor(planeColor);
         UIClone.GetComponent<UIHologram>().setTextColor(textColor);
         UIClone.GetComponent<UIHologram>().setMeasurement(extensionMeasurementScale);
@@ -50,6 +50,7 @@ public class UIHologram_ObjectScript : MonoBehaviour {
 
     private void Update()
     {
+        tf = this.transform;
         float dist = Mathf.Sqrt(Mathf.Pow((this.transform.position.x - GameObject.Find("Player").transform.position.x), 2) + Mathf.Pow((this.transform.position.y - GameObject.Find("Player").transform.position.y), 2) + Mathf.Pow((this.transform.position.z - GameObject.Find("Player").transform.position.z), 2));
 
         if (dist < 5 && !spawned)

@@ -77,13 +77,8 @@ public class UIHologram : MonoBehaviour {
             {
                 displayText.text += text[i] + "\n";
                 plane.GetComponent<RectTransform>().localScale += new Vector3(0, 0, size);
-                plane.transform.position += new Vector3(0, size * (sizeModifier - sizeModifierReducer), 0);    //  shift the plane into its proper position. 0.4f is just a number to reduce themodifier
+                plane.transform.position += new Vector3(0, size * (sizeModifier - sizeModifierReducer), 0);    //  shift the plane into its proper position
             }
-
-            /*
-                * issue with plane sizes. they physically change but editor says they're the same size? moving extend button for time being
-                *  extendButton.transform.position -= new Vector3(0, (plane.GetComponent<RectTransform>().localScale.y / 2) + (sizeModifier - sizeModifierReducer), 0);
-            */
 
             isActive = true;
             displayText.color = textColor;
