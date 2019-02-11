@@ -83,9 +83,5 @@ public class UIHologram : MonoBehaviour {
             isActive = true;
             displayText.color = textColor;
         }
-        else
-        {
-            this.GetComponent<Transform>().LookAt(player.transform.position);  //  billboarding
-        }
     }
 }
