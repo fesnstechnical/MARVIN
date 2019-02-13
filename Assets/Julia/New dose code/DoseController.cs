@@ -69,6 +69,16 @@ public class DoseController : MonoBehaviour {
 
             foreach ( Source source in sources ) {
 
+                Dictionary<float , float> particleEnergies = source.getParticleEnergies();
+
+                float averageParticleEnergy = 0f;
+
+                foreach ( float particleEnergy in particleEnergies.Keys ) {
+
+                    averageParticleEnergy += ( particleEnergy * particleEnergies[ particleEnergy ] ); 
+
+                }
+
                 float attenuatedActivity = source.getActivity();
 
                 Vector3 origin = doseReceptor.getPosistion();
@@ -126,35 +136,35 @@ public class DoseController : MonoBehaviour {
 
                             List<float> keyList = new List<float>(attenData.Keys);
 
-                            if ( source.getParticleEnergy() < keyList[ 0 ] ) { //If the particle energy is below the lowest energy
+                            if ( averageParticleEnergy < keyList[ 0 ] ) { //If the particle energy is below the lowest energy
 
                                 //y = mx + b
                                 float m = ( attenData[ keyList[ 1 ] ] - attenData[ keyList[ 0 ] ] ) / ( keyList[ 1 ] - keyList[ 0 ] );
                                 float b = attenData[ keyList[ 1 ] ] - ( m * keyList[ 1 ] );
 
-                                materialAttenuationConstant = ( m * source.getParticleEnergy() ) + b;
+                                materialAttenuationConstant = ( m * averageParticleEnergy ) + b;
 
                             }
-                            else if ( source.getParticleEnergy() > keyList[ attenData.Keys.Count - 1 ] ) { //If the particle energy is larger than the highest particle energy
+                            else if ( averageParticleEnergy > keyList[ attenData.Keys.Count - 1 ] ) { //If the particle energy is larger than the highest particle energy
 
                                 //y = mx + b
                                 float m = ( attenData[ keyList[ attenData.Keys.Count - 2 ] ] - attenData[ keyList[ attenData.Keys.Count - 1 ] ] ) / ( keyList[ attenData.Keys.Count - 2 ] - keyList[ attenData.Keys.Count - 1 ] );
                                 float b = attenData[ keyList[ attenData.Keys.Count - 1 ] ] - ( m * keyList[ attenData.Keys.Count - 1 ] );
 
-                                materialAttenuationConstant = ( m * source.getParticleEnergy() ) + b;
+                                materialAttenuationConstant = ( m * averageParticleEnergy ) + b;
 
                             }
                             else { //Particle energy is somewhere in known particle energy range
 
                                 for ( int k = 1 ; k < attenData.Keys.Count - 2 ; k++ ) {
 
-                                    if ( source.getParticleEnergy() >= keyList[ k ] && source.getParticleEnergy() <= keyList[ k + 1 ] ) {
+                                    if ( averageParticleEnergy >= keyList[ k ] && averageParticleEnergy <= keyList[ k + 1 ] ) {
 
                                         //y = mx + b
                                         float m = ( attenData[ keyList[ k + 1 ] ] - attenData[ keyList[ k ] ] ) / ( keyList[ k + 1 ] - keyList[ k ] );
                                         float b = attenData[ keyList[ k ] ] - ( m * keyList[ k ] );
 
-                                        materialAttenuationConstant = ( m * source.getParticleEnergy() ) + b;
+                                        materialAttenuationConstant = ( m * averageParticleEnergy ) + b;
 
                                         break;
 
@@ -192,7 +202,7 @@ public class DoseController : MonoBehaviour {
                 //averageActivity * particleEnergies[ i ] yields keV/s
                 //keV/s / 6241506479963235 yields j/s, conversion factor
                 //Dividing that by weight yields j/kg*s, and a Sv=j/kg
-                doseRate += ( attenuatedActivity * source.getParticleEnergy() * 1000 * 3600 ) / ( 6241506479963235 * doseReceptor.getMass() ); //Yields mSv/hr
+                doseRate += ( attenuatedActivity * averageParticleEnergy * 1000 * 3600 ) / ( 6241506479963235 * doseReceptor.getMass() ); //Yields mSv/hr
 
             }
 
