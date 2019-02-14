@@ -11,10 +11,11 @@ public class UIHologram_ObjectScript : MonoBehaviour {
     public Color planeColor;
     public Color textColor;
     public float displayHeight; //  how high from the spawn point the plane should be
-    public bool spawnUIOnStart;
+    public float UISpawnDistance = 5.0f;    //  distance from this object to player that the holo UI spawns at
+    public bool spawnUIOnStart; //  mainly for debugging
 
     private GameObject UIClone;  //  instantiated UI element
-    private bool spawned = false;
+    private bool spawned = false;   //  has the UIClone been spawned?
     #endregion
 
    /* private void OnTriggerEnter(Collider col)
@@ -27,10 +28,7 @@ public class UIHologram_ObjectScript : MonoBehaviour {
 
     private void Awake()
     {
-        if (spawnUIOnStart)
-        {
-            spawnUI();
-        }
+        if (spawnUIOnStart) { spawnUI(); }
     }
 
     private void spawnUI()
@@ -41,7 +39,7 @@ public class UIHologram_ObjectScript : MonoBehaviour {
         UIClone.GetComponent<UIHologram>().setTextColor(textColor);
         UIClone.GetComponent<UIHologram>().setMeasurement(extensionMeasurementScale);
 
-        for (int i = 0; i < lines.Count; i++)
+        for (int i = 0; i < lines.Count; i++)   //  set lines in instantiated object
         {
             UIClone.GetComponent<UIHologram>().setLines(lines[i], i);
         }
@@ -49,19 +47,19 @@ public class UIHologram_ObjectScript : MonoBehaviour {
 
     private void Update()
     {
-        float dist = Mathf.Sqrt(Mathf.Pow((this.transform.position.x - GameObject.Find("Player").transform.position.x), 2) + Mathf.Pow((this.transform.position.y - GameObject.Find("Player").transform.position.y), 2) + Mathf.Pow((this.transform.position.z - GameObject.Find("Player").transform.position.z), 2));
+        float dist = Mathf.Sqrt(Mathf.Pow((this.transform.position.x - GameObject.Find("Player").transform.position.x), 2) + Mathf.Pow((this.transform.position.y - GameObject.Find("Player").transform.position.y), 2) + Mathf.Pow((this.transform.position.z - GameObject.Find("Player").transform.position.z), 2));  //  distance between this object and player position
 
-        if (dist < 5 && !spawned)
+        if (dist < UISpawnDistance && !spawned) //  spawn
         {
             spawnUI();
             spawned = true;
         }
-        else if(dist > 5 && spawned)
+        else if(dist > UISpawnDistance && spawned)  //  de-spawn
         {
             Destroy(UIClone);
             spawned = false;
         }
-
+        
         if (spawned)
         {
             UIClone.GetComponent<Transform>().LookAt(GameObject.Find("Player").transform.position);  //  billboarding

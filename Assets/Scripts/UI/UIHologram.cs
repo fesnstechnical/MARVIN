@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIHologram : MonoBehaviour {
     #region variables
-    public GameObject player;
+   
     public GameObject plane;    //  holoUI background
     public GameObject UI_HologramExtension; //  scrollbar extension
     public Canvas thisCanvas;
@@ -14,8 +14,9 @@ public class UIHologram : MonoBehaviour {
     public bool isActive = false;   //  is the UI in the world?
     public float extensionDistance = 0.0f; //  how far from the origin of the main Holo UI?
     public float sizeModifier = 1.9f;   //  used to help modify the dynamic size of the holo-plane
-    public float sizeModifierReducer = 0.4f;
+    public float sizeModifierReducer = 0.4f; /// could probably do without this?
 
+    private GameObject player;
     private Text displayText;
     private Color planeColor;
     private Color textColor;
@@ -62,6 +63,7 @@ public class UIHologram : MonoBehaviour {
     }
 
     private void Start() {
+        player = GameObject.Find("Player");
         size = plane.GetComponent<RectTransform>().localScale.z * sizeModifier;
         displayText = this.GetComponentInChildren<Text>();
         GetComponentInChildren<Renderer>().material.color = planeColor; //  set rendering color

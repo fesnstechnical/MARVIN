@@ -23,6 +23,7 @@ public class MissionHandler : MonoBehaviour
     /*
          * List of Missions:
          * [0] - testing
+            * [0] - hi, i am an objective! 
          * 
      */
 
