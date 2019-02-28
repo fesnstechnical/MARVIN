@@ -23,8 +23,15 @@ public class QuestionHandler : MonoBehaviour
 
     void Start() {
         Debug.Log( "hi" );
+        path = Application.dataPath + folderName + fileName;    //  store path
+        if (File.Exists(path))  //  check if the file already exists
+        {
+            Debug.Log(folderName + " Exists!");
+            sw = new StreamWriter(path, false);
+        }
+        else { Debug.Log(path + " doesn't exist! Making file"); sw = new StreamWriter(path, true); }    //  if not, make it
+        sw.Close();
 
-   
         OptionA.GetComponentInChildren<Text>().text = "1";
         OptionB.GetComponentInChildren<Text>().text = "2";
         OptionC.GetComponentInChildren<Text>().text = "3";
@@ -109,14 +116,6 @@ public class QuestionHandler : MonoBehaviour
 
     //runs into fille access error: access to path "filepath" is denied
     void saveResultsToFile() {
-        path = Application.dataPath + folderName + fileName;    //  store path
-        if ( File.Exists( path ) )  //  check if the file already exists
-        {
-            Debug.Log( folderName + " Exists!" );
-            sw = new StreamWriter( path , false );
-        }
-        else { Debug.Log( path + " doesn't exist! Making file" ); sw = new StreamWriter( path , true ); }    //  if not, make it
-
         sw = new StreamWriter( path , false ); //  open file
 
         sw.WriteLine( "Q1: " + answers[ 0 ] );
