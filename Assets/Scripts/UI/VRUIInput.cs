@@ -16,7 +16,7 @@ using Valve.VR;
             if (SteamVR_Actions._default.InteractUI.GetStateUp(SteamVR_Input_Sources.Any))
             {
                 Debug.Log("click!");
-                if(Physics.Raycast(raycast,out hit, 300.0f))
+                if(Physics.Raycast(raycast,out hit, 1000.0f))
                 {
                     if(hit.transform != null)
                     {
