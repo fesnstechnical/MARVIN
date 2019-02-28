@@ -14,41 +14,25 @@ public class QuestionHandler : MonoBehaviour
     public Button OptionB;
     public Button OptionC;
     public Button OptionD;
-    private List<char> answers = new List<char>();
+    public Button OptionE;
+    private List<int> answers = new List<int>();
     public int Qnum = 0;
-    private string path;
     private StreamWriter sw;
+    bool write = true;
+    private string path;
 
-    void saveResultsToFile()
-    {
-        sw = new StreamWriter(path, false); //  open file
+    void Start() {
+        Debug.Log( "hi" );
 
-        sw.WriteLine("Q1: " + answers[0]);
-        sw.WriteLine("Q2: " + answers[1]);
-        sw.WriteLine("Q3: " + answers[2]);
-        sw.WriteLine("Q4: " + answers[3]);
-        sw.WriteLine("======================");
-
-        sw.Close(); //  close file
+   
+        OptionA.GetComponentInChildren<Text>().text = "1";
+        OptionB.GetComponentInChildren<Text>().text = "2";
+        OptionC.GetComponentInChildren<Text>().text = "3";
+        OptionD.GetComponentInChildren<Text>().text = "4";
+        OptionE.GetComponentInChildren<Text>().text = "5";
     }
 
-    void Start()
-    {
-
-        path = Application.dataPath + folderName + fileName;    //  store path
-        if (File.Exists(path))  //  check if the file already exists
-        {
-            Debug.Log(folderName + " Exists!");
-            sw = new StreamWriter(path, false);
-        }
-        else { Debug.Log(path + " doesn't exist! Making file"); sw = new StreamWriter(path, true); }    //  if not, make it
-        sw.Close();
-
-        OptionA.onClick.AddListener(() => { AClick(); });
-        OptionB.onClick.AddListener(() => { BClick(); });
-        OptionC.onClick.AddListener(() => { CClick(); });
-        OptionD.onClick.AddListener(() => { DClick(); });
-    }
+  
 
     // Update is called once per frame
     void Update()
@@ -56,75 +40,90 @@ public class QuestionHandler : MonoBehaviour
         
         if (Qnum == 0)
         {
-            Qtext.GetComponent<Text>().text = "BEEP";
-            OptionA.GetComponentInChildren<Text>().text = "Yes";
-            OptionB.GetComponentInChildren<Text>().text = "No";
-            OptionC.GetComponentInChildren<Text>().text = "What";
-            OptionD.GetComponentInChildren<Text>().text = "DingleBerry!";
+            Qtext.GetComponent<Text>().text = "I thought the system/controls were easy to use";
+           
 
         }
         else if (Qnum == 1)
         {
-            Qtext.GetComponent<Text>().text = "BOOP";
-            OptionA.GetComponentInChildren<Text>().text = "es";
-            OptionB.GetComponentInChildren<Text>().text = "o";
-            OptionC.GetComponentInChildren<Text>().text = "hat";
-            OptionD.GetComponentInChildren<Text>().text = "ingleBerry!";
+            Qtext.GetComponent<Text>().text = "I feel confident about using the system";
+           
         }
         else if (Qnum == 2)
         {
-            Qtext.GetComponent<Text>().text = "BliP";
-            OptionA.GetComponentInChildren<Text>().text = "Yes";
-            OptionB.GetComponentInChildren<Text>().text = "yes";
-            OptionC.GetComponentInChildren<Text>().text = "yEs";
-            OptionD.GetComponentInChildren<Text>().text = "DongleBerry!";
+            Qtext.GetComponent<Text>().text = "I understand more about radiation";
+          
+
         }
-        else if (Qnum == 3)
-        {
-            Qtext.GetComponent<Text>().text = "BORP";
-            OptionA.GetComponentInChildren<Text>().text = "No";
-            OptionB.GetComponentInChildren<Text>().text = "No";
-            OptionC.GetComponentInChildren<Text>().text = "No";
-            OptionD.GetComponentInChildren<Text>().text = "DinkleBerg!";
-        }
-        else if (Qnum >= 4)
+        else if (Qnum >= 3)
         {
             OptionA.onClick.RemoveAllListeners();
             OptionB.onClick.RemoveAllListeners();
             OptionC.onClick.RemoveAllListeners();
             OptionD.onClick.RemoveAllListeners();
+            OptionE.onClick.RemoveAllListeners();
+
             
-            Qtext.GetComponent<Text>().text = answers[0] + " " + answers[1] + " " + answers[2] + " " + answers[3];
             OptionA.GetComponentInChildren<Text>().text = "That's";
             OptionB.GetComponentInChildren<Text>().text = "It.";
-            OptionC.GetComponentInChildren<Text>().text = "Get";
-            OptionD.GetComponentInChildren<Text>().text = "Out.";
+            OptionC.GetComponentInChildren<Text>().text = "Now";
+            OptionD.GetComponentInChildren<Text>().text = "Get";
+            OptionE.GetComponentInChildren<Text>().text = "Out.";
+            if ( write ) {
+                saveResultsToFile();
+                write = false;
+            }
         }
 
 
 
     }
 
-    void AClick (){
-        answers.Add('A');
+    public void AClick (){
+        answers.Add(1);
         Qnum++;
     }
 
-    void BClick()
+    public void BClick()
     {
-        answers.Add('B');
+        answers.Add(2);
         Qnum++;
     }
 
-    void CClick()
+    public void CClick()
     {
-        answers.Add('C');
+        answers.Add(3);
         Qnum++;
     }
 
-    void DClick()
+    public void DClick()
     {
-        answers.Add('D');
+        answers.Add(4);
         Qnum++;
+    }
+
+    public void EClick() {
+        answers.Add( 5 );
+        Qnum++;
+    }
+
+    //runs into fille access error: access to path "filepath" is denied
+    void saveResultsToFile() {
+        path = Application.dataPath + folderName + fileName;    //  store path
+        if ( File.Exists( path ) )  //  check if the file already exists
+        {
+            Debug.Log( folderName + " Exists!" );
+            sw = new StreamWriter( path , false );
+        }
+        else { Debug.Log( path + " doesn't exist! Making file" ); sw = new StreamWriter( path , true ); }    //  if not, make it
+
+        sw = new StreamWriter( path , false ); //  open file
+
+        sw.WriteLine( "Q1: " + answers[ 0 ] );
+        sw.WriteLine( "Q2: " + answers[ 1 ] );
+        sw.WriteLine( "Q3: " + answers[ 2 ] );
+        sw.WriteLine( "======================" );
+
+        sw.Close(); //  close file
     }
 }
