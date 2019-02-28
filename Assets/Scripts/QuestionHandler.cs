@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using System.IO;
 using UnityEngine.UI;
+
 public class QuestionHandler : MonoBehaviour
 {
-
+    public string fileName;
+    public string folderName = "/File/";    //  by default
     public Text Qtext;
     public Button OptionA;
     public Button OptionB;
@@ -12,8 +16,34 @@ public class QuestionHandler : MonoBehaviour
     public Button OptionD;
     private List<char> answers = new List<char>();
     public int Qnum = 0;
+    private string path;
+    private StreamWriter sw;
+
+    void saveResultsToFile()
+    {
+        sw = new StreamWriter(path, false); //  open file
+
+        sw.WriteLine("Q1: " + answers[0]);
+        sw.WriteLine("Q2: " + answers[1]);
+        sw.WriteLine("Q3: " + answers[2]);
+        sw.WriteLine("Q4: " + answers[3]);
+        sw.WriteLine("======================");
+
+        sw.Close(); //  close file
+    }
+
     void Start()
     {
+
+        path = Application.dataPath + folderName + fileName;    //  store path
+        if (File.Exists(path))  //  check if the file already exists
+        {
+            Debug.Log(folderName + " Exists!");
+            sw = new StreamWriter(path, false);
+        }
+        else { Debug.Log(path + " doesn't exist! Making file"); sw = new StreamWriter(path, true); }    //  if not, make it
+        sw.Close();
+
         OptionA.onClick.AddListener(() => { AClick(); });
         OptionB.onClick.AddListener(() => { BClick(); });
         OptionC.onClick.AddListener(() => { CClick(); });
