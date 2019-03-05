@@ -14,6 +14,8 @@ public class GeigerController : DoseBody {
     private Transform handTransform;
     private Hand hand;
 
+    private Collider collider;
+
     public GameObject rightHand;
 
     private Vector3 priorPosistion;
@@ -54,6 +56,8 @@ public class GeigerController : DoseBody {
         audioSourceEffects = GetComponents<AudioSource>()[ 0 ];
 
         doseTextMesh.text = "";
+
+        collider = GetComponent<Collider>();
         
 
     }
@@ -102,7 +106,7 @@ public class GeigerController : DoseBody {
         }
 
         value = value / scales[ scale ];
-
+        
         return value;
 
     }
@@ -123,9 +127,17 @@ public class GeigerController : DoseBody {
 
         if ( active ) {
 
-            
+            if ( getValue() >= 0 ) {
 
-            doseTextMesh.text = ( ( int ) getValue() ) + "\n" + prefixes[ scale ] + modes[ mode ]; //Cast to int so we dont get long decimals
+                doseTextMesh.text = ( ( int ) getValue() ) + "\n" + prefixes[ scale ] + modes[ mode ]; //Cast to int so we dont get long decimals
+
+            }
+            else {
+
+                doseTextMesh.text = ( "LUDICROUS\n" + prefixes[ scale ] + modes[ mode ] ); //Prepare ship, ..., for LUDICROUS speed. What's the matter colonel Sanders, chicken?
+                //https://youtu.be/mk7VWcuVOf0?t=46
+
+            }
 
         }
         else {
@@ -144,7 +156,7 @@ public class GeigerController : DoseBody {
 
         if ( pickedUp ) {
 
-            float inputTrigger = SteamVR_Actions.default_ControllerTrigger.GetAxis(SteamVR_Input_Sources.RightHand);
+            float inputTrigger = SteamVR_Actions.default_ControllerTrigger.GetAxis(SteamVR_Input_Sources.Any);
 
             bool triggerDown = inputTrigger == 1f;
 
@@ -208,12 +220,13 @@ public class GeigerController : DoseBody {
 
             //Play active sound, change color, turn on text mesh
             meshRendererStatusSphere.material.SetColor( "_Color" , Color.green);
-
+            collider.enabled = true; //Disabling the colliders since most people will put the geiger counter close to the source, and it'll launch it in the air
 
         }
         else {
 
             meshRendererStatusSphere.material.SetColor("_Color" , Color.black);
+            collider.enabled = false;
 
         }
 
