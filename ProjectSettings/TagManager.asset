@@ -7,6 +7,12 @@ TagManager:
   - DoseReceptor
   - Shielding
   - Button
+  - Top
+  - Bottom
+  - Left
+  - Right
+  - Front
+  - Back
   layers:
   - Default
   - TransparentFX
