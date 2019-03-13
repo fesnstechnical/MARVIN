@@ -7,7 +7,7 @@ public class PSOnTrigger : MonoBehaviour {
 
     private DoseController doseController;
     private Transform ceTransform;
-    private ParticleSystem ps;
+    public ParticleSystem ps;
 
     public List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
     
