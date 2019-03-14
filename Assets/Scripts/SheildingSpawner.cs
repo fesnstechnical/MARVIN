@@ -66,10 +66,15 @@ public class SheildingSpawner : MonoBehaviour {
         float inputTrigger = SteamVR_Actions.default_ControllerTrigger.GetAxis(SteamVR_Input_Sources.Any);
 
         bool triggerDown = inputTrigger == 1f;
+        bool triggerPressedThisFrame = false;
 
         if (triggerDown == false && triggerPressedLastFrame)
         {
             triggerReleasedThisFrame = true;
+        }
+        else if (triggerDown == true && triggerPressedLastFrame == false)
+        {
+            triggerPressedThisFrame = true;
         }
 
         triggerPressedLastFrame = triggerDown;
@@ -114,6 +119,10 @@ public class SheildingSpawner : MonoBehaviour {
                 else if (currentMode == mode.placingSecondPoint)
                 {
                     currentMode = mode.free;
+                    currentObject.AddComponent<Rigidbody>();
+                    currentObject.AddComponent<Interactable>();
+                    currentObject.AddComponent<VelocityEstimator>();
+                    currentObject.AddComponent<Throwable>();
                     currentObject = null;
                     //Debug.Log("Second point placed!");
 
@@ -123,17 +132,17 @@ public class SheildingSpawner : MonoBehaviour {
 
         else if (modeManager.mode == modeManager.handMode.editing)
         {
-            if (triggerDown)
+            if (triggerPressedThisFrame)
             {
                 Debug.Log("Trigger Pulled!");
                 //check colliding shielding with cube and delete
-                Collider[] colliders = Physics.OverlapSphere(cursor.transform.position, cursor.transform.localScale.x / 2);
+                Collider[] colliders = Physics.OverlapSphere(cursor.transform.position, 0.1f);
                 //GameObject sphere = Instantiate(sphereDebug, cursor.transform.position, Quaternion.identity);
                 //sphere.transform.localScale = new Vector3(cursor.transform.localScale.x, cursor.transform.localScale.x, cursor.transform.localScale.x);
                 GameObject shieldingBeingEdited = null;
                 side touchedSide = side.NONE;
                 Debug.Log("Num collisions: " + colliders.Length);
-                Debug.Log("Sphere size: " + cursor.transform.localScale.x / 2);
+                //Debug.Log("Sphere size: " + cursor.transform.localScale.x);
   
 
 
@@ -169,7 +178,7 @@ public class SheildingSpawner : MonoBehaviour {
                     {
                         shieldingBeingEdited = collider.gameObject;
                         gameobjectEditing = collider.gameObject.GetComponent<sideDetector>();
-                        gameobjectEditing.pointTouched = gameObject.transform.position;
+                        gameobjectEditing.pointTouched = cursor.transform.position;
                         gameobjectEditing.originalPosition = shieldingBeingEdited.gameObject.transform.position;
                         gameobjectEditing.originalScale = shieldingBeingEdited.gameObject.transform.localScale;
                     }
@@ -185,7 +194,7 @@ public class SheildingSpawner : MonoBehaviour {
                     editingState = editingMode.dragging;
                     Debug.Log("New side last touched set!");
                 }
-                else
+                else if (gameobjectEditing != null)
                 {
                     editingState = editingMode.free;
                     gameobjectEditing.lastSideTouched = side.NONE;
@@ -206,7 +215,9 @@ public class SheildingSpawner : MonoBehaviour {
                 if (editingState == editingMode.dragging && gameobjectEditing != null)
                 {
                     Debug.Log("Dragging shielding");
-                    float newScaleY, newPosY, newScaleX, newPosX, newScaleZ, newPosZ;
+                    //float newScaleY, newPosY, newScaleX, newPosX, newScaleZ, newPosZ;
+                   // Debug.Log("Original position: " + gameobjectEditing.transform.position);
+                    //Debug.Log("Original Scale: " + gameobjectEditing.transform.localScale);
                     switch (gameobjectEditing.lastSideTouched)
                     {
                         case side.top:
@@ -233,19 +244,23 @@ public class SheildingSpawner : MonoBehaviour {
 
                         case side.front:
                             gameobjectEditing.transform.localScale = new Vector3(gameobjectEditing.transform.localScale.x, gameobjectEditing.transform.localScale.y, gameobjectEditing.originalScale.z + (cursor.transform.position - gameobjectEditing.pointTouched).z);
-                            gameobjectEditing.transform.position = new Vector3(gameobjectEditing.transform.localScale.x, gameobjectEditing.transform.position.y, gameobjectEditing.originalPosition.z + ((cursor.transform.position - gameobjectEditing.pointTouched).z / 2));
+                            gameobjectEditing.transform.position = new Vector3(gameobjectEditing.originalPosition.x, gameobjectEditing.transform.position.y, gameobjectEditing.originalPosition.z + ((cursor.transform.position - gameobjectEditing.pointTouched).z / 2));
 
                             break;
 
                         case side.back:
                             gameobjectEditing.transform.localScale = new Vector3(gameobjectEditing.transform.localScale.x, gameobjectEditing.transform.localScale.y, gameobjectEditing.originalScale.z - (cursor.transform.position - gameobjectEditing.pointTouched).z);
-                            gameobjectEditing.transform.position = new Vector3(gameobjectEditing.transform.localScale.x, gameobjectEditing.transform.position.y, gameobjectEditing.originalPosition.z - ((gameobjectEditing.pointTouched - cursor.transform.position).z / 2));
+                            gameobjectEditing.transform.position = new Vector3(gameobjectEditing.originalPosition.x, gameobjectEditing.transform.position.y, gameobjectEditing.originalPosition.z - ((gameobjectEditing.pointTouched - cursor.transform.position).z / 2));
                             break;
 
                         default:
                             break;
 
+
                     }
+
+                    //Debug.Log("New position: " + gameobjectEditing.transform.position);
+                    //Debug.Log("New Scale: " + gameobjectEditing.transform.localScale);
                 }
             }
         }
