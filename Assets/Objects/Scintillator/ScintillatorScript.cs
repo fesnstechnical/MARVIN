@@ -60,11 +60,11 @@ public class ScintillatorScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Player") { playerWithinTrigger = true; }
+        if(other.gameObject.name == "Player") { playerWithinTrigger = true; }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.name == "Player") { playerWithinTrigger = false; }
+        if(other.gameObject.name == "Player") { playerWithinTrigger = false; }
     }
 }
