@@ -36,14 +36,16 @@ public class UIHologram : MonoBehaviour {
 
     public void openExtension()
     {
-        if (!extensionActive)
+        switch(extensionActive)
         {
-            extensionClone = Instantiate(UI_HologramExtension, this.transform);
-            extensionClone.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + extensionDistance);
-            extensionClone.transform.SetParent(this.transform);
-            extensionClone.GetComponent<UIHologram_Scroll>().setColor(planeColor);
-            extensionClone.GetComponent<UIHologram_Scroll>().setMeasurementText(extensionMeaurementScale);
-            extensionActive = true;
+            case false:
+                extensionClone = Instantiate(UI_HologramExtension, this.transform);
+                extensionClone.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + extensionDistance);
+                extensionClone.transform.SetParent(this.transform);
+                extensionClone.GetComponent<UIHologram_Scroll>().setColor(planeColor);
+                extensionClone.GetComponent<UIHologram_Scroll>().setMeasurementText(extensionMeaurementScale);
+                extensionActive = true;
+                break;
         }
     }
 
@@ -73,17 +75,19 @@ public class UIHologram : MonoBehaviour {
     // Update is called once per frame
     private void Update () {
 
-        if (!isActive)  //  if the UI isn't already displayed, display it
-        {          
-            for (int i = 0; i < text.Count; i++)
-            {
-                displayText.text += text[i] + "\n";
-                plane.GetComponent<RectTransform>().localScale += new Vector3(0, 0, size);
-                plane.transform.position += new Vector3(0, size * (sizeModifier - sizeModifierReducer), 0);    //  shift the plane into its proper position
-            }
+        switch(isActive)  //  if the UI isn't already displayed, display it
+        {
+            case false:
+                for (int i = 0; i < text.Count; i++)
+                {
+                    displayText.text += text[i] + "\n";
+                    plane.GetComponent<RectTransform>().localScale += new Vector3(0, 0, size);
+                    plane.transform.position += new Vector3(0, size * (sizeModifier - sizeModifierReducer), 0);    //  shift the plane into its proper position
+                }
 
-            isActive = true;
-            displayText.color = textColor;
+                isActive = true;
+                displayText.color = textColor;
+                break;
         }
     }
 }
