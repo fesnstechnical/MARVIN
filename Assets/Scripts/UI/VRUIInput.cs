@@ -32,7 +32,23 @@ public class VRUIInput : MonoBehaviour
             menu.enabled = true;
             menu.GetComponentInChildren<BoxCollider>().enabled = true;
             GetComponent<SteamVR_LaserPointer>().thickness = 0.002f;
-        } else
+
+            RaycastHit hit;
+            Ray raycast = new Ray( transform.position , transform.forward );
+            if ( SteamVR_Actions._default.InteractUI.GetStateUp( SteamVR_Input_Sources.Any ) ) {
+                Debug.Log( "click!" );
+                if ( Physics.Raycast( raycast , out hit , 1000.0f ) ) {
+                    if ( hit.transform != null ) {
+                        if ( hit.transform.tag == "Button" ) {
+                            Debug.Log( "that's a button" );
+                            hit.transform.GetComponent<Button>().onClick.Invoke();
+                        }
+                    }
+                }
+            }
+
+        }
+        else
         {
             menu.enabled = false;
             menu.GetComponentInChildren<BoxCollider>().enabled = false;
@@ -40,24 +56,7 @@ public class VRUIInput : MonoBehaviour
         }
 
 
-            RaycastHit hit;
-            Ray raycast = new Ray(transform.position, transform.forward);
-            if (SteamVR_Actions._default.InteractUI.GetStateUp(SteamVR_Input_Sources.Any))
-            {
-                Debug.Log("click!");
-                if(Physics.Raycast(raycast,out hit, 1000.0f))
-                {
-                    if(hit.transform != null)
-                    {
-                        if(hit.transform.tag == "Button")
-                        {
-                            Debug.Log("that's a button");
-                            hit.transform.GetComponent<Button>().onClick.Invoke();
-                        }
-                    }
-                }
-            }
-
+           
 
 
 
