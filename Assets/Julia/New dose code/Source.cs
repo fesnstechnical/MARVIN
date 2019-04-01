@@ -13,26 +13,89 @@ public class Source : MonoBehaviour {
 
     public List<Isotope> isotopes = new List<Isotope>();
 
-    private Dictionary<string , float> activities;
+    private Dictionary<string , float> activities = new Dictionary<string , float>();
 
     private Transform sourceTransform;
     
     private double startTime;
+
+    private BoxCollider boxColldier;
+    private Rigidbody rigidbody;
 
     //Used to contain information
     void Start() {
 
         this.sourceTransform = GetComponent<Transform>();
         this.startTime = new System.TimeSpan(System.DateTime.Now.Ticks).TotalMilliseconds;
+        
 
-        activities = new Dictionary<string , float>();
+        boxColldier = GetComponent<BoxCollider>();
 
+        rigidbody = GetComponent<Rigidbody>();
 
     }
 
-    void Update() {
-        
+    public Dictionary<string , float> getNewComposistion() {
 
+        Dictionary<string , float> newComposistion = new Dictionary<string , float>();
+
+        float totalActivity = 0f;
+
+        foreach ( string nom in activities.Keys ) {
+
+            totalActivity += activities[ nom ];
+
+        }
+
+        foreach ( string nom in activities.Keys ) {
+
+            newComposistion[ nom ] = activities[ nom ] / totalActivity;
+
+        }
+
+        return newComposistion;
+
+    }
+
+    private List<Isotope> getFullDecayChain() {
+
+        List<Isotope> decayChain = new List<Isotope>();
+
+        foreach ( Isotope isotope in getIsotopes() ) {
+
+            recurseDecayChain( ref decayChain , isotope , 0 );
+
+        }
+
+        return decayChain;
+
+    }
+
+    private List<Isotope> recurseDecayChain( ref List<Isotope> decayChain , Isotope parent , int round ) {
+
+        if ( round > 3 ) {
+
+            Debug.Log( "ITS TIME TO STOP" );
+            Debug.Break();
+
+        }
+        else {
+            
+            decayChain.Add( parent );
+
+            if ( parent.getDecayProducts().Count != 0 ) {
+                
+                foreach ( Isotope daughter in parent.getDecayProducts() ) {
+                    
+                    recurseDecayChain( ref decayChain , daughter , round + 1 );
+
+                }
+
+            }
+
+        }
+
+        return decayChain;
 
     }
 
@@ -52,7 +115,7 @@ public class Source : MonoBehaviour {
         else {
 
             //Daughter parent
-
+  
             if ( !daughter.isStable() ) {
 
                 float lambdaM = Mathf.Log( 2 ) / mother.getHalfLife();
@@ -223,5 +286,18 @@ public class Source : MonoBehaviour {
 
     }
 
-    
+    public void freeze() {
+
+        boxColldier.enabled = false;
+        rigidbody.useGravity = false;
+
+    }
+
+    public void unfreeze() {
+
+        boxColldier.enabled = true;
+        rigidbody.useGravity = true;
+
+    }
+
 }

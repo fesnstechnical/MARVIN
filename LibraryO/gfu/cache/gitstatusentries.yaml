@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 995438498, guid: 88f2b9571f3eae449b208dd1fd767111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheType: 5
+  lastUpdatedAtString: 2019-03-30T17:58:17.544-04:00
+  initializedAtString: 2019-03-30T17:58:16.457-04:00
+  entries:
+  - path: Assets\ERC_Basement.unity
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\ERC_Basement.unity
+    projectPath: Assets\ERC_Basement.unity
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\Julia\MenuInterpretor.cs
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\MenuInterpretor.cs
+    projectPath: Assets\Julia\MenuInterpretor.cs
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Assets\Julia\MenuInterpretor.cs.meta
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\MenuInterpretor.cs.meta
+    projectPath: Assets\Julia\MenuInterpretor.cs.meta
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Assets\Julia\New dose code\DoseBody.cs
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\New dose code\DoseBody.cs
+    projectPath: Assets\Julia\New dose code\DoseBody.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\Julia\New dose code\DoseController.cs
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\New dose code\DoseController.cs
+    projectPath: Assets\Julia\New dose code\DoseController.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\Julia\New dose code\GeigerController.cs
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\New dose code\GeigerController.cs
+    projectPath: Assets\Julia\New dose code\GeigerController.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\Julia\New dose code\InterfaceImages.meta
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\New dose code\InterfaceImages.meta
+    projectPath: Assets\Julia\New dose code\InterfaceImages.meta
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Assets\Julia\New dose code\InterfaceImages\Interface_01.jpg
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\New dose code\InterfaceImages\Interface_01.jpg
+    projectPath: Assets\Julia\New dose code\InterfaceImages\Interface_01.jpg
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Assets\Julia\New dose code\InterfaceImages\Interface_01.jpg.meta
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\New dose code\InterfaceImages\Interface_01.jpg.meta
+    projectPath: Assets\Julia\New dose code\InterfaceImages\Interface_01.jpg.meta
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Assets\Julia\New dose code\Isotope.cs
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\New dose code\Isotope.cs
+    projectPath: Assets\Julia\New dose code\Isotope.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\Julia\New dose code\Source.cs
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\New dose code\Source.cs
+    projectPath: Assets\Julia\New dose code\Source.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\Julia\Prefabs\GeigerTool.prefab
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Julia\Prefabs\GeigerTool.prefab
+    projectPath: Assets\Julia\Prefabs\GeigerTool.prefab
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\MS\Pipes-kit\Pipes\Mesh\obj.meta
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\MS\Pipes-kit\Pipes\Mesh\obj.meta
+    projectPath: Assets\MS\Pipes-kit\Pipes\Mesh\obj.meta
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Assets\MS\Pipes-kit\RoofSink\Mesh\obj.meta
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\MS\Pipes-kit\RoofSink\Mesh\obj.meta
+    projectPath: Assets\MS\Pipes-kit\RoofSink\Mesh\obj.meta
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Assets\Objects\Scintillator\ScintillatorScript.cs
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Objects\Scintillator\ScintillatorScript.cs
+    projectPath: Assets\Objects\Scintillator\ScintillatorScript.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\Prefabs\Materials\computer.mat
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Prefabs\Materials\computer.mat
+    projectPath: Assets\Prefabs\Materials\computer.mat
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\Scenes.meta
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\Scenes.meta
+    projectPath: Assets\Scenes.meta
+    originalPath: 
+    status: 5
+    staged: 0
+  - path: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF.asset
+    fullPath: C:\Users\Julia\Projects\MARVIN\Assets\TextMesh Pro\Resources\Fonts &
+      Materials\LiberationSans SDF.asset
+    projectPath: Assets\TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF.asset
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: unityProject.vrmanifest
+    fullPath: C:\Users\Julia\Projects\MARVIN\unityProject.vrmanifest
+    projectPath: unityProject.vrmanifest
+    originalPath: 
+    status: 3
+    staged: 0

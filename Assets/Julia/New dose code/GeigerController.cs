@@ -11,16 +11,13 @@ public class GeigerController : DoseBody {
     private Transform toolTransform;
     private Interactable interactable;
     private Rigidbody toolBody;
-    private Transform handTransform;
-    private Hand hand;
+
 
     private Collider collider;
 
-    public GameObject rightHand;
-
-    private Vector3 priorPosistion;
-    private Quaternion priorAngle;
-
+    private Transform handTransform;
+    private Hand hand;
+    
     private GameObject handRenderPrefab;
 
     private List<DoseReceptor> doseReceptors = new List<DoseReceptor>();
@@ -36,7 +33,7 @@ public class GeigerController : DoseBody {
     private float[] scales = { 0.001f , 1f , 1000f , 10e6f };
     private string[] prefixes = { "m" , "" , "k" , "M" };
 
-    int mode = 0;
+    int mode = 1;
     int scale = 2;
 
     public override void secondaryStart() {
@@ -45,10 +42,11 @@ public class GeigerController : DoseBody {
         interactable = GetComponent<Interactable>();
         toolBody = GetComponent<Rigidbody>();
 
-        handTransform = rightHand.GetComponent<Transform>();
-        hand = rightHand.GetComponent<Hand>();
+        //handTransform = rightHand.GetComponent<Transform>();
+        //hand = rightHand.GetComponent<Hand>();
 
         doseReceptors.Add(new DoseReceptor( 1 , 0.02f , getTransform()) );
+        efficiency = 0.025f;
 
         //components
         doseTextMesh = GetComponentInChildren<TextMesh>();
@@ -57,7 +55,7 @@ public class GeigerController : DoseBody {
 
         doseTextMesh.text = "";
 
-        collider = GetComponent<Collider>();
+        collider = GetComponent<BoxCollider>();
         
 
     }
@@ -111,31 +109,35 @@ public class GeigerController : DoseBody {
 
     }
 
+    
+
     // Update is called once per frame
     void Update() {
 
         if ( pickedUp ) {
-
-            if ( priorPosistion != null & priorAngle != null ) {
-
-                toolTransform.localPosition = priorPosistion;
-                toolTransform.localRotation = priorAngle;
-
-            }
-
+            
+            toolTransform.position = handTransform.position;
+            toolTransform.rotation = handTransform.rotation * Quaternion.Euler( 0 , -90 , 0 );
+            
         }
-
+        
         if ( active ) {
+
 
             if ( getValue() >= 0 ) {
 
                 doseTextMesh.text = ( ( int ) getValue() ) + "\n" + prefixes[ scale ] + modes[ mode ]; //Cast to int so we dont get long decimals
 
             }
-            else {
+            else if ( getValue() < -10 ) {
 
                 doseTextMesh.text = ( "LUDICROUS\n" + prefixes[ scale ] + modes[ mode ] ); //Prepare ship, ..., for LUDICROUS speed. What's the matter colonel Sanders, chicken?
                 //https://youtu.be/mk7VWcuVOf0?t=46
+
+            }
+            else {
+
+                doseTextMesh.text = ( 0 ) + "\n" + prefixes[ scale ] + modes[ mode ]; //Cast to int so we dont get long decimals
 
             }
 
@@ -218,15 +220,33 @@ public class GeigerController : DoseBody {
 
         if ( active ) {
 
+            GameObject rightHand = GameObject.Find( "RightHand" );
+            GameObject leftHand = GameObject.Find( "LeftHand" );
+            
+
+            if ( ( rightHand.GetComponent<Transform>().position - toolTransform.position ).magnitude < ( leftHand.GetComponent<Transform>().position - toolTransform.position ).magnitude ) {
+
+                //Right hand is closest, so that must've picked it up
+                handTransform = rightHand.GetComponent<Transform>();
+                hand = rightHand.GetComponent<Hand>();
+
+            }
+            else {
+
+                handTransform = leftHand.GetComponent<Transform>();
+                hand = leftHand.GetComponent<Hand>();
+
+            }
+
             //Play active sound, change color, turn on text mesh
             meshRendererStatusSphere.material.SetColor( "_Color" , Color.green);
-            collider.enabled = true; //Disabling the colliders since most people will put the geiger counter close to the source, and it'll launch it in the air
+            collider.enabled = false; //Disabling the colliders since most people will put the geiger counter close to the source, and it'll launch it in the air
 
         }
         else {
 
             meshRendererStatusSphere.material.SetColor("_Color" , Color.black);
-            collider.enabled = false;
+            collider.enabled = true;
 
         }
 
@@ -239,13 +259,11 @@ public class GeigerController : DoseBody {
             toolBody.useGravity = false;
             interactable.highlightOnHover = false;
             toolTransform.SetParent(handTransform);
-
-            priorPosistion = toolTransform.localPosition;
-            priorAngle = toolTransform.localRotation;
-
+            
             handRenderPrefab = hand.renderModelPrefab;
-            handRenderPrefab.GetComponent<MeshRenderer>().enabled = false;
-            hand.SetRenderModel(handRenderPrefab);
+       
+            //handRenderPrefab.GetComponent<MeshRenderer>().enabled = false;
+            //hand.SetRenderModel(handRenderPrefab);
             
 
 
@@ -258,7 +276,7 @@ public class GeigerController : DoseBody {
             interactable.highlightOnHover = true;
             toolTransform.position = handTransform.position;
 
-            hand.SetRenderModel(handRenderPrefab);
+            //hand.SetRenderModel(handRenderPrefab);
 
         }
 
@@ -275,12 +293,7 @@ public class GeigerController : DoseBody {
                 updateActive();
 
             }
-            else {
-
-            }
-
- 
-            
+     
         }
         else if ( message == "Drop" ) {
 

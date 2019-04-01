@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class DoseController : MonoBehaviour {
 
+    public bool applyCorrectionCode = false;
+
     private Dictionary<string , Dictionary<float , float>> attenConstants = new Dictionary<string , Dictionary<float , float>>();
     private float airAttenuation = 0; //Please change and update later
 
     public bool debug;
-    public bool particleSystem;
 
     //This class is the controller for the dose system
     //Only one of these per scene
@@ -60,13 +61,27 @@ public class DoseController : MonoBehaviour {
 
     }
 
-    private List<Isotope> recurseDecayChain( List<Isotope> decayChain , Isotope parent ) {
+    private List<Isotope> recurseDecayChain( ref List<Isotope> decayChain , Isotope parent , int round ) {
 
-        decayChain.Add( parent );
+        if ( round > 10 ) {
+            
+            Debug.Log( "ITS TIME TO STOP" );
+            Debug.Break();
 
-        foreach ( Isotope daughter in parent.getDecayProducts() ) {
+        }
+        else {
 
-            recurseDecayChain( decayChain , daughter );
+            decayChain.Add( parent );
+
+            if ( parent.getDecayProducts().Count != 0 ) {
+
+                foreach ( Isotope daughter in parent.getDecayProducts() ) {
+
+                    recurseDecayChain( ref decayChain , daughter , round + 1 );
+
+                }
+
+            }
 
         }
 
@@ -87,7 +102,7 @@ public class DoseController : MonoBehaviour {
 
                 foreach ( Isotope isotope in source.getIsotopes() ) {
 
-                    recurseDecayChain( decayChain , isotope );
+                    recurseDecayChain( ref decayChain , isotope , 0 );
 
                 }
 
@@ -102,13 +117,20 @@ public class DoseController : MonoBehaviour {
                     //Sort shields
                     shields = sortShields( shields , doseReceptor.getPosistion() );
 
+                    bool passedThroughShieldAny = false;
+
                     for ( int i = 0 ; i < shields.Count ; i++ ) {
+
+                        bool passedShield = false;
 
                         Shield shield = shields[ i ];
 
                         Vector3[] points = lineShieldIntersection( origin , source.getPosistion() , shield );
 
                         if ( points[ 0 ] != Vector3.zero && points[ 1 ] != Vector3.zero ) {
+
+                            passedShield = true;
+                            passedThroughShieldAny = true;
 
                             //This is our thickness
                             float thickness = Vector3.Distance( points[ 0 ] , points[ 1 ] );
@@ -193,7 +215,31 @@ public class DoseController : MonoBehaviour {
 
                                 attenuatedActivity = materialAttenuate( attenuatedActivity , materialAttenuationConstant , thickness );
 
+                                if ( passedShield && applyCorrectionCode ) {
+                                    
+                                    float deadTime = attenuatedActivity / ( 1 - ( attenuatedActivity * 200 ) );
+                                    float materialAttenuationCorrection = Mathf.Exp( -( 3.1f + ( ( ( float ) thickness / 100 ) * 0.0513678f ) ) );
+
+                                    float distanceDoseDetector = ( doseReceptor.getPosistion() - shield.GetComponent<Transform>().position ).magnitude * 100; //cm
+
+                                    float buildup = 1f; //Fix later
+
+                                    attenuatedActivity *= doseBody.getEfficiency() * deadTime * materialAttenuationCorrection;
+
+                                    if ( distanceDoseDetector < 50 && isotope.getBetaDecayEnergy() != 0 ) {
+
+                                        //Less than 50cm, & beta so we gotta consider scattering
+                                        attenuatedActivity += ( ( 50 - distanceDoseDetector ) * 0.095f * attenuatedActivity );
+
+                                    }
+
+                                }
+
+
                             }
+
+
+
 
                             origin = furthestPoint;
 
@@ -213,6 +259,29 @@ public class DoseController : MonoBehaviour {
 
                     //Attenuate distance
                     attenuatedActivity = ( ( attenuatedActivity ) / ( 4 * Mathf.PI * Mathf.Pow( ( doseReceptor.getPosistion() - source.getPosistion() ).magnitude , 2 ) ) ) * doseReceptor.getSurfaceArea();
+
+                   
+                    if ( applyCorrectionCode && !passedThroughShieldAny ) {
+                        
+
+                        //Correction
+
+                        float distanceDoseSource = ( doseReceptor.getPosistion() - source.GetComponent<Transform>().position ).magnitude * 100; //cm
+
+                        float deadTime = attenuatedActivity / ( 1 - ( attenuatedActivity * 200 ) );
+                        float geometricFactor = 0.37f;
+
+                        if ( distanceDoseSource < 3 ) { //Less than 3 centimeters
+                            
+                            geometricFactor = ( float )( distanceDoseSource * ( ( -0.03180557 + ( 19.65851 - -0.03180557 ) / ( 1 + Mathf.Pow( ( distanceDoseSource / 1.494623f ) , 1.501856f ) ) ) / ( ( 0.00113283 + ( 12233.67 - 0.00113283 ) / ( 1 + Mathf.Pow( ( distanceDoseSource / 0.04303171f ) , 2.002215f ) ) ) ) ) );
+    
+                        }
+
+                        attenuatedActivity *= doseBody.getEfficiency() * deadTime * geometricFactor;
+
+                    }
+
+                    
 
                     countRate += attenuatedActivity;
 
@@ -329,7 +398,7 @@ public class DoseController : MonoBehaviour {
     }
 
     //Finds all game objects with a 'Source' component and returns a list of type Source
-    private List<Source> getSources() {
+    public List<Source> getSources() {
 
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
         List<Source> sources = new List<Source>();
@@ -369,7 +438,7 @@ public class DoseController : MonoBehaviour {
     }
 
     //Finds all game objects with a 'DoseBody' component and returns a list of type DoseBody
-    private List<DoseBody> getDoseBodies() {
+    public List<DoseBody> getDoseBodies() {
 
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
         List<DoseBody> doseBodies = new List<DoseBody>();

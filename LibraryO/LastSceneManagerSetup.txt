@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/ERC_Basement.unity
+  isLoaded: 1
+  isActive: 1

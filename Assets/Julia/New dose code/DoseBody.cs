@@ -10,6 +10,11 @@ public abstract class DoseBody : MonoBehaviour {
     private float doseRate;
     private float countRate;
     private Transform hiddenTransform;
+    protected float efficiency = 1f; //Overriden by GeigerController
+    protected bool isPlayer = false;
+
+    private float accululatedDose = 0f;
+    private float lastTime = 0f;
 
 
     public Transform getTransform() {
@@ -22,14 +27,35 @@ public abstract class DoseBody : MonoBehaviour {
         
         hiddenTransform = GetComponent<Transform>();
         secondaryStart();
-
+        
     }
 
 
+    public bool getIsPlayer() {
+
+        return isPlayer;
+
+    }
+
+    public void setIsPlayer( bool isPlayer ) {
+
+        this.isPlayer = isPlayer;
+
+    }
 
     public void setDoseRate( float doseRate ) {
 
         this.doseRate = doseRate;
+
+        if ( lastTime != 0 ) {
+
+            float deltaTime = ( Time.time - lastTime ) / ( 3600f );
+            accululatedDose += deltaTime * doseRate;
+
+
+        }
+
+        lastTime = Time.time;
 
     }
 
@@ -52,5 +78,16 @@ public abstract class DoseBody : MonoBehaviour {
 
     }
 
+    public float getEfficiency() {
+
+        return efficiency;
+
+    }
+
+    public float getAccumulatedDose() {
+
+        return accululatedDose;
+
+    }
 
 }

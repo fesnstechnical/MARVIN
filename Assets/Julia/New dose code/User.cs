@@ -13,6 +13,7 @@ public class User : DoseBody {
     public override void secondaryStart() {
         
         doseReceptors.Add( new DoseReceptor(77, 1.7f / 2 , getTransform()) );
+        setIsPlayer( true );
 
     }
 

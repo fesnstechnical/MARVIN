@@ -7,35 +7,37 @@ public class Isotope {
 
     //########################Constructors########################
 
-    public float concentration;
+    public float concentration = -1f;
     public RadioIsotopes radioIsotope;
 
-    private string isotopeName;
+    private string name;
+    private bool wasConstructed = false;
 
     public Isotope() {
-
-        isotopeName = isotopeNames[ ( int ) radioIsotope ];
+        
         readCSV();
-
-
+        
     }
 
     public Isotope( RadioIsotopes radioIsotope , float concentration ) {
         
         this.concentration = concentration;
-        
-        isotopeName = isotopeNames[ ( int ) radioIsotope ];
+        name = isotopeNames[ ( int ) radioIsotope ];
 
         readCSV();
+
+        wasConstructed = true;
 
     }
 
     public Isotope( string isotopeName , float concentration ) {
-
-        this.isotopeName = isotopeName;
+        
         this.concentration = concentration;
+        this.name = isotopeName;
 
         readCSV();
+
+        wasConstructed = true;
 
     }
 
@@ -43,13 +45,25 @@ public class Isotope {
     public Isotope( int Z , int N , bool meta , float concentration ) {
 
         this.concentration = concentration;
-
-        this.isotopeName = isotopeSymbols[ ( Z + N ) - 1 ].Split( '-' )[ 1 ] + ( meta ? "m" : "" );
-
+        
+        name = isotopeSymbols[ Z - 1 ].Split( '-' )[ 1 ] + ( meta ? "m" : "" );
+        
         readCSV();
+
+        wasConstructed = true;
 
     }
 
+    private void properConstruct() {
+
+        if ( !wasConstructed ) {
+
+            name = isotopeNames[ ( int ) radioIsotope ];
+            wasConstructed = true;
+
+        }
+
+    }
 
     //########################Functions########################
     
@@ -57,18 +71,24 @@ public class Isotope {
     //Return in keV
     public float getGammaDecayEnergy() {
 
-        string name = getIsotopeName();
+        properConstruct();
 
-        foreach ( Dictionary<string , string> isotope in isotopeData ) {
+        if ( !isStable() ) {
 
-            if ( isotope[ "Full name" ] == this.getIsotopeName() ) {
+            string name = getIsotopeName();
 
-                return ( float.Parse( isotope[ "Gamma energy (MeV)" ] ) * 100 );
+            foreach ( Dictionary<string , string> isotope in isotopeData ) {
+                
+                if ( isotope[ "Full name" ] == this.getIsotopeName() && isotope[ "Gamma energy (MeV)" ]  != "" ) {
+                    
+                    return ( float.Parse( isotope[ "Gamma energy (MeV)" ] ) * 100 );
+
+                }
 
             }
 
         }
-
+        
         return 0;
 
     }
@@ -76,13 +96,17 @@ public class Isotope {
     //Return in keV
     public float getBetaDecayEnergy() {
 
-        string name = getIsotopeName();
+        properConstruct();
 
-        foreach ( Dictionary<string , string> isotope in isotopeData ) {
+        if ( !isStable() ) {
 
-            if ( isotope[ "Full name" ] == this.getIsotopeName() ) {
+            foreach ( Dictionary<string , string> isotope in isotopeData ) {
 
-                return ( float.Parse( isotope[ "Beta energy (MeV)" ] ) * 100 );
+                if ( isotope[ "Full name" ] == this.getIsotopeName() && isotope[ "Beta energy (MeV)" ] != "" ) {
+
+                    return ( float.Parse( isotope[ "Beta energy (MeV)" ] ) * 100 );
+
+                }
 
             }
 
@@ -94,6 +118,8 @@ public class Isotope {
 
     //Return in s
     public float getHalfLife() {
+
+        properConstruct();
 
         foreach ( Dictionary<string , string> isotope in isotopeData ) {
 
@@ -144,6 +170,7 @@ public class Isotope {
 
     public bool isStable() {
 
+        properConstruct();
         //If its in the table its not stable
 
         foreach ( Dictionary<string , string> isotope in isotopeData ) {
@@ -162,6 +189,7 @@ public class Isotope {
 
     public List<Isotope> getDecayProducts() {
 
+        properConstruct();
         List<Isotope> daughters = new List<Isotope>();
 
         if ( !isStable() ) {
@@ -178,7 +206,7 @@ public class Isotope {
                         int N = int.Parse( isotope[ "N" ] );
                         bool meta = isotope[ "Meta-stable daughter" ] == "TRUE";
                         float newConcentration = ( float.Parse( isotope[ "Decay probability (%)" ] ) / 100 ) * getConcentration();
-
+                        
                         daughters.Add( new Isotope( Z + 1 , N - 1 , meta , newConcentration ) );
 
                     }
@@ -243,7 +271,7 @@ public class Isotope {
 
     public string getIsotopeName() {
 
-        return isotopeName;
+        return name;
 
     }
 
