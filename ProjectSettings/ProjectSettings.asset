@@ -235,6 +235,7 @@ PlayerSettings:
   tvOSManualSigningProvisioningProfileType: 0
   appleEnableAutomaticSigning: 0
   iOSRequireARKit: 0
+  iOSAutomaticallyDetectAndAddCapabilities: 1
   appleEnableProMotion: 0
   clonedFromGUID: 00000000000000000000000000000000
   templatePackageId: 
@@ -590,10 +591,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 2
-  cloudProjectId: 208d7cc2-51bc-4d02-ae93-5587772d3f66
+  cloudProjectId: 78b0fb05-3a20-4b80-bddc-8d718e8df606
   framebufferDepthMemorylessMode: 0
-  projectName: MARVIN
-  organizationId: mscalandria
+  projectName: MARVIN (1)
+  organizationId: tom-tsiliopoulos
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
