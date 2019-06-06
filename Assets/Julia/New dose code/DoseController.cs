@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DoseController : MonoBehaviour {
 
-    public bool applyCorrectionCode = false;
+    public bool applyCorrectionCode = true;
 
     private Dictionary<string , Dictionary<float , float>> attenConstants = new Dictionary<string , Dictionary<float , float>>();
     private float airAttenuation = 0; //Please change and update later
@@ -217,14 +217,14 @@ public class DoseController : MonoBehaviour {
 
                                 if ( passedShield && applyCorrectionCode ) {
                                     
-                                    float deadTime = attenuatedActivity / ( 1 - ( attenuatedActivity * 200 ) );
                                     float materialAttenuationCorrection = Mathf.Exp( -( 3.1f + ( ( ( float ) thickness / 100 ) * 0.0513678f ) ) );
-
+                                    
                                     float distanceDoseDetector = ( doseReceptor.getPosistion() - shield.GetComponent<Transform>().position ).magnitude * 100; //cm
 
                                     float buildup = 1f; //Fix later
 
-                                    attenuatedActivity *= doseBody.getEfficiency() * deadTime * materialAttenuationCorrection;
+                                    attenuatedActivity *= doseBody.getEfficiency() * materialAttenuationCorrection;
+
 
                                     if ( distanceDoseDetector < 50 && isotope.getBetaDecayEnergy() != 0 ) {
 
@@ -267,8 +267,7 @@ public class DoseController : MonoBehaviour {
                         //Correction
 
                         float distanceDoseSource = ( doseReceptor.getPosistion() - source.GetComponent<Transform>().position ).magnitude * 100; //cm
-
-                        float deadTime = attenuatedActivity / ( 1 - ( attenuatedActivity * 200 ) );
+                        
                         float geometricFactor = 0.37f;
 
                         if ( distanceDoseSource < 3 ) { //Less than 3 centimeters
@@ -277,7 +276,7 @@ public class DoseController : MonoBehaviour {
     
                         }
 
-                        attenuatedActivity *= doseBody.getEfficiency() * deadTime * geometricFactor;
+                        attenuatedActivity *= doseBody.getEfficiency()  * geometricFactor;
 
                     }
 

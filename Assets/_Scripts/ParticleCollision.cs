@@ -40,8 +40,8 @@ namespace Bhaptics.Tact.Unity
                 var go = Instantiate(rayShootEffectPrefab, collisionEvents[0].intersection, Quaternion.identity);
                 Destroy(go, 0.1f);
                 //TactSenderForCollision.Play(PositionTag.Default, collisionEvents[0].intersection,other.GetComponent<Collider>());
-                Debug.DrawLine(collisionEvents[0].intersection,raycastHit.point, Color.red);
-                Debug.Log(collisionEvents[0].intersection.x + "&" + collisionEvents[0].intersection.y);
+                //Debug.DrawLine(collisionEvents[0].intersection,raycastHit.point, Color.red);
+                ///Debug.Log(collisionEvents[0].intersection.x + "&" + collisionEvents[0].intersection.y);
             }
                 
             

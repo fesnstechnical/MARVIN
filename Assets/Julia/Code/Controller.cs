@@ -169,7 +169,12 @@ public class Controller : MonoBehaviour {
     void OnApplicationQuit() {
 
         stopThread = true;
-        readThread.Abort();
+
+        if ( readThread != null ) {
+
+            readThread.Abort();
+
+        }
 
     }
 
