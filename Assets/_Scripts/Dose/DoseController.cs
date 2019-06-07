@@ -52,7 +52,7 @@ public class DoseController : MonoBehaviour {
             float[] rates = calculateCountAndDoseRateForDoseBody(body , sources , shields);
 
             float countRate = rates[ 0 ];
-            float doseRate = rates[ 1 ];
+            float doseRate = rates[ 1 ]; //mSv/hr
             
             body.setCountRate(countRate);
             body.setDoseRate(doseRate);

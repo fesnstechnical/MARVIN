@@ -15,9 +15,11 @@ public class Controller : MonoBehaviour {
     private static Controller controller;
 
     private DoseController doseController;
+    private ScenarioHandler scenarioHandler;
+
     private bool particlesEnabled;
 
-    private bool enableNetworking = false;
+    private bool enableNetworking = true;
     
     // Start is called before the first frame update
     void Start() {
@@ -26,6 +28,7 @@ public class Controller : MonoBehaviour {
 
         controller = this;
         doseController = GameObject.Find( "Dose controller" ).GetComponent<DoseController>();
+        scenarioHandler = GameObject.Find( "Dose controller" ).GetComponent<ScenarioHandler>();
 
         particlesEnabled = particlesInitiallyEnalbed;
         updateParticleGenerators();
@@ -148,7 +151,7 @@ public class Controller : MonoBehaviour {
             
             string inputText = ( encoder.GetString( message , 0 , bytesRead ) );
             inputText = inputText.Trim();
-
+            
             if ( inputText == "ping" ) {
 
                 streamWrite( "ping" );
@@ -181,6 +184,12 @@ public class Controller : MonoBehaviour {
     public static Controller getController() {
 
         return controller;
+
+    }
+
+    public ScenarioHandler getScenarioHandler() {
+
+        return scenarioHandler;
 
     }
 
