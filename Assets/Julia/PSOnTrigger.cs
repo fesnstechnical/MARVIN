@@ -14,21 +14,8 @@ public class PSOnTrigger : MonoBehaviour {
 
     void OnEnable() {
 
-        //Finds the dose controller
-        //We need the dose controller to find the shields
-        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
-
-        foreach ( GameObject gameObject in allObjects ) {
-
-            if ( gameObject.GetComponent<DoseController>() != null ) {
-
-                doseController = gameObject.GetComponent<DoseController>();
-                break;
-
-            }
-
-        }
-
+        doseController = Controller.getController().getDoseController();
+        
         ceTransform = GetComponentInChildren<Transform>(); 
         ps = GetComponent<ParticleSystem>();
 
@@ -40,7 +27,7 @@ public class PSOnTrigger : MonoBehaviour {
 
     void Update() {
 
-        if ( frameCount == 90 ) {
+        if ( frameCount == 90 * 1.5 ) {
 
             setColliders();
             frameCount = 0;

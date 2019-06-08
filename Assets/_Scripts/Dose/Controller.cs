@@ -187,6 +187,12 @@ public class Controller : MonoBehaviour {
 
     }
 
+    public DoseController getDoseController() {
+
+        return doseController;
+
+    }
+
     public ScenarioHandler getScenarioHandler() {
 
         return scenarioHandler;

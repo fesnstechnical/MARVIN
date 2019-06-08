@@ -31,7 +31,7 @@ public class DoseController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if ( t == 90 * 1 ) {
+        if ( t == 90 * 2 ) {
 
             StartCoroutine( DoseCalculator() );
             t = 0;
@@ -73,8 +73,7 @@ public class DoseController : MonoBehaviour {
                     yield return new WaitForSecondsRealtime( staggerTime );
 
                     foreach ( Isotope isotope in decayChain ) {
-
-
+                        
                         float averageParticleEnergy = isotope.getGammaDecayEnergy() + isotope.getBetaDecayEnergy();
 
                         float attenuatedActivity = source.getActivity( isotope.getIsotopeName() );
