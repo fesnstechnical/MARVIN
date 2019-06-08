@@ -7,10 +7,14 @@ public class DoseController : MonoBehaviour {
 
     public bool applyCorrectionCode = true;
 
+    private Dictionary<string , Dictionary<float , float>> knownAttenuationCoefficients = new Dictionary<string , Dictionary<float , float>>();
     private Dictionary<string , Dictionary<float , float>> attenConstants = new Dictionary<string , Dictionary<float , float>>();
-    private float airAttenuation = 0; //Please change and update later
+    private float airAttenuation = 0.05f; 
 
     public bool debug;
+
+    private bool staggerCalculations = true;
+    private float staggerTime = 0.05f;
 
     //This class is the controller for the dose system
     //Only one of these per scene
@@ -29,7 +33,7 @@ public class DoseController : MonoBehaviour {
 
         if ( t == 90 * 1 ) {
 
-            calculateDose();
+            StartCoroutine( DoseCalculator() );
             t = 0;
 
         }
@@ -38,26 +42,267 @@ public class DoseController : MonoBehaviour {
 
     }
 
-
-
-    private void calculateDose() {
+    IEnumerator DoseCalculator() {
 
         List<Source> sources = getSources();
         List<Shield> shields = getShields();
         List<DoseBody> doseBodies = getDoseBodies();
         
-        foreach ( DoseBody body in doseBodies ) {
+        foreach ( DoseBody doseBody in doseBodies ) {
+
+            yield return new WaitForSecondsRealtime( staggerTime );
+
+            float countRate = 0;
+            float doseRate = 0;
+
+            foreach ( DoseReceptor doseReceptor in doseBody.getDoseReceptors() ) {
+
+                yield return new WaitForSecondsRealtime( staggerTime );
+
+                foreach ( Source source in sources ) {
+
+                    yield return new WaitForSecondsRealtime( staggerTime );
+                    List<Isotope> decayChain = new List<Isotope>();
+
+                    foreach ( Isotope isotope in source.getIsotopes() ) {
+
+                        recurseDecayChain( ref decayChain , isotope , 0 );
+
+                    }
+
+                    yield return new WaitForSecondsRealtime( staggerTime );
+
+                    foreach ( Isotope isotope in decayChain ) {
 
 
-            float[] rates = calculateCountAndDoseRateForDoseBody(body , sources , shields);
+                        float averageParticleEnergy = isotope.getGammaDecayEnergy() + isotope.getBetaDecayEnergy();
 
-            float countRate = rates[ 0 ];
-            float doseRate = rates[ 1 ]; //mSv/hr
+                        float attenuatedActivity = source.getActivity( isotope.getIsotopeName() );
+
+                        Vector3 origin = doseReceptor.getPosistion();
+
+                        //Sort shields
+                        shields = sortShields( shields , doseReceptor.getPosistion() );
+
+                        bool passedThroughShieldAny = false;
+
+                        yield return new WaitForSecondsRealtime( staggerTime );
+
+                        for ( int i = 0 ; i < shields.Count ; i++ ) {
+
+                            yield return new WaitForSecondsRealtime( staggerTime );
+
+                            bool passedShield = false;
+
+                            Shield shield = shields[ i ];
+
+                            Vector3[] points = lineShieldIntersection( origin , source.getPosistion() , shield );
+
+                            if ( points[ 0 ] != Vector3.zero && points[ 1 ] != Vector3.zero ) {
+
+                                passedShield = true;
+                                passedThroughShieldAny = true;
+
+                                //This is our thickness
+                                float thickness = Vector3.Distance( points[ 0 ] , points[ 1 ] );
+
+                                Vector3 closestPoint = points[ 0 ];
+                                Vector3 furthestPoint = points[ 1 ];
+
+                                if ( Vector3.Distance( origin , points[ 1 ] ) < Vector3.Distance( origin , points[ 0 ] ) ) {
+
+                                    closestPoint = points[ 1 ];
+                                    furthestPoint = points[ 0 ];
+
+                                }
+
+                                float airAttenuationDistance = Vector3.Distance( origin , closestPoint );
+
+                                attenuatedActivity = materialAttenuate( attenuatedActivity , airAttenuation , airAttenuationDistance );
+
+                                if ( debug ) {
+
+                                    DrawLine( origin , closestPoint , Color.red );
+                                    DrawLine( closestPoint , furthestPoint , Color.green );
+
+                                }
+
+
+                                string assumed = "Concrete (Ordinary)";
+                                string renderName = shield.getName();
+
+                                if ( attenConstants.ContainsKey( renderName ) ) {
+
+                                    assumed = renderName;
+
+                                }
+
+                                if ( attenConstants.ContainsKey( assumed ) ) {
+                                    
+                                    attenuatedActivity = materialAttenuate( attenuatedActivity , getMaterialAttenuationCoefficient( assumed , averageParticleEnergy ) , thickness );
+
+                                    if ( passedShield && applyCorrectionCode ) {
+
+                                        float materialAttenuationCorrection = Mathf.Exp( -( 3.1f + ( ( ( float ) thickness / 100 ) * 0.0513678f ) ) );
+
+                                        float distanceDoseDetector = ( doseReceptor.getPosistion() - shield.GetComponent<Transform>().position ).magnitude * 100; //cm
+
+                                        float buildup = 1f; //Fix later
+
+                                        attenuatedActivity *= doseBody.getEfficiency() * materialAttenuationCorrection;
+
+
+                                        if ( distanceDoseDetector < 50 && isotope.getBetaDecayEnergy() != 0 ) {
+
+                                            //Less than 50cm, & beta so we gotta consider scattering
+                                            attenuatedActivity += ( ( 50 - distanceDoseDetector ) * 0.095f * attenuatedActivity );
+
+                                        }
+
+                                    }
+
+
+                                }
+                                
+                                origin = furthestPoint;
+
+                            }
+
+                        }
+
+
+
+                        if ( debug ) {
+
+                            DrawLine( origin , source.getPosistion() , Color.blue );
+
+                        }
+
+                        yield return new WaitForSecondsRealtime( staggerTime );
+
+                        attenuatedActivity = materialAttenuate( attenuatedActivity , airAttenuation , Vector3.Distance( origin , source.getPosistion() ) );
+
+                        //Attenuate distance
+                        attenuatedActivity = ( ( attenuatedActivity ) / ( 4 * Mathf.PI * Mathf.Pow( ( doseReceptor.getPosistion() - source.getPosistion() ).magnitude , 2 ) ) ) * doseReceptor.getSurfaceArea();
+
+
+                        if ( applyCorrectionCode && !passedThroughShieldAny ) {
+
+
+                            //Correction
+
+                            float distanceDoseSource = ( doseReceptor.getPosistion() - source.GetComponent<Transform>().position ).magnitude * 100; //cm
+
+                            float geometricFactor = 0.37f;
+
+                            if ( distanceDoseSource < 3 ) { //Less than 3 centimeters
+
+                                geometricFactor = ( float ) ( distanceDoseSource * ( ( -0.03180557 + ( 19.65851 - -0.03180557 ) / ( 1 + Mathf.Pow( ( distanceDoseSource / 1.494623f ) , 1.501856f ) ) ) / ( ( 0.00113283 + ( 12233.67 - 0.00113283 ) / ( 1 + Mathf.Pow( ( distanceDoseSource / 0.04303171f ) , 2.002215f ) ) ) ) ) );
+
+                            }
+
+                            attenuatedActivity *= doseBody.getEfficiency() * geometricFactor;
+
+                        }
+
+
+
+                        countRate += attenuatedActivity;
+
+                        //Dose rate
+                        //averageActivity * particleEnergies[ i ] yields keV/s
+                        //keV/s / 6241506479963235 yields j/s, conversion factor
+                        //Dividing that by weight yields j/kg*s, and a Sv=j/kg
+                        doseRate += ( attenuatedActivity * averageParticleEnergy * 1000 * 3600 ) / ( 6241506479963235 * doseReceptor.getMass() ); //Yields mSv/hr
+
+
+                    }
+
+
+                }
+
+            }
             
-            body.setCountRate(countRate);
-            body.setDoseRate(doseRate);
+            
+            doseBody.setCountRate(countRate);
+            doseBody.setDoseRate(doseRate);
             
         }
+
+        yield return null;
+
+    }
+
+    private float getMaterialAttenuationCoefficient( string materialName , float averageParticleEnergy ) {
+
+        if ( knownAttenuationCoefficients.ContainsKey( materialName ) ) {
+
+            if ( knownAttenuationCoefficients[ materialName ].ContainsKey( averageParticleEnergy) ) {
+                
+                return knownAttenuationCoefficients[ materialName ][ averageParticleEnergy ];
+
+            }
+
+        }
+
+        Dictionary<float , float> attenData = attenConstants[ materialName ];
+
+        float materialAttenuationCoefficient = 10; //Concrete for 1000 keV, uses this if it cant find a useful energy
+
+        List<float> keyList = new List<float>( attenData.Keys );
+
+        if ( averageParticleEnergy < keyList[ 0 ] ) { //If the particle energy is below the lowest energy
+
+            //y = mx + b
+            float m = ( attenData[ keyList[ 1 ] ] - attenData[ keyList[ 0 ] ] ) / ( keyList[ 1 ] - keyList[ 0 ] );
+            float b = attenData[ keyList[ 1 ] ] - ( m * keyList[ 1 ] );
+
+            materialAttenuationCoefficient = ( m * averageParticleEnergy ) + b;
+
+        }
+        else if ( averageParticleEnergy > keyList[ attenData.Keys.Count - 1 ] ) { //If the particle energy is larger than the highest particle energy
+
+            //y = mx + b
+            float m = ( attenData[ keyList[ attenData.Keys.Count - 2 ] ] - attenData[ keyList[ attenData.Keys.Count - 1 ] ] ) / ( keyList[ attenData.Keys.Count - 2 ] - keyList[ attenData.Keys.Count - 1 ] );
+            float b = attenData[ keyList[ attenData.Keys.Count - 1 ] ] - ( m * keyList[ attenData.Keys.Count - 1 ] );
+
+            materialAttenuationCoefficient = ( m * averageParticleEnergy ) + b;
+
+        }
+        else { //Particle energy is somewhere in known particle energy range
+
+            for ( int k = 1 ; k < attenData.Keys.Count - 2 ; k++ ) {
+
+                if ( averageParticleEnergy >= keyList[ k ] && averageParticleEnergy <= keyList[ k + 1 ] ) {
+
+                    //y = mx + b
+                    float m = ( attenData[ keyList[ k + 1 ] ] - attenData[ keyList[ k ] ] ) / ( keyList[ k + 1 ] - keyList[ k ] );
+                    float b = attenData[ keyList[ k ] ] - ( m * keyList[ k ] );
+
+                    materialAttenuationCoefficient = ( m * averageParticleEnergy ) + b;
+
+                    break;
+
+                }
+
+
+            }
+
+        }
+
+        if ( knownAttenuationCoefficients.Count < 50 ) {
+
+            if ( !knownAttenuationCoefficients.ContainsKey( materialName ) ) {
+
+                knownAttenuationCoefficients[ materialName ] = new Dictionary<float , float>();
+
+            }
+
+            knownAttenuationCoefficients[ materialName ][ averageParticleEnergy ] = materialAttenuationCoefficient;
+
+        }
+
+        return materialAttenuationCoefficient;
 
     }
 
@@ -86,219 +331,6 @@ public class DoseController : MonoBehaviour {
         }
 
         return decayChain;
-
-    }
-
-    private float[] calculateCountAndDoseRateForDoseBody( DoseBody doseBody , List<Source> sources , List<Shield> shields ) {
-
-        float countRate = 0;
-        float doseRate = 0;
-
-        foreach ( DoseReceptor doseReceptor in doseBody.getDoseReceptors() ) {
-
-            foreach ( Source source in sources ) {
-
-                List<Isotope> decayChain = new List<Isotope>();
-
-                foreach ( Isotope isotope in source.getIsotopes() ) {
-
-                    recurseDecayChain( ref decayChain , isotope , 0 );
-
-                }
-
-                foreach ( Isotope isotope in decayChain ) {
-                    
-                    float averageParticleEnergy = isotope.getGammaDecayEnergy() + isotope.getBetaDecayEnergy();
-                    
-                    float attenuatedActivity = source.getActivity( isotope.getIsotopeName() );
-
-                    Vector3 origin = doseReceptor.getPosistion();
-
-                    //Sort shields
-                    shields = sortShields( shields , doseReceptor.getPosistion() );
-
-                    bool passedThroughShieldAny = false;
-
-                    for ( int i = 0 ; i < shields.Count ; i++ ) {
-
-                        bool passedShield = false;
-
-                        Shield shield = shields[ i ];
-
-                        Vector3[] points = lineShieldIntersection( origin , source.getPosistion() , shield );
-
-                        if ( points[ 0 ] != Vector3.zero && points[ 1 ] != Vector3.zero ) {
-
-                            passedShield = true;
-                            passedThroughShieldAny = true;
-
-                            //This is our thickness
-                            float thickness = Vector3.Distance( points[ 0 ] , points[ 1 ] );
-
-                            Vector3 closestPoint = points[ 0 ];
-                            Vector3 furthestPoint = points[ 1 ];
-
-                            if ( Vector3.Distance( origin , points[ 1 ] ) < Vector3.Distance( origin , points[ 0 ] ) ) {
-
-                                closestPoint = points[ 1 ];
-                                furthestPoint = points[ 0 ];
-
-                            }
-
-                            float airAttenuationDistance = Vector3.Distance( origin , closestPoint );
-
-                            attenuatedActivity = materialAttenuate( attenuatedActivity , airAttenuation , airAttenuationDistance );
-
-                            if ( debug ) {
-
-                                DrawLine( origin , closestPoint , Color.red );
-                                DrawLine( closestPoint , furthestPoint , Color.green );
-
-                            }
-
-
-                            string assumed = "Concrete (Ordinary)";
-                            string renderName = shield.getName();
-
-                            if ( attenConstants.ContainsKey( renderName ) ) {
-
-                                assumed = renderName;
-
-                            }
-
-                            if ( attenConstants.ContainsKey( assumed ) ) {
-
-                                Dictionary<float , float> attenData = attenConstants[ assumed ];
-
-                                float materialAttenuationConstant = 10; //Concrete for 1000 keV, uses this if it cant find a useful energy
-
-                                List<float> keyList = new List<float>( attenData.Keys );
-
-                                if ( averageParticleEnergy < keyList[ 0 ] ) { //If the particle energy is below the lowest energy
-
-                                    //y = mx + b
-                                    float m = ( attenData[ keyList[ 1 ] ] - attenData[ keyList[ 0 ] ] ) / ( keyList[ 1 ] - keyList[ 0 ] );
-                                    float b = attenData[ keyList[ 1 ] ] - ( m * keyList[ 1 ] );
-
-                                    materialAttenuationConstant = ( m * averageParticleEnergy ) + b;
-
-                                }
-                                else if ( averageParticleEnergy > keyList[ attenData.Keys.Count - 1 ] ) { //If the particle energy is larger than the highest particle energy
-
-                                    //y = mx + b
-                                    float m = ( attenData[ keyList[ attenData.Keys.Count - 2 ] ] - attenData[ keyList[ attenData.Keys.Count - 1 ] ] ) / ( keyList[ attenData.Keys.Count - 2 ] - keyList[ attenData.Keys.Count - 1 ] );
-                                    float b = attenData[ keyList[ attenData.Keys.Count - 1 ] ] - ( m * keyList[ attenData.Keys.Count - 1 ] );
-
-                                    materialAttenuationConstant = ( m * averageParticleEnergy ) + b;
-
-                                }
-                                else { //Particle energy is somewhere in known particle energy range
-
-                                    for ( int k = 1 ; k < attenData.Keys.Count - 2 ; k++ ) {
-
-                                        if ( averageParticleEnergy >= keyList[ k ] && averageParticleEnergy <= keyList[ k + 1 ] ) {
-
-                                            //y = mx + b
-                                            float m = ( attenData[ keyList[ k + 1 ] ] - attenData[ keyList[ k ] ] ) / ( keyList[ k + 1 ] - keyList[ k ] );
-                                            float b = attenData[ keyList[ k ] ] - ( m * keyList[ k ] );
-
-                                            materialAttenuationConstant = ( m * averageParticleEnergy ) + b;
-
-                                            break;
-
-                                        }
-
-
-                                    }
-
-                                }
-
-                                attenuatedActivity = materialAttenuate( attenuatedActivity , materialAttenuationConstant , thickness );
-
-                                if ( passedShield && applyCorrectionCode ) {
-                                    
-                                    float materialAttenuationCorrection = Mathf.Exp( -( 3.1f + ( ( ( float ) thickness / 100 ) * 0.0513678f ) ) );
-                                    
-                                    float distanceDoseDetector = ( doseReceptor.getPosistion() - shield.GetComponent<Transform>().position ).magnitude * 100; //cm
-
-                                    float buildup = 1f; //Fix later
-
-                                    attenuatedActivity *= doseBody.getEfficiency() * materialAttenuationCorrection;
-
-
-                                    if ( distanceDoseDetector < 50 && isotope.getBetaDecayEnergy() != 0 ) {
-
-                                        //Less than 50cm, & beta so we gotta consider scattering
-                                        attenuatedActivity += ( ( 50 - distanceDoseDetector ) * 0.095f * attenuatedActivity );
-
-                                    }
-
-                                }
-
-
-                            }
-
-
-
-
-                            origin = furthestPoint;
-
-                        }
-
-                    }
-
-
-
-                    if ( debug ) {
-
-                        DrawLine( origin , source.getPosistion() , Color.blue );
-
-                    }
-
-                    attenuatedActivity = materialAttenuate( attenuatedActivity , airAttenuation , Vector3.Distance( origin , source.getPosistion() ) );
-
-                    //Attenuate distance
-                    attenuatedActivity = ( ( attenuatedActivity ) / ( 4 * Mathf.PI * Mathf.Pow( ( doseReceptor.getPosistion() - source.getPosistion() ).magnitude , 2 ) ) ) * doseReceptor.getSurfaceArea();
-
-                   
-                    if ( applyCorrectionCode && !passedThroughShieldAny ) {
-                        
-
-                        //Correction
-
-                        float distanceDoseSource = ( doseReceptor.getPosistion() - source.GetComponent<Transform>().position ).magnitude * 100; //cm
-                        
-                        float geometricFactor = 0.37f;
-
-                        if ( distanceDoseSource < 3 ) { //Less than 3 centimeters
-                            
-                            geometricFactor = ( float )( distanceDoseSource * ( ( -0.03180557 + ( 19.65851 - -0.03180557 ) / ( 1 + Mathf.Pow( ( distanceDoseSource / 1.494623f ) , 1.501856f ) ) ) / ( ( 0.00113283 + ( 12233.67 - 0.00113283 ) / ( 1 + Mathf.Pow( ( distanceDoseSource / 0.04303171f ) , 2.002215f ) ) ) ) ) );
-    
-                        }
-
-                        attenuatedActivity *= doseBody.getEfficiency()  * geometricFactor;
-
-                    }
-
-                    
-
-                    countRate += attenuatedActivity;
-
-                    //Dose rate
-                    //averageActivity * particleEnergies[ i ] yields keV/s
-                    //keV/s / 6241506479963235 yields j/s, conversion factor
-                    //Dividing that by weight yields j/kg*s, and a Sv=j/kg
-                    doseRate += ( attenuatedActivity * averageParticleEnergy * 1000 * 3600 ) / ( 6241506479963235 * doseReceptor.getMass() ); //Yields mSv/hr
-
-
-                }
-
-
-            }
-
-        }
-
-        return new float[]{  countRate , doseRate };
 
     }
 
@@ -357,42 +389,60 @@ public class DoseController : MonoBehaviour {
 
     }
 
-    public List<Shield> sortShields( List<Shield> shields , Vector3 origin) {
+    private int partition( ref List<Shield> shields , Vector3 origin , int low , int high ) {
 
-        float[] distances = new float[ shields.Count ];
-        for ( int i = 0 ; i < shields.Count ; i++ ) {
+        float pivot = ( shields[ high ].transform.position - origin ).magnitude;
 
-            distances[i] = ( shields[i].transform.position - origin ).magnitude;
+        // index of smaller element 
+        int i = ( low - 1 );
+        for ( int j = low ; j < high ; j++ ) {
+            // If current element is smaller  
+            // than or equal to pivot 
+            if ( ( shields[ j ].transform.position - origin ).magnitude <= pivot ) {
+                i++;
 
-        }
-
-        int n = shields.Count;
-
-        for ( int i = 0 ; i < n - 1 ; i++ ) {
-
-            for ( int j = 0 ; j < n - i - 1 ; j++ ) {
-
-                if ( distances[j] > distances[j + 1] ) {
-
-                    Shield tempObject;
-                    float tempDistance;
-
-                    tempDistance = distances[j];
-                    distances[j] = distances[j + 1];
-                    distances[j + 1] = tempDistance;
-
-
-                    tempObject = shields[j];
-                    shields[j] = shields[j + 1];
-                    shields[j + 1] = tempObject;
-
-                }
+                // swap arr[i] and arr[j] 
+                Shield tempShield = shields[ i ];
+                shields[ i ] = shields[ j ];
+                shields[ j ] = tempShield;
 
             }
-
         }
 
+        // swap arr[i+1] and arr[high] (or pivot) 
+        Shield tempShield2 = shields[ i + 1 ];
+        shields[ i + 1 ] = shields[ high ];
+        shields[ high ] = tempShield2;
+        
+        return i + 1;
+
+    }
+
+    
+    private void quickSort( ref List< Shield > shields , Vector3 origin , int low , int high ) {
+
+        if ( low < high ) {
+
+            /* pi is partitioning index, arr[pi] is  
+            now at right place */
+            int pi = partition( ref shields , origin , low , high );
+
+            // Recursively sort elements before 
+            // partition and after partition 
+            quickSort( ref shields , origin , low , pi - 1 );
+            quickSort( ref shields , origin , pi + 1 , high );
+
+        }
+        
+    }
+
+    public List<Shield> sortShields( List<Shield> shields , Vector3 origin) {
+        
+        quickSort( ref shields , origin , 0 , shields.Count - 1 );
+        
+
         return shields;
+        
 
     }
 
