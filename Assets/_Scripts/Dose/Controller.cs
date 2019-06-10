@@ -48,12 +48,12 @@ public class Controller : MonoBehaviour {
 
         tick++;
 
-        if ( tick == 50 ) {
+        if ( tick == 50 && false ) {
             
             List<DoseBody> doseBoides = doseController.getDoseBodies();
-            
-            foreach ( DoseBody doseBody in doseBoides ) {
 
+            foreach ( DoseBody doseBody in doseBoides ) {
+                
                 if ( doseBody.getIsPlayer() ) {
 
                     streamWrite( "doseRate:" + doseBody.getDoseRate() );
