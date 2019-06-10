@@ -16,7 +16,7 @@ public class DoseController : MonoBehaviour {
     private List<Source> listSources = new List<Source>();
 
 
-    public bool debug;
+    public bool debug = false;
 
     private bool enableDoseSystem = true;
 
@@ -24,7 +24,7 @@ public class DoseController : MonoBehaviour {
     private float staggerTime = 0.05f;
 
     private int updateTickInterval = 8;
-    private int lastGameObjectCount = 0;
+    private int lastGameObjectCount = -1;
     
     //This class is the controller for the dose system
     //Only one of these per scene
@@ -33,6 +33,8 @@ public class DoseController : MonoBehaviour {
     void Start() {
 
         readCSV();
+
+        createColumn();
 
         StartCoroutine( DoseCalculator() );
 
@@ -47,25 +49,18 @@ public class DoseController : MonoBehaviour {
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
 
         if ( allObjects.Length != lastGameObjectCount ) {
-
-            lastGameObjectCount = allObjects.Length;
-
-            if ( updateTick == ( 60 * updateTickInterval ) ) {
-
-                updateListShields( allObjects  );
-
-            }
-            else if ( updateTick == ( 60 * updateTickInterval ) + 20 ) {
-
-                updateListBodies( allObjects  );
-
-            }
-            else if ( updateTick == ( 60 * updateTickInterval ) + 40 ) {
-
+            
+            if ( updateTick > ( 60 * updateTickInterval ) ) {
+                
+                lastGameObjectCount = allObjects.Length;
+                
+                updateListShields( allObjects );
+                updateListBodies( allObjects );
                 updateListSources( allObjects );
                 updateTick = 0;
 
             }
+  
 
         }
 
@@ -87,7 +82,7 @@ public class DoseController : MonoBehaviour {
                 List<DoseBody> doseBodies = getDoseBodies();
 
                 if ( enableDoseSystem ) {
-
+                    
                     foreach ( DoseBody doseBody in doseBodies ) {
 
                         yield return new WaitForSecondsRealtime( staggerTime );
@@ -122,7 +117,7 @@ public class DoseController : MonoBehaviour {
 
                                     //Sort shields
                                     shields = sortShields( shields , doseReceptor.getPosistion() );
-
+                                    
                                     bool passedThroughShieldAny = false;
 
                                     yield return new WaitForSecondsRealtime( staggerTime );
@@ -167,7 +162,7 @@ public class DoseController : MonoBehaviour {
 
                                             string assumed = "Concrete (Ordinary)";
                                             string renderName = shield.getName();
-
+                                            
                                             if ( attenConstants.ContainsKey( renderName ) ) {
 
                                                 assumed = renderName;
@@ -393,7 +388,9 @@ public class DoseController : MonoBehaviour {
 
         //Checks to see if the source hit one face
         if ( collider.Raycast(new Ray(origin , ( ( origin - destination ) * -1f ).normalized) , out hitA , 1000f) ) {
-            
+
+
+
             if ( hitA.transform.name == shield.name ) {
 
                 startA = hitA.point;
@@ -402,8 +399,10 @@ public class DoseController : MonoBehaviour {
                 if ( collider.Raycast(new Ray(destination , ( ( destination - origin ) * -1f ).normalized) , out hitB , 1000f) ) {
                     
                     if ( hitB.transform.name == shield.name ) {
-
+                        
+                        //collider.gameObject.GetComponent<Renderer>().material.color = Color.green;
                         startB = hitB.point;
+                   
 
                     }
 
@@ -524,6 +523,8 @@ public class DoseController : MonoBehaviour {
             }
 
         }
+
+        listSources = sources;
         
 
     }
@@ -542,6 +543,8 @@ public class DoseController : MonoBehaviour {
             }
 
         }
+
+        listShields = shields;
         
 
     }
@@ -552,7 +555,7 @@ public class DoseController : MonoBehaviour {
         List<DoseBody> doseBodies = new List<DoseBody>();
 
         foreach ( GameObject gameObject in allObjects ) {
-
+            
             if ( gameObject.GetComponent<DoseBody>() != null ) {
 
                 doseBodies.Add( gameObject.GetComponent<DoseBody>() );
@@ -561,6 +564,7 @@ public class DoseController : MonoBehaviour {
 
         }
 
+        listBodies = doseBodies;
         
         
     }
@@ -638,6 +642,127 @@ public class DoseController : MonoBehaviour {
         lr.SetPosition(0 , start);
         lr.SetPosition(1 , end);
         GameObject.Destroy(myLine , duration);
+    }
+
+    private void createColumn() {
+
+        Transform transform = GameObject.Find( "ColumnBase" ).transform;
+  
+        for ( int c = 0 ; c < 1 ; c++ ) {
+
+            Vector3 offset = new Vector3( 0 , 0 , 0 );
+        
+            float thickness = new float[]{ 0.01f , 0.01f }[ c ];
+            float radius = new float[] { 0.2f , 0.15f / 2 }[ c ]; 
+            float height = new float[] { 0.2435f * 2 , 0.18f }[ c ];
+
+            int n = new int[] { 18 , 18 }[ c ];
+            int heightSplit = new int[] { 24 , 1 }[ c ];
+
+            float heightInterval = height / ( float ) heightSplit;
+
+            float theta = 360 / n;
+            float length = ( radius + ( thickness / 2 ) ) * Mathf.Tan( Mathf.Deg2Rad * ( theta / 2 ) ) * 2;
+
+            if ( c == 1 ) {
+
+                offset = offset + new Vector3( -0.272f , 0.054f , 0 );
+
+            }
+
+            GameObject parentObject = new GameObject();
+            parentObject.transform.parent = transform;
+            parentObject.transform.localPosition = new Vector3( 0 , 0 , 0 ) + offset;
+            parentObject.transform.localScale = new Vector3( 1 , 1 , 1 );
+
+
+            MeshCollider parentMeshCollider = parentObject.AddComponent<MeshCollider>();
+            MeshFilter parentFilter = parentObject.AddComponent<MeshFilter>();
+            MeshRenderer parentRenderer = parentObject.AddComponent<MeshRenderer>();
+
+
+            List<MeshFilter> filters = new List<MeshFilter>();
+
+            for ( int h = 0 ; h < heightSplit ; h++ ) {
+
+                for ( int i = 0 ; i < n ; i++ ) {
+
+                    bool ignore = ( i == 9 ) && ( h >= 13 && h <= 16 ) && c == 0;
+
+                    if ( !ignore ) {
+
+                        float x = radius * Mathf.Cos( Mathf.Deg2Rad * ( theta * i ) );
+                        float y = radius * Mathf.Sin( Mathf.Deg2Rad * ( theta * i ) );
+
+                        GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
+        
+                        cube.transform.SetParent(  parentObject.transform , false );
+                        
+                        cube.transform.localScale = new Vector3( length , thickness , heightInterval );
+                        cube.transform.localPosition = new Vector3( x , -( height / 2 ) + ( heightInterval * h ) + ( heightInterval / 2 ) , y );
+                        cube.transform.localEulerAngles = new Vector3( 90 , theta * -i + ( 90 ) , 0 );
+
+                        if ( cube.GetComponent<BoxCollider>() !=null ) {
+
+                            //Destroy( cube.GetComponent<BoxCollider>() );
+
+                        }
+                        
+                        filters.Add( cube.GetComponent<MeshFilter>() );
+
+
+                    }
+
+                }
+
+            }
+
+            if ( c == 1 ) {
+
+                parentObject.transform.rotation *= Quaternion.Euler( 0 , 0 , 90 );
+
+            }
+
+            Transform masterTransform = GameObject.Find( "GammaGun" ).transform;
+
+
+            CombineInstance[] combine = new CombineInstance[ filters.Count ];
+            for ( int i = 0 ; i < combine.Length ; i++ ) {
+
+                combine[ i ].mesh = filters[ i ].sharedMesh;
+
+                Vector3 local = filters[ i ].transform.localPosition;
+
+                filters[ i ].transform.localPosition = filters[ i ].transform.position;
+                filters[ i ].transform.position = local;
+                
+                combine[ i ].transform = ( filters[ i ].transform ).localToWorldMatrix;
+                filters[ i ].gameObject.SetActive( false );
+
+
+            }
+
+           
+            parentFilter.mesh = new Mesh();
+            
+            parentFilter.mesh.CombineMeshes( combine , true );
+
+            parentFilter.sharedMesh = parentFilter.mesh;
+            
+            
+            parentMeshCollider.sharedMesh = parentFilter.mesh;
+
+
+            parentFilter.gameObject.SetActive( true );
+
+
+            Shield cubeShield = parentObject.AddComponent<Shield>();
+            cubeShield.nom = "Lead";
+
+        }
+
+
+
     }
 
 }

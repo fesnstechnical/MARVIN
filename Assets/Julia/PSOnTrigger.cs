@@ -12,7 +12,7 @@ public class PSOnTrigger : MonoBehaviour {
     public List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
     
 
-    void OnEnable() {
+    void Start() {
 
         doseController = Controller.getController().getDoseController();
         
@@ -42,19 +42,39 @@ public class PSOnTrigger : MonoBehaviour {
     
     private void setColliders() {
 
-        List<Shield> shields = doseController.getShields(); //Gets all shields on the map from the dose controller
-        shields = doseController.sortShields( shields , ceTransform.position ); //Sorts the shields closest to the source
-
-        int max = 5;
-        int count = shields.Count < max ? shields.Count : max; //If the number of shields is less than the max then iterate through all shields, else go up to 6 of the closest
-        
-        for ( int i = 0 ; i < count ; i++ ) {
-
-            ps.trigger.SetCollider( i , shields[ i ].GetComponent<Collider>() );
-      
-            //Set to these colliders
+        if ( doseController == null ) {
+            
+            doseController = Controller.getController().getDoseController();
 
         }
+        
+        if ( ceTransform == null ) {
+
+            ceTransform = GetComponentInChildren<Transform>();
+
+        }
+
+        if ( ps == null ) {
+
+            ps = GetComponent<ParticleSystem>();
+
+        }
+
+            List<Shield> shields = doseController.getShields(); //Gets all shields on the map from the dose controller
+        
+            shields = doseController.sortShields( shields , ceTransform.position ); //Sorts the shields closest to the source
+
+            int max = 5;
+            int count = shields.Count < max ? shields.Count : max; //If the number of shields is less than the max then iterate through all shields, else go up to 6 of the closest
+
+            for ( int i = 0 ; i < count ; i++ ) {
+            
+                ps.trigger.SetCollider( i , shields[ i ].GetComponent<Collider>() );
+
+                //Set to these colliders
+
+            }
+            
 
     }
 
@@ -67,6 +87,7 @@ public class PSOnTrigger : MonoBehaviour {
         Vector3 exitpoint = new Vector3( 0 ,0 , 0 );
         Vector3 entrypoint = new Vector3( 0, 0 , 0 );
         
+
         //Interates over particles that have collided
         for ( int i=0 ; i < enterParticleNumber ; i++ ) { 
         
@@ -78,8 +99,9 @@ public class PSOnTrigger : MonoBehaviour {
             RaycastHit getName;
             string colliderhit = "N/A";
 
-            if (Physics.Raycast (namehit,out getName , 0.1F ) ) { 
-            
+            if (Physics.Raycast (namehit,out getName , 0.1F ) ) {
+
+                
                 colliderhit = getName.collider.name;
          
 
@@ -99,7 +121,7 @@ public class PSOnTrigger : MonoBehaviour {
                 }
 
             }
-
+            
             if (Random.Range(0, 1000) < 1000 * ( 1 - Mathf.Exp( -1.2F * ( exitpoint - entrypoint ).magnitude ) ) ) {
                 
                 p.velocity = new Vector3(0, 0, 0);
@@ -129,11 +151,6 @@ public class PSOnTrigger : MonoBehaviour {
 
     }
 
-    void Start () {
-
-        
-
-    }
 
     
 
