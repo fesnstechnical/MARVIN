@@ -36,7 +36,15 @@ public class DoseController : MonoBehaviour {
 
         createColumn();
 
+
+        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        updateListShields( allObjects );
+        updateListBodies( allObjects );
+        updateListSources( allObjects );
+
+
         StartCoroutine( DoseCalculator() );
+
 
     }
 
@@ -272,7 +280,7 @@ public class DoseController : MonoBehaviour {
 
     }
 
-    private float getMaterialAttenuationCoefficient( string materialName , float averageParticleEnergy ) {
+    public float getMaterialAttenuationCoefficient( string materialName , float averageParticleEnergy ) {
 
         if ( knownAttenuationCoefficients.ContainsKey( materialName ) ) {
 
@@ -281,6 +289,12 @@ public class DoseController : MonoBehaviour {
                 return knownAttenuationCoefficients[ materialName ][ averageParticleEnergy ];
 
             }
+
+        }
+
+        if ( !attenConstants.ContainsKey( materialName ) ) {
+
+            Debug.Log( materialName );
 
         }
 
