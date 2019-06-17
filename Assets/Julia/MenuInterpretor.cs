@@ -16,12 +16,13 @@ public class MenuInterpretor : MonoBehaviour {
 
         scintillator = GameObject.Find( "Liquid Scintillator" ).GetComponent<ScintillatorScript>();
         
-
         controller = Controller.getController();
 
     }
 
     void SendMessage( string message ) {
+
+        Debug.Log( message );
 
         if ( message == "ToggleScintillatorDoor" ) {
 
@@ -31,6 +32,11 @@ public class MenuInterpretor : MonoBehaviour {
         else if ( message == "ToggleParticles" ) {
 
             controller.toggleParticles();
+
+        }
+        else if ( message == "ToggleGammaCap" ) {
+
+            controller.getGammaGunController().toggleCap( 0 );
 
         }
 

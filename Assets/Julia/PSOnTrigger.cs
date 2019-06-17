@@ -61,7 +61,7 @@ public class PSOnTrigger : MonoBehaviour {
 
         shields = doseController.sortShields( shields , ceTransform.position ); //Sorts the shields closest to the source
 
-        int max = 5;
+        int max = 20;
         int count = shields.Count < max ? shields.Count : max; //If the number of shields is less than the max then iterate through all shields, else go up to 6 of the closest
         
 
@@ -104,55 +104,63 @@ public class PSOnTrigger : MonoBehaviour {
                 RaycastHit getName;
 
                 shields = doseController.sortShields( shields , p.position );
-                Shield closestShield = shields[ 0 ];
 
-                closestShield.getCollider().Raycast( ray , out getName , 1000f );
+                bool collided = false;
 
-                if ( getName.collider != null ) {
+                for ( int x = 0 ; x < shields.Count ; x++ ) {
 
-                    //getName.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                    shields[x].getCollider().Raycast( ray , out getName , 1000f );
 
-                    float thickness = ( p.position - getName.point ).magnitude;
+                    if ( getName.collider != null ) {
 
-                    string materialName = closestShield.nom;
+                        //getName.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
 
-                    float averageMaterialCoefficient = 0;
-                    int count = 0;
+                        float thickness = ( p.position - getName.point ).magnitude;
 
-                    foreach ( Isotope isotope in source.getIsotopes() ) {
+                        string materialName = shields[x].getName();
 
-                        float averageParticleEnergy = isotope.getGammaDecayEnergy() + isotope.getBetaDecayEnergy();
-                        averageMaterialCoefficient += doseController.getMaterialAttenuationCoefficient( materialName , averageParticleEnergy );
+                        float averageMaterialCoefficient = 0;
+                        int count = 0;
 
-                        count++;
+                        foreach ( Isotope isotope in source.getIsotopes() ) {
+
+                            float averageParticleEnergy = isotope.getGammaDecayEnergy() + isotope.getBetaDecayEnergy();
+                            averageMaterialCoefficient += doseController.getMaterialAttenuationCoefficient( materialName , averageParticleEnergy );
+
+                            count++;
+
+                        }
+
+                        averageMaterialCoefficient /= count;
+                        averageMaterialCoefficient *= 1;
+
+                        float random = Random.Range( 0 , 1000 );
+                        float upperBound = 1000 * ( 1 - Mathf.Exp( -averageMaterialCoefficient * thickness ) );
+
+                        if ( random < upperBound ) {
+
+                            p.velocity = new Vector3( 0 , 0 , 0 );
+                            p.remainingLifetime = 1;
+                            collided = true;
+
+                        }
 
                     }
 
-                    averageMaterialCoefficient /= count;
-                    averageMaterialCoefficient *= 1;
+                    if ( collided ) {
 
-                    float random = Random.Range( 0 , 1000 );
-                    float upperBound = 1000 * ( 1 - Mathf.Exp( -averageMaterialCoefficient * thickness ) );
-
-                    if ( random < upperBound ) {
-
-                        p.velocity = new Vector3( 0 , 0 , 0 );
-                        p.remainingLifetime = 1;
+                        break;
 
                     }
-                    else {
-
-                        p.startColor = Color.red;
-
-                    }
-
-
+              
                 }
 
 
 
             }
 
+
+           // p.startColor = Color.blue;
             enter[ i ] = p;
 
             

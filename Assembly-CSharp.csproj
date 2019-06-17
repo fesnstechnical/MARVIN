@@ -65,6 +65,9 @@
     <Compile Include="Assets\_Scripts\Dose\DoseBody.cs" />
     <Compile Include="Assets\_Scripts\Dose\DoseController.cs" />
     <Compile Include="Assets\_Scripts\Dose\DoseReceptor.cs" />
+    <Compile Include="Assets\_Scripts\Dose\GammaGun\GammaGunController.cs" />
+    <Compile Include="Assets\_Scripts\Dose\GammaGun\GammaGunEditor.cs" />
+    <Compile Include="Assets\_Scripts\Dose\GammaGun\GammaShield.cs" />
     <Compile Include="Assets\_Scripts\Dose\GeigerController.cs" />
     <Compile Include="Assets\_Scripts\Dose\GeigerSound.cs" />
     <Compile Include="Assets\_Scripts\Dose\Interface.cs" />
@@ -75,6 +78,7 @@
     <Compile Include="Assets\_Scripts\Dose\User.cs" />
     <Compile Include="Assets\_Scripts\MissionHandler.cs" />
     <Compile Include="Assets\_Scripts\ParticleCollision.cs" />
+    <Compile Include="Assets\_Scripts\PlatformMover.cs" />
     <Compile Include="Assets\_Scripts\QuestionHandler.cs" />
     <Compile Include="Assets\_Scripts\Scenario\ScenarioHandler.cs" />
     <Compile Include="Assets\_Scripts\UI\ERCTransfer.cs" />

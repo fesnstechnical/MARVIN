@@ -662,11 +662,11 @@ public class DoseController : MonoBehaviour {
 
         Transform transform = GameObject.Find( "ColumnBase" ).transform;
   
-        for ( int c = 0 ; c < 1 ; c++ ) {
+        for ( int c = 0 ; c < 2 ; c++ ) {
 
             Vector3 offset = new Vector3( 0 , 0 , 0 );
         
-            float thickness = new float[]{ 0.01f , 0.01f }[ c ];
+            float thickness = new float[]{ 0.03f , 0.01f }[ c ];
             float radius = new float[] { 0.2f , 0.15f / 2 }[ c ]; 
             float height = new float[] { 0.2435f * 2 , 0.18f }[ c ];
 
@@ -738,40 +738,44 @@ public class DoseController : MonoBehaviour {
             }
 
             Transform masterTransform = GameObject.Find( "GammaGun" ).transform;
+            
+                CombineInstance[] combine = new CombineInstance[ filters.Count ];
+                for ( int i = 0 ; i < combine.Length ; i++ ) {
 
-
-            CombineInstance[] combine = new CombineInstance[ filters.Count ];
-            for ( int i = 0 ; i < combine.Length ; i++ ) {
-
-                combine[ i ].mesh = filters[ i ].sharedMesh;
-
-                Vector3 local = filters[ i ].transform.localPosition;
-
-                filters[ i ].transform.localPosition = filters[ i ].transform.position;
-                filters[ i ].transform.position = local;
+                    combine[ i ].mesh = filters[ i ].sharedMesh;
                 
-                combine[ i ].transform = ( filters[ i ].transform ).localToWorldMatrix;
-                filters[ i ].gameObject.SetActive( false );
+
+                    Vector3 local = filters[ i ].transform.localPosition;
+                    Quaternion localAngle = filters[ i ].transform.localRotation;
+
+                    filters[ i ].transform.localPosition = filters[ i ].transform.position;
+                    filters[ i ].transform.localRotation = filters[ i ].transform.rotation;
+                    filters[ i ].transform.position = local;
+                    filters[ i ].transform.rotation = localAngle;
+                
+                    combine[ i ].transform = ( filters[ i ].transform ).localToWorldMatrix;
+                    filters[ i ].gameObject.SetActive( false );
 
 
-            }
+                }
 
-           
-            parentFilter.mesh = new Mesh();
+
+                parentFilter.mesh = new Mesh();
+
+                parentFilter.mesh.CombineMeshes( combine , true );
+
+                parentFilter.sharedMesh = parentFilter.mesh;
+                parentMeshCollider.sharedMesh = parentFilter.mesh;
+                parentMeshCollider.gameObject.GetComponent<Renderer>().enabled = false;
+
+                parentFilter.gameObject.SetActive( true );
+
+                Shield cubeShield = parentObject.AddComponent<Shield>();
+                cubeShield.nom = "Lead";
+
             
-            parentFilter.mesh.CombineMeshes( combine , true );
-
-            parentFilter.sharedMesh = parentFilter.mesh;
-            
-            
-            parentMeshCollider.sharedMesh = parentFilter.mesh;
 
 
-            parentFilter.gameObject.SetActive( true );
-
-
-            Shield cubeShield = parentObject.AddComponent<Shield>();
-            cubeShield.nom = "Lead";
 
         }
 

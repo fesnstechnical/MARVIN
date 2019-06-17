@@ -16,6 +16,7 @@ public class Controller : MonoBehaviour {
 
     private DoseController doseController;
     private ScenarioHandler scenarioHandler;
+    private GammaGunController gammaGunController;
 
     private bool particlesEnabled;
 
@@ -29,6 +30,7 @@ public class Controller : MonoBehaviour {
         controller = this;
         doseController = GameObject.Find( "Dose controller" ).GetComponent<DoseController>();
         scenarioHandler = GameObject.Find( "Dose controller" ).GetComponent<ScenarioHandler>();
+        gammaGunController = GameObject.Find( "End-barrel" ).GetComponent<GammaGunController>();
 
         particlesEnabled = particlesInitiallyEnalbed;
         updateParticleGenerators();
@@ -196,6 +198,12 @@ public class Controller : MonoBehaviour {
     public ScenarioHandler getScenarioHandler() {
 
         return scenarioHandler;
+
+    }
+
+    public GammaGunController getGammaGunController() {
+
+        return gammaGunController;
 
     }
 
