@@ -1,0 +1,317 @@
+fileFormatVersion: 2
+guid: dee903688e8355a4f86ee6a35db40f48
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: 7al2
+    100002: Apples
+    100004: banana banana1
+    100006: Big Cabinet
+    100008: Ceiling Roof
+    100010: Chair 1
+    100012: Chair 2
+    100014: Chair 3
+    100016: Chair 4
+    100018: Circle
+    100020: Cube
+    100022: Cube.001
+    100024: Cube.002
+    100026: Cube.003
+    100028: Cube.004
+    100030: door
+    100032: Fridge
+    100034: Glass Bowl
+    100036: handcenter2
+    100038: handleft
+    100040: handright
+    100042: //RootNode
+    100044: Kitchen Lamp
+    100046: Middle Sink
+    100048: Plane
+    100050: Plane (3)
+    100052: Plate.000
+    100054: Plate.001
+    100056: Plate.002
+    100058: Plate.003
+    100060: Plate.005
+    100062: rotation
+    100064: Small Cabinents
+    100066: Stove
+    100068: Table
+    100070: Wall Lining
+    100072: Window
+    400000: 7al2
+    400002: Apples
+    400004: banana banana1
+    400006: Big Cabinet
+    400008: Ceiling Roof
+    400010: Chair 1
+    400012: Chair 2
+    400014: Chair 3
+    400016: Chair 4
+    400018: Circle
+    400020: Cube
+    400022: Cube.001
+    400024: Cube.002
+    400026: Cube.003
+    400028: Cube.004
+    400030: door
+    400032: Fridge
+    400034: Glass Bowl
+    400036: handcenter2
+    400038: handleft
+    400040: handright
+    400042: //RootNode
+    400044: Kitchen Lamp
+    400046: Middle Sink
+    400048: Plane
+    400050: Plane (3)
+    400052: Plate.000
+    400054: Plate.001
+    400056: Plate.002
+    400058: Plate.003
+    400060: Plate.005
+    400062: rotation
+    400064: Small Cabinents
+    400066: Stove
+    400068: Table
+    400070: Wall Lining
+    400072: Window
+    2100000: Material.020
+    2100002: IslandCounter
+    2100004: banana
+    2100006: Stem
+    2100008: Glass.001
+    2100010: phongE1
+    2100012: lambert2
+    2100014: CrunchFlakes_Front
+    2100016: CrunchFlakes_Top
+    2100018: CrunchFlakes_Side
+    2100020: CrunchFlakes_Bottom
+    2100022: CrunchFlakes_Side_2
+    2100024: Material.013
+    2100026: Material.011
+    2100028: Material.015
+    2100030: Material.012
+    2100032: Plate
+    2100034: Material.002
+    2100036: Material.003
+    2100038: Material.010
+    2100040: Material.014
+    2100042: Material.008
+    2100044: Material
+    2100046: white gloss
+    2100048: Marble
+    2100050: Material.005
+    2100052: Material.007
+    2100054: Material.016
+    2100056: Material.001
+    2100058: Material.006
+    2100060: Material.009
+    2100062: Mat_1.001
+    2100064: Mat.001
+    2100066: Mat_1
+    2100068: Mat
+    2300000: 7al2
+    2300002: Apples
+    2300004: banana banana1
+    2300006: Big Cabinet
+    2300008: Ceiling Roof
+    2300010: Chair 1
+    2300012: Chair 2
+    2300014: Chair 3
+    2300016: Chair 4
+    2300018: Circle
+    2300020: Cube
+    2300022: Cube.001
+    2300024: Cube.002
+    2300026: Cube.003
+    2300028: Cube.004
+    2300030: door
+    2300032: Fridge
+    2300034: Glass Bowl
+    2300036: handcenter2
+    2300038: handleft
+    2300040: handright
+    2300042: Kitchen Lamp
+    2300044: Middle Sink
+    2300046: Plane
+    2300048: Plane (3)
+    2300050: Plate.000
+    2300052: Plate.001
+    2300054: Plate.002
+    2300056: Plate.003
+    2300058: Plate.005
+    2300060: Small Cabinents
+    2300062: Stove
+    2300064: Table
+    2300066: Wall Lining
+    2300068: Window
+    3300000: 7al2
+    3300002: Apples
+    3300004: banana banana1
+    3300006: Big Cabinet
+    3300008: Ceiling Roof
+    3300010: Chair 1
+    3300012: Chair 2
+    3300014: Chair 3
+    3300016: Chair 4
+    3300018: Circle
+    3300020: Cube
+    3300022: Cube.001
+    3300024: Cube.002
+    3300026: Cube.003
+    3300028: Cube.004
+    3300030: door
+    3300032: Fridge
+    3300034: Glass Bowl
+    3300036: handcenter2
+    3300038: handleft
+    3300040: handright
+    3300042: Kitchen Lamp
+    3300044: Middle Sink
+    3300046: Plane
+    3300048: Plane (3)
+    3300050: Plate.000
+    3300052: Plate.001
+    3300054: Plate.002
+    3300056: Plate.003
+    3300058: Plate.005
+    3300060: Small Cabinents
+    3300062: Stove
+    3300064: Table
+    3300066: Wall Lining
+    3300068: Window
+    4300000: Plane
+    4300002: Cube.004
+    4300004: Cube.003
+    4300006: Cube.002
+    4300008: Cube
+    4300010: Cube.001
+    4300012: banana banana1
+    4300014: Glass Bowl
+    4300016: Circle
+    4300018: Apples
+    4300020: Plane (3)
+    4300022: handcenter2
+    4300024: handleft
+    4300026: handright
+    4300028: door
+    4300030: 7al2
+    4300032: Plate.003
+    4300034: Plate.002
+    4300036: Plate.001
+    4300038: Plate.000
+    4300040: Plate.005
+    4300042: Window
+    4300044: Fridge
+    4300046: Big Cabinet
+    4300048: Middle Sink
+    4300050: Small Cabinents
+    4300052: Stove
+    4300054: Ceiling Roof
+    4300056: Kitchen Lamp
+    4300058: Wall Lining
+    4300060: Chair 3
+    4300062: Chair 2
+    4300064: Chair 1
+    4300066: Chair 4
+    4300068: Table
+    7400000: Apples|pSphere3.001|Take 001|BaseLayer
+    7400002: Apples|pSphere3|Take 001|BaseLayer
+    7400004: Apples|pSphere4.001|Take 001|BaseLayer
+    7400006: Apples|pSphere4|Take 001|BaseLayer
+    7400008: Apples|pSphere5.001|Take 001|BaseLayer
+    7400010: Apples|pSphere5|Take 001|BaseLayer
+    7400012: Apples|pSphere6.001|Take 001|BaseLayer
+    7400014: Apples|pSphere6|Take 001|BaseLayer
+    7400016: Apples|pSphere7.001|Take 001|BaseLayer
+    7400018: Apples|pSphere7|Take 001|BaseLayer
+    9500000: //RootNode
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

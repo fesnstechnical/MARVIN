@@ -13,6 +13,11 @@ public class Isotope {
     private string name;
     private bool wasConstructed = false;
 
+    private float gammaEnergy = -1f;
+    private float betaEnergy = -1f;
+    private float halfLife = -1f;
+    private float decayConstant = -1f;
+
     public Isotope() {
         
         readCSV();
@@ -23,7 +28,7 @@ public class Isotope {
         
         this.concentration = concentration;
         name = isotopeNames[ ( int ) radioIsotope ];
-
+        
         readCSV();
 
         wasConstructed = true;
@@ -34,7 +39,7 @@ public class Isotope {
         
         this.concentration = concentration;
         this.name = isotopeName;
-
+        
         readCSV();
 
         wasConstructed = true;
@@ -45,9 +50,9 @@ public class Isotope {
     public Isotope( int Z , int N , bool meta , float concentration ) {
 
         this.concentration = concentration;
-        
-        name = isotopeSymbols[ Z - 1 ].Split( '-' )[ 1 ] + ( meta ? "m" : "" );
-        
+
+        name = isotopeSymbols[ Z - 1 ].Split( '-' )[ 1 ] + "-" + ( Z + N ) + ( meta ? "m" : "" );
+ 
         readCSV();
 
         wasConstructed = true;
@@ -71,17 +76,23 @@ public class Isotope {
     //Return in keV
     public float getGammaDecayEnergy() {
 
-        properConstruct();
+        if ( gammaEnergy == -1 ) {
 
-        if ( !isStable() ) {
+            properConstruct();
+            gammaEnergy = 0;
 
-            string name = getIsotopeName();
+            if ( !isStable() ) {
 
-            foreach ( Dictionary<string , string> isotope in isotopeData ) {
-                
-                if ( isotope[ "Full name" ] == this.getIsotopeName() && isotope[ "Gamma energy (MeV)" ]  != "" ) {
-                    
-                    return ( float.Parse( isotope[ "Gamma energy (MeV)" ] ) * 100 );
+                string name = getIsotopeName();
+
+                foreach ( Dictionary<string , string> isotope in isotopeData ) {
+
+                    if ( isotope[ "Full name" ] == this.getIsotopeName() && isotope[ "Gamma energy (MeV)" ] != "" ) {
+
+                        gammaEnergy = ( float.Parse( isotope[ "Gamma energy (MeV)" ] ) * 1000 );
+                        break;
+
+                    }
 
                 }
 
@@ -89,22 +100,28 @@ public class Isotope {
 
         }
         
-        return 0;
+        return gammaEnergy;
 
     }
 
     //Return in keV
     public float getBetaDecayEnergy() {
 
-        properConstruct();
+        if ( betaEnergy == -1f ) {
 
-        if ( !isStable() ) {
+            properConstruct();
+            betaEnergy = 0;
 
-            foreach ( Dictionary<string , string> isotope in isotopeData ) {
+            if ( !isStable() ) {
 
-                if ( isotope[ "Full name" ] == this.getIsotopeName() && isotope[ "Beta energy (MeV)" ] != "" ) {
+                foreach ( Dictionary<string , string> isotope in isotopeData ) {
 
-                    return ( float.Parse( isotope[ "Beta energy (MeV)" ] ) * 100 );
+                    if ( isotope[ "Full name" ] == this.getIsotopeName() && isotope[ "Beta energy (MeV)" ] != "" ) {
+
+                        betaEnergy = ( float.Parse( isotope[ "Beta energy (MeV)" ] ) * 1000 );
+                        break;
+
+                    }
 
                 }
 
@@ -112,59 +129,77 @@ public class Isotope {
 
         }
 
-        return 0;
+        return betaEnergy;
 
     }
 
     //Return in s
     public float getHalfLife() {
 
-        properConstruct();
+        if ( halfLife == -1f ) {
 
-        foreach ( Dictionary<string , string> isotope in isotopeData ) {
+            properConstruct();
+            halfLife = 1;
+            
+            foreach ( Dictionary<string , string> isotope in isotopeData ) {
 
-            if ( isotope[ "Full name" ] == this.getIsotopeName() ) {
+                if ( isotope[ "Full name" ] == this.getIsotopeName() ) {
 
-                string units = "";
+                    string units = "";
 
-                foreach ( string key in isotope.Keys ) {
+                    foreach ( string key in isotope.Keys ) {
 
-                    if ( key.Contains( "Unit" ) ) {
+                        if ( key.Contains( "Unit" ) ) {
 
-                        units = isotope[ key ];
-                        break;
+                            units = isotope[ key ];
+                            break;
+
+                        }
 
                     }
 
+                    string rawHalfLifeString = isotope[ "Half-life" ];
+
+                    float rawHalfLife = float.Parse( rawHalfLifeString );
+
+                    if ( units.Contains( "yr" ) ) {
+
+                        rawHalfLife *= 31622400;
+
+                    }
+                    else if ( units.Contains( "mn" ) ) {
+
+                        rawHalfLife *= 60;
+
+                    }
+                    else if ( units.Contains( "dy" ) ) {
+
+                        rawHalfLife *= 864000;
+
+                    }
+
+                    halfLife = rawHalfLife;
+                    break;
+
                 }
-                
-                string rawHalfLifeString = isotope[ "Half-life" ];
-                
-                float rawHalfLife = float.Parse( rawHalfLifeString );
-
-                if ( units.Contains( "yr" ) ) {
-                    
-                    rawHalfLife *= 31622400;
-
-                }
-                else if ( units.Contains( "mn" ) ) {
-
-                    rawHalfLife *= 60;
-
-                }
-                else if ( units.Contains( "dy" ) ) {
-
-                    rawHalfLife *= 864000;
-
-                }
-                
-                return rawHalfLife;
 
             }
 
         }
+        
+        return halfLife;
 
-        return 0;
+    }
+
+    public float getDecayConstant() {
+
+        if ( decayConstant == -1f ) {
+
+            decayConstant = Mathf.Log( 2 ) / getHalfLife();
+            
+        }
+
+        return decayConstant;
 
     }
 
@@ -270,6 +305,7 @@ public class Isotope {
     }
 
     public string getIsotopeName() {
+       
 
         return name;
 
@@ -289,8 +325,8 @@ public class Isotope {
 
         "Co-60",
         "Cs-137",
-        "Ba_137n",
-        "I_131",
+        "Ba-137m",
+        "I-131",
 
     };
 

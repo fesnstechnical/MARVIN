@@ -9,8 +9,8 @@ public class Shield : MonoBehaviour {
     public Types shield;
     public string nom;
 
-    private string[] names = new string[] { "Brick" , "Wood" , "Water" , "Concrete (Ordinary)" , "Concrete (ERC Lab)" , "Soft Tissue (General)" , "Polyethylene (Plastic)" , "Mylar" , "Polystryrene (Styrofoam)" , "Lead Glass" , "Lead" , "Aluminium" };
-
+    public static string[] names = new string[] { "Brick" , "Wood" , "Water" , "Concrete (Ordinary)" , "Concrete (ERC Lab)" , "Soft Tissue (General)" , "Polyethylene (Plastic)" , "Mylar" , "Polystyrene (Styrofoam)" , "Lead Glass" , "Lead" , "Aluminum" };
+    
     public string getName() {
 
         if ( nom != null ) {
@@ -30,6 +30,12 @@ public class Shield : MonoBehaviour {
     public Collider getCollider() {
 
         return GetComponent<Collider>();
+
+    }
+
+    public float getAverageAttenuationCoefficient() {
+
+        return Controller.getController().getDoseController().getAverageMaterialAttenuationCoefficient( this.getName() );
 
     }
 

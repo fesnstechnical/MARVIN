@@ -5,35 +5,50 @@ using UnityEngine;
 
 public class Source : MonoBehaviour {
 
-    
+
     public float initialActivity;
     public Units unit;
     public bool firstUse = true;
     public string originalDate = "";
+    public bool enableComposistionEvolution = true;
 
     public List<Isotope> isotopes = new List<Isotope>();
 
-    private Dictionary<string , float> activities = new Dictionary<string , float>();
+    private Dictionary<string, float> activities = new Dictionary<string, float>();
 
     private Transform sourceTransform;
-    
+
     private double startTime;
 
-    private BoxCollider boxColldier;
+    private BoxCollider boxCollider;
     private Rigidbody rigidbody;
+
+    private List<Isotope> decayChain;
+
+    // in Bq
+    public float totalActivityLevelBq { get; private set; }
 
     //Used to contain information
     void Start() {
 
         this.sourceTransform = GetComponent<Transform>();
         this.startTime = new System.TimeSpan(System.DateTime.Now.Ticks).TotalMilliseconds;
-        
 
-        boxColldier = GetComponent<BoxCollider>();
-
+        boxCollider = GetComponent<BoxCollider>();
         rigidbody = GetComponent<Rigidbody>();
 
+        getFullDecayChain();
+
+        float randomTime = Random.Range( 0 , 150 ) / 10;
+
+        updateActivityLevel();
+
+        //InvokeRepeating("updateActivityLevel", randomTime , 10.0f);
+
+
+
     }
+
 
     public Dictionary<string , float> getNewComposistion() {
 
@@ -44,26 +59,87 @@ public class Source : MonoBehaviour {
         foreach ( string nom in activities.Keys ) {
 
             totalActivity += activities[ nom ];
-
         }
 
         foreach ( string nom in activities.Keys ) {
 
             newComposistion[ nom ] = activities[ nom ] / totalActivity;
-
         }
 
         return newComposistion;
+    }
+
+    //This thing is my portal of truth, so I get the make the disision on how this is used
+    //Its come to that, and you're sure about this?
+    private void updateActivityLevel() {
+    
+        totalActivityLevelBq = 0;
+        
+        double time = new System.TimeSpan( System.DateTime.Now.Ticks ).TotalMilliseconds - startTime; //Milliseconds
+
+        if ( !firstUse && originalDate.Length > 2 ) {
+
+            time = new System.TimeSpan( System.DateTime.Now.Ticks ).TotalMilliseconds - new System.TimeSpan( System.Convert.ToDateTime( originalDate ).Ticks ).TotalMilliseconds;
+
+        }
+
+        float timef = ( float ) time;
+
+        if ( enableComposistionEvolution ) {
+
+            foreach ( Isotope mother in isotopes ) {
+
+                recurseActivity( null , mother , timef , initialActivity , true );
+
+            }
+
+        }
+        else {
+
+            foreach ( Isotope mother in isotopes ) {
+
+                float lambda = mother.getDecayConstant();
+
+                activities[ mother.getIsotopeName() ] = initialActivity * Mathf.Exp( ( timef / 1000 ) * -lambda ) * mother.getConcentration();
+
+            }
+
+
+        }
+
+        foreach ( Isotope isotope in getFullDecayChain() ) {
+
+            totalActivityLevelBq += getDecayedActivity( isotope.getIsotopeName() );
+            
+        }
 
     }
+    
 
     private List<Isotope> getFullDecayChain() {
 
-        List<Isotope> decayChain = new List<Isotope>();
+        if ( decayChain == null ) {
 
-        foreach ( Isotope isotope in getIsotopes() ) {
+            decayChain = new List<Isotope>();
 
-            recurseDecayChain( ref decayChain , isotope , 0 );
+            if ( enableComposistionEvolution ) {
+
+                foreach ( Isotope isotope in getIsotopes() ) {
+
+                    recurseDecayChain( ref decayChain , isotope , 0 );
+
+                }
+
+            }
+            else {
+
+                foreach ( Isotope isotope in getIsotopes() ) {
+
+                    decayChain.Add( isotope );
+
+                }
+
+            }
 
         }
 
@@ -73,7 +149,7 @@ public class Source : MonoBehaviour {
 
     private List<Isotope> recurseDecayChain( ref List<Isotope> decayChain , Isotope parent , int round ) {
 
-        if ( round > 3 ) {
+        if ( round > 4 ) {
 
             Debug.Log( "ITS TIME TO STOP" );
             Debug.Break();
@@ -99,6 +175,8 @@ public class Source : MonoBehaviour {
 
     }
 
+    //I am the truth of your despair, the inescapable price of your bostfulness
+    //And now I will bestow upon you the dispair you deserve
     private void recurseActivity( Isotope mother , Isotope daughter , float time , float initialAcitivity , bool first ) {
 
         //First calculate own activity
@@ -118,16 +196,16 @@ public class Source : MonoBehaviour {
   
             if ( !daughter.isStable() ) {
 
-                float lambdaM = Mathf.Log( 2 ) / mother.getHalfLife();
-                float lambdaD = Mathf.Log( 2 ) / daughter.getHalfLife();
+                float lambdaM = mother.getDecayConstant();
+                float lambdaD = daughter.getDecayConstant();
 
                 decayedActivity = initialAcitivity * ( lambdaD / ( lambdaD - lambdaM ) ) * ( Mathf.Exp( -lambdaM * time ) - Mathf.Exp( -lambdaD * time ) ) * daughter.getConcentration();
 
                 activities[ daughter.getIsotopeName() ] = decayedActivity;
-
+                
             }
             else {
-
+                
                 activities[ daughter.getIsotopeName() ] = 0;
 
             }
@@ -142,37 +220,20 @@ public class Source : MonoBehaviour {
 
     }
 
-    public float getDecayedActivity( string isotopeName ) {
+    private float getDecayedActivity( string isotopeName ) {
 
-        double time = new System.TimeSpan(System.DateTime.Now.Ticks).TotalMilliseconds - startTime; //Milliseconds
+        if ( isotopeName == null ) {
 
-        if ( !firstUse && originalDate.Length > 2 ) {
-
-            time = new System.TimeSpan(System.DateTime.Now.Ticks).TotalMilliseconds - new System.TimeSpan( System.Convert.ToDateTime(originalDate).Ticks ).TotalMilliseconds;
-           
-        }
-
-        float timef = ( float ) time;
-
-        foreach ( Isotope mother in isotopes ) {
-            
-            recurseActivity( null , mother , timef , initialActivity , true );
+            return 0;
 
         }
-
+        
         return activities[ isotopeName ];
 
     }
 
     public Vector3 getPosistion() {
-
-        if ( this.sourceTransform == null ){
-
-            return new Vector3(0 , 0 , 0);
-
-        }
         
-
         return sourceTransform.position;
 
     }
@@ -288,14 +349,14 @@ public class Source : MonoBehaviour {
 
     public void freeze() {
 
-        boxColldier.enabled = false;
+        boxCollider.enabled = false;
         rigidbody.useGravity = false;
 
     }
 
     public void unfreeze() {
 
-        boxColldier.enabled = true;
+        boxCollider.enabled = true;
         rigidbody.useGravity = true;
 
     }

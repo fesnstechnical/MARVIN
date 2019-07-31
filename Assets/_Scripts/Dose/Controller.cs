@@ -17,10 +17,12 @@ public class Controller : MonoBehaviour {
     private DoseController doseController;
     private ScenarioHandler scenarioHandler;
     private GammaGunController gammaGunController;
+    private PlatformMover platfomrMover;
+    private VisionModeController visionModeController;
 
     private bool particlesEnabled;
 
-    private bool enableNetworking = true;
+    private bool enableNetworking = false;
     
     // Start is called before the first frame update
     void Start() {
@@ -30,7 +32,21 @@ public class Controller : MonoBehaviour {
         controller = this;
         doseController = GameObject.Find( "Dose controller" ).GetComponent<DoseController>();
         scenarioHandler = GameObject.Find( "Dose controller" ).GetComponent<ScenarioHandler>();
-        gammaGunController = GameObject.Find( "End-barrel" ).GetComponent<GammaGunController>();
+
+        if ( GameObject.Find( "End-barrel" ) != null ) {
+
+            gammaGunController = GameObject.Find( "End-barrel" ).GetComponent<GammaGunController>();
+
+        }
+
+        if ( GameObject.Find( "Gamma rail" ) != null ) {
+            
+            platfomrMover = GameObject.Find( "Gamma rail" ).GetComponent<PlatformMover>();
+
+        }
+
+        visionModeController = this.GetComponent<VisionModeController>();
+        
 
         particlesEnabled = particlesInitiallyEnalbed;
         updateParticleGenerators();
@@ -72,6 +88,7 @@ public class Controller : MonoBehaviour {
         
     }
 
+
     public void toggleParticles() {
 
         particlesEnabled = !particlesEnabled;
@@ -93,6 +110,8 @@ public class Controller : MonoBehaviour {
         }
         
     }
+
+
 
     //=======================================NETWORK======================================================
 
@@ -204,6 +223,18 @@ public class Controller : MonoBehaviour {
     public GammaGunController getGammaGunController() {
 
         return gammaGunController;
+
+    }
+
+    public PlatformMover getPlatformMover() {
+
+        return platfomrMover;
+
+    }
+
+    public VisionModeController getVisionModeController() {
+
+        return visionModeController;
 
     }
 

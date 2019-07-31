@@ -81,11 +81,11 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Single ControllerTrigger
+        public virtual SteamVR_Action_Boolean HeadsetOnHead
         {
             get
             {
-                return SteamVR_Actions.default_ControllerTrigger;
+                return SteamVR_Actions.default_HeadsetOnHead;
             }
         }
         

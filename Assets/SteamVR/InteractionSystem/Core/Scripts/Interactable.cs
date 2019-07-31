@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace Valve.VR.InteractionSystem
 {
@@ -38,6 +39,8 @@ namespace Valve.VR.InteractionSystem
         public event OnAttachedToHandDelegate onAttachedToHand;
         public event OnDetachedFromHandDelegate onDetachedFromHand;
 
+        public static Action<GameObject> onAttachedToHandAction;
+        public static Action<GameObject> onDetachedFromHandAction;
 
         [Tooltip("Specify whether you want to snap to the hand's object attachment point, or just the raw hand")]
         public bool useHandObjectAttachmentPoint = true;
@@ -281,6 +284,11 @@ namespace Valve.VR.InteractionSystem
                 onAttachedToHand.Invoke(hand);
             }
 
+            if(onAttachedToHandAction != null)
+            {
+                onAttachedToHandAction(gameObject);
+            }
+
             if (skeletonPoser != null && hand.skeleton != null)
             {
                 hand.skeleton.BlendToPoser(skeletonPoser, blendToPoseTime);
@@ -306,6 +314,10 @@ namespace Valve.VR.InteractionSystem
                 onDetachedFromHand.Invoke(hand);
             }
 
+            if (onDetachedFromHandAction != null)
+            {
+                onDetachedFromHandAction(gameObject);
+            }
 
             if (skeletonPoser != null)
             {

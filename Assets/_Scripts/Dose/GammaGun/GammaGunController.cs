@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GammaGunController : MonoBehaviour {
@@ -23,10 +24,12 @@ public class GammaGunController : MonoBehaviour {
 
     public AudioClip moveClip;
     public AudioClip stopClip;
-
-
+    
     public List<GammaShield> gammaShields = new List<GammaShield>();
 
+    private List<float[]> pointData = new List<float[]>();
+
+    private int select = 0;
 
     private AudioSource audioSource;
 
@@ -50,37 +53,46 @@ public class GammaGunController : MonoBehaviour {
         //startAnimation[ 0 ] = true;
 
         float totalThickness = 0f;
-        
+
         if ( gammaShields.Count > 0 ) {
-            
+
             GameObject baseObject = GameObject.Find( "GammaGunColumn" );
 
             float conversionFactor = 2 / baseObject.transform.localScale.y;
 
-            float xCount = ( this.transform.localScale.y ) - ( gammaShields[ 0 ].thickness * 0.5f * conversionFactor );
-            
+            float xCount = 0f; // ( this.transform.localScale.y ) - ( gammaShields[ 0 ].thickness * 0.5f * conversionFactor )
+
             for ( int i = 0 ; i < gammaShields.Count ; i++ ) {
 
                 GameObject cylinder = GameObject.CreatePrimitive( PrimitiveType.Cylinder );
+                cylinder.name = "Sub-shield " + ( i + 1 );
+
+                float actualHeight = gammaShields[ i ].thickness * conversionFactor;
 
                 cylinder.transform.parent = baseObject.transform;
-                cylinder.transform.localPosition = new Vector3( 0 , xCount + ( gammaShields[ i ].thickness * conversionFactor ) , 0 );
+                cylinder.transform.localScale = new Vector3( 1f , ( actualHeight * 0.5f ) , 1f );
                 cylinder.transform.localRotation = Quaternion.Euler( new Vector3( 0 , 0 , 0 ) );
-                cylinder.transform.localScale = new Vector3( 1f , ( gammaShields[ i ].thickness * conversionFactor * 0.5f ) , 1f );
 
-                xCount += ( gammaShields[ i ].thickness * conversionFactor * 0.5f );
-                totalThickness += gammaShields[ i ].thickness * conversionFactor * 0.5f;
+                cylinder.transform.localPosition = new Vector3( 0 , xCount + ( actualHeight * 0.5f ) + 1 , 0 );
+
+                xCount += ( actualHeight * 1f );
+                totalThickness += actualHeight * 0.5f;
 
                 cylinder.GetComponent<Renderer>().material = baseObject.GetComponent<Renderer>().material;
+
+                Destroy( cylinder.GetComponent<CapsuleCollider>() );
+
+                cylinder.AddComponent<MeshCollider>();
 
                 Shield shield = cylinder.AddComponent<Shield>();
                 shield.shield = gammaShields[ i ].types;
 
+                Controller.getController().getDoseController().addShield( cylinder );
+
                 caps[ i ] = cylinder;
 
-                startRoll[ i ] = UnityEditor.TransformUtils.GetInspectorRotation( caps[ i ].transform ).y + 180 % 360;
+                startRoll[ i ] = caps[ i ].transform.localRotation.eulerAngles.y;
                 endRoll[ i ] = endAngle;
-            
 
             }
 
@@ -88,14 +100,13 @@ public class GammaGunController : MonoBehaviour {
 
         GameObject basePin = GameObject.Find( "Pin-Base" );
         float adjustX = totalThickness + 1;
-        
+
         pinOuter.transform.localPosition = new Vector3( -adjustX , 0 , 0 );
         pinOuter.transform.localScale = new Vector3( 1 , totalThickness , 1 );
 
         pin.transform.localPosition = new Vector3( -adjustX - 0.1f , 0 , 0 );
         pin.transform.localScale = new Vector3( 0.8f , totalThickness , 0.8f );
-
-        //
+        
 
     }
 
@@ -119,9 +130,8 @@ public class GammaGunController : MonoBehaviour {
 
                 caps[ i ].transform.RotateAround( pin.transform.position , new Vector3( open[ i ] ? 1 : -1 , 0 , 0 ) , rotationRate * Time.deltaTime );
 
-                float roll = ( -UnityEditor.TransformUtils.GetInspectorRotation( caps[ i ].transform ).y + 180 % 360 );
-
-
+                float roll = 360 - caps[ i ].transform.localRotation.eulerAngles.y;
+                
                 if ( open[ i ] ) {
                     
                     if ( roll - startRoll[ i ] >= endRoll[ i ] ) {
@@ -143,7 +153,7 @@ public class GammaGunController : MonoBehaviour {
                 }
                 else {
 
-                    if ( roll - startRoll[ i ] <= 0 ) {
+                    if ( roll - startRoll[ i ] <= 0 || roll - startRoll[ i ] > ( endRoll[ i ] + rotationRate ) ) {
 
                         if ( roll - startRoll[ i ] != 0 ) {
 
@@ -166,6 +176,31 @@ public class GammaGunController : MonoBehaviour {
         
     }
 
+    public void recordPoint() {
+
+        //Distance, CPS
+        float[] dataPoint = new float[] { Controller.getController().getPlatformMover().getDistanceBetweenSourceEtDetector() , GameObject.Find( "GeigerTool (GammaGun)" ).GetComponent<GeigerController>().getCountRate() };
+        pointData.Add( dataPoint );
+
+
+    }
+
+    public void exportData() {
+
+        string csvData = "Distance (m), Count rate (CPS) \n";
+
+        for ( int i = 0 ; i < pointData.Count ; i++ ) {
+
+            csvData += pointData[ i ][ 0 ] + "," + pointData[ i ][ 1 ] + "\n";
+
+        }
+
+
+        File.WriteAllText( System.Environment.GetFolderPath( System.Environment.SpecialFolder.Desktop ) + "/data.csv" , csvData );
+        
+
+    }
+
     public List<GammaShield> getGammaShields(){
 
         return gammaShields;
@@ -177,5 +212,61 @@ public class GammaGunController : MonoBehaviour {
         startAnimation[ index ] = true;
 
     }
+
+    public void toggleAll() {
+
+        int opened = 0;
+
+        for ( int i = 0 ; i < gammaShields.Count ; i++ ) {
+
+            if ( open[ i ] ) {
+
+                opened++;
+
+            }
+
+        }
+
+        bool openAll = opened < gammaShields.Count;
+
+        for ( int i = 0 ; i < gammaShields.Count ; i++ ) {
+
+            if ( open[ i ] != openAll ) {
+
+               toggleCap( i );
+
+            }
+
+        }
+
+    }
+
+    public void decrementSelect() {
+
+        if ( select - 1 >= 0 ) {
+
+            select--;
+
+        }
+
+    }
+
+    public void incrementSelect() {
+
+        if ( select + 1 < gammaShields.Count ) {
+
+            select++;
+
+        }
+
+    }
+
+    public int getSelected() {
+
+        return select;
+
+    }
+
+    
 
 }

@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(Controller))]
 public class GammaGunEditor : Editor {
 
 
     public override void OnInspectorGUI() {
-        
 
-        for ( int i = 0 ; i < Controller.getController().getGammaGunController().getGammaShields().Count ; i++ ) {
+        if ( Controller.getController() != null ) {
 
-            if ( GUILayout.Button( "Toggle cap " + ( i + 1 ) ) ) {
+            for ( int i = 0 ; i < Controller.getController().getGammaGunController().getGammaShields().Count ; i++ ) {
 
-                Controller.getController().getGammaGunController().toggleCap( i );
+                if ( GUILayout.Button( "Toggle cap " + ( i + 1 ) ) ) {
+
+                    Controller.getController().getGammaGunController().toggleCap( i );
+
+                }
 
             }
 
@@ -23,3 +27,4 @@ public class GammaGunEditor : Editor {
     }
 
 }
+#endif

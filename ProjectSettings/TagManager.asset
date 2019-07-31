@@ -9,6 +9,8 @@ TagManager:
   - Button
   - Shooes
   - Barrier
+  - Source
+  - Reflector
   layers:
   - Default
   - TransparentFX
@@ -21,8 +23,8 @@ TagManager:
   - ShieldLayer
   - Body
   - Floor
-  - 
-  - 
+  - Radiation
+  - Geiger
   - 
   - 
   - 

@@ -23,6 +23,7 @@ public abstract class DoseBody : MonoBehaviour {
 
     }
 
+
     void Start() {
         
         hiddenTransform = GetComponent<Transform>();

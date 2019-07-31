@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//This is my portal
+//I know it contains every secret nuclear has to offer
+//However it has also lead me astray
+//I saw the truth that lies within it, and i became convinced I could solve everything with C#
+//But I couldnt have possibly been more wrong, that was just arrogance
 public class DoseController : MonoBehaviour {
 
     public bool applyCorrectionCode = true;
@@ -14,11 +20,14 @@ public class DoseController : MonoBehaviour {
     private List<Shield> listShields = new List<Shield>();
     private List<DoseBody> listBodies = new List<DoseBody>();
     private List<Source> listSources = new List<Source>();
-
+    private List<Reflector> listReflectors = new List<Reflector>();
 
     public bool debug = false;
 
+    public bool useMinhParticleSystem = true;
+
     private bool enableDoseSystem = true;
+
 
     private bool staggerCalculations = true;
     private float staggerTime = 0.05f;
@@ -34,226 +43,266 @@ public class DoseController : MonoBehaviour {
 
         readCSV();
 
-        createColumn();
+        if ( GameObject.Find( "ColumnBase" ) != null ) {
+
+            createColumn();
+
+        }
 
 
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
         updateListShields( allObjects );
         updateListBodies( allObjects );
         updateListSources( allObjects );
+        updateListReflectors( allObjects );
 
 
         StartCoroutine( DoseCalculator() );
 
+        updateParticleSystemChoice();
+        
 
     }
 
     int t = 0;
-    int updateTick = 0;
 
     // Update is called once per frame
     void Update() {
         
-        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
-
-        if ( allObjects.Length != lastGameObjectCount ) {
-            
-            if ( updateTick > ( 60 * updateTickInterval ) ) {
-                
-                lastGameObjectCount = allObjects.Length;
-                
-                updateListShields( allObjects );
-                updateListBodies( allObjects );
-                updateListSources( allObjects );
-                updateTick = 0;
-
-            }
-  
-
-        }
-
         t++;
-        updateTick++;
+
 
     }
 
+    //I am a monument to all your sins
     IEnumerator DoseCalculator() {
 
         while ( true ) {
 
-            yield return new WaitForSecondsRealtime( 0.1f );
+            yield return new WaitForSecondsRealtime( staggerCalculations ? staggerTime : 0 );
 
-            if ( t > 90 * 2 ) {
-                
+            if ( t > 30 ) {
+
+                yield return new WaitForSecondsRealtime( staggerCalculations ? staggerTime : 0 );
+
                 List<Source> sources = getSources();
                 List<Shield> shields = getShields();
                 List<DoseBody> doseBodies = getDoseBodies();
 
-                if ( enableDoseSystem ) {
-                    
-                    foreach ( DoseBody doseBody in doseBodies ) {
+                foreach ( DoseBody doseBody in doseBodies ) {
 
-                        yield return new WaitForSecondsRealtime( staggerTime );
+                    yield return new WaitForSecondsRealtime( staggerCalculations ? staggerTime : 0 );
 
-                        float countRate = 0;
-                        float doseRate = 0;
+                    if ( doseBody != null ) {
 
-                        foreach ( DoseReceptor doseReceptor in doseBody.getDoseReceptors() ) {
+                        if ( doseBody.enabled ) {
 
-                            yield return new WaitForSecondsRealtime( staggerTime );
+                            float countRate = 0;
+                            float doseRate = 0;
 
-                            foreach ( Source source in sources ) {
+                            foreach ( DoseReceptor doseReceptor in doseBody.getDoseReceptors() ) {
 
-                                yield return new WaitForSecondsRealtime( staggerTime );
-                                List<Isotope> decayChain = new List<Isotope>();
+                                yield return new WaitForSecondsRealtime( staggerCalculations ? staggerTime : 0 );
 
-                                foreach ( Isotope isotope in source.getIsotopes() ) {
+                                foreach ( Source source in sources ) {
 
-                                    recurseDecayChain( ref decayChain , isotope , 0 );
-
-                                }
-
-                                yield return new WaitForSecondsRealtime( staggerTime );
-
-                                foreach ( Isotope isotope in decayChain ) {
-
-                                    float averageParticleEnergy = isotope.getGammaDecayEnergy() + isotope.getBetaDecayEnergy();
-
-                                    float attenuatedActivity = source.getActivity( isotope.getIsotopeName() );
-
-                                    Vector3 origin = doseReceptor.getPosistion();
-
-                                    //Sort shields
-                                    shields = sortShields( shields , doseReceptor.getPosistion() );
+                                    yield return new WaitForSecondsRealtime( staggerCalculations ? staggerTime : 0 );
                                     
-                                    bool passedThroughShieldAny = false;
+                                    float totalDistance = ( source.getPosistion() - doseReceptor.getPosistion() ).magnitude;
 
-                                    yield return new WaitForSecondsRealtime( staggerTime );
+                                    RaycastHit[] forwardHits = Physics.RaycastAll( doseReceptor.getPosistion() , ( ( doseReceptor.getPosistion() - source.getPosistion() ) * -1f ).normalized , totalDistance );
+                                    RaycastHit[] reverseHits = Physics.RaycastAll( source.getPosistion() , ( ( source.getPosistion() - doseReceptor.getPosistion() ) * -1f ).normalized , totalDistance );
+                                
+                                    Dictionary<string , float> shieldThicknesses = new Dictionary<string , float>();
+                                    
+                                    for ( int i = 0 ; i < forwardHits.Length ; i++ ) {
+                                        
+                                        RaycastHit pointEnter = forwardHits[ i ];
+                                        Shield shieldEnter = pointEnter.transform.gameObject.GetComponent<Shield>();
 
-                                    for ( int i = 0 ; i < shields.Count ; i++ ) {
-
-                                        bool passedShield = false;
-
-                                        Shield shield = shields[ i ];
-
-                                        Vector3[] points = lineShieldIntersection( origin , source.getPosistion() , shield );
-
-                                        if ( points[ 0 ] != Vector3.zero && points[ 1 ] != Vector3.zero ) {
-
-                                            passedShield = true;
-                                            passedThroughShieldAny = true;
-
-                                            //This is our thickness
-                                            float thickness = Vector3.Distance( points[ 0 ] , points[ 1 ] );
-
-                                            Vector3 closestPoint = points[ 0 ];
-                                            Vector3 furthestPoint = points[ 1 ];
-
-                                            if ( Vector3.Distance( origin , points[ 1 ] ) < Vector3.Distance( origin , points[ 0 ] ) ) {
-
-                                                closestPoint = points[ 1 ];
-                                                furthestPoint = points[ 0 ];
-
-                                            }
-
-                                            float airAttenuationDistance = Vector3.Distance( origin , closestPoint );
-
-                                            attenuatedActivity = materialAttenuate( attenuatedActivity , airAttenuation , airAttenuationDistance );
-
-                                            if ( debug ) {
-
-                                                DrawLine( origin , closestPoint , Color.red );
-                                                DrawLine( closestPoint , furthestPoint , Color.green );
-
-                                            }
-
-
-                                            string assumed = "Concrete (Ordinary)";
-                                            string renderName = shield.getName();
+                                        if ( shieldEnter != null ) {
                                             
-                                            if ( attenConstants.ContainsKey( renderName ) ) {
+                                            float maxDistance = totalDistance;
+                                            bool foundCounter = false;
 
-                                                assumed = renderName;
-
-                                            }
-
-                                            if ( attenConstants.ContainsKey( assumed ) ) {
-
-                                                attenuatedActivity = materialAttenuate( attenuatedActivity , getMaterialAttenuationCoefficient( assumed , averageParticleEnergy ) , thickness );
-
-                                                if ( passedShield && applyCorrectionCode ) {
-
-                                                    float materialAttenuationCorrection = Mathf.Exp( -( 3.1f + ( ( ( float ) thickness / 100 ) * 0.0513678f ) ) );
-
-                                                    float distanceDoseDetector = ( doseReceptor.getPosistion() - shield.GetComponent<Transform>().position ).magnitude * 100; //cm
-
-                                                    float buildup = 1f; //Fix later
-
-                                                    attenuatedActivity *= doseBody.getEfficiency() * materialAttenuationCorrection;
-
-
-                                                    if ( distanceDoseDetector < 50 && isotope.getBetaDecayEnergy() != 0 ) {
-
-                                                        //Less than 50cm, & beta so we gotta consider scattering
-                                                        attenuatedActivity += ( ( 50 - distanceDoseDetector ) * 0.095f * attenuatedActivity );
+                                            for ( int j = 0 ; j < reverseHits.Length ; j++ ) {
+                                                
+                                                RaycastHit pointExit = reverseHits[ j ];
+                                                Shield shieldExit = pointExit.transform.gameObject.GetComponent<Shield>();
+                                                
+                                                if ( shieldExit != null && GameObject.ReferenceEquals( pointEnter.transform.gameObject , pointExit.transform.gameObject ) ) {
+                                                    
+                                                    float distance = ( pointEnter.point - pointExit.point ).magnitude;
+                                                    
+                                                    if ( distance < maxDistance && distance != 0 ) { //I dont know how distance would be 0 but here we are
+                                                        
+                                                        foundCounter = true;
+                                                        maxDistance = distance;
 
                                                     }
 
                                                 }
 
+                                            }
+
+                                            if ( foundCounter ) {
+                                                
+                                                string shieldMaterial = pointEnter.transform.gameObject.GetComponent<Shield>().getName();
+
+                                                if ( !shieldThicknesses.ContainsKey( shieldMaterial ) ) {
+
+                                                    shieldThicknesses[ shieldMaterial ] = 0f;
+                                                    
+                                                }
+                                                
+                                                shieldThicknesses[ shieldMaterial ] = shieldThicknesses[ shieldMaterial ] + maxDistance;
+                                                totalDistance -= maxDistance;
+
+                                            }
+                                            
+                                        
+                                        }
+
+                                    }
+
+                                    
+
+                                    List<Isotope> decayChain = new List<Isotope>();
+
+                                    foreach ( Isotope isotope in source.getIsotopes() ) {
+
+                                        if ( source.enableComposistionEvolution ) {
+
+                                            recurseDecayChain( ref decayChain , isotope , 0 );
+
+                                        }
+                                        else {
+
+                                            decayChain.Add( isotope );
+
+                                        }
+
+                                    }
+
+                                    foreach ( Reflector reflector in this.getReflectors() ) {
+
+                                        reflector.resetDoseAlbedo();
+
+                                    }
+
+                                    //Now we go through each isotope
+                                    foreach ( Isotope isotope in decayChain ) {
+
+                                        if ( isotope.getIsotopeName() != null ) {
+                                            
+                                            float initialIsotopeActivity = source.getActivity( isotope.getIsotopeName() );
+                                            float averageParticleEnergy = isotope.getGammaDecayEnergy() + isotope.getBetaDecayEnergy();
+
+                                            float isotopeActivity = initialIsotopeActivity;
+                   
+                                            bool usePrimeChilton = true;
+
+                                            float energy = isotope.getGammaDecayEnergy(); //Since albedo is from x-rays only
+                                            float totalAlbedoFactor = 0;
+
+                                            if ( energy > 0 ) {
+
+                                                //Now we must go through each shield, to obtain the Chilton-Huddleston approximation
+                                                foreach ( Reflector reflector in this.getReflectors() ) {
+
+                                                    RaycastHit hit;
+                                                    // Does the ray intersect any objects excluding the player layer
+                                                    if ( reflector.getCollider().Raycast( new Ray( source.getPosistion() , ( reflector.getPosistion() - source.getPosistion() ).normalized * 1f ) , out hit , 100f ) ) {
+
+                                                        Vector3 directionPrime = ( source.getPosistion() - hit.point ).normalized;
+                                                        Vector3 directionIncident = ( doseReceptor.getPosistion() - hit.point ).normalized;
+
+                                                        float dotProductPrime = Vector3.Dot( directionPrime , hit.normal );
+
+                                                        float thetaPrimeRadians = Mathf.Acos( dotProductPrime );
+                                                        float thetaPrime = thetaPrimeRadians * 180 / Mathf.PI;
+
+                                                        float dotProductIncident = Vector3.Dot( directionIncident , hit.normal );
+
+                                                        float thetaIncidentRadians = Mathf.Acos( dotProductIncident );
+                                                        float thetaIncident = thetaIncidentRadians * 180 / Mathf.PI;
+
+                                                        //DrawLine( hit.point , hit.point + hit.normal , Color.red , 1f );
+                                                        //DrawLine( source.getPosistion() , hit.point , Color.black , 1f );
+
+                                                        //8.18710565E-14f = Mass of electron * c2
+                                                        float primeChilton = usePrimeChilton ? DataManager.getChiltonPrimeValue( reflector.getName() , energy ) : 0;
+                                                        float p = 1 / ( 1 + ( ( 1 / ( 8.18710565E-14f ) ) * ( 1 - Mathf.Cos( thetaIncidentRadians ) ) ) );
+                                                        float sigma = 0.5f * ( p * p ) * ( 2.8179E-13f ) * ( 1 + ( p * p ) + ( p * ( 1 - Mathf.Pow( Mathf.Cos( thetaIncidentRadians ) , 2 ) ) ) );
+                                                        float alpha = ( DataManager.getChiltonIncidentValue( reflector.getName() , energy ) * sigma * 10E26f + primeChilton ) / ( 1 + ( Mathf.Cos( thetaPrimeRadians ) / Mathf.Cos( thetaIncidentRadians ) ) );
+
+                                                        reflector.addDoseAlbedo( alpha );
+
+                                                        float albedoFactor = ( reflector.getSurfaceArea() * alpha ) / Mathf.Pow( ( reflector.getPosistion() - doseReceptor.getPosistion() ).magnitude , 2 );
+                                                        totalAlbedoFactor += albedoFactor;
+
+                                                        //Debug.Log( thetaPrime + ":" + thetaIncident + ":" + alpha );
+
+                                                    }
+
+                                                }
 
                                             }
 
-                                            origin = furthestPoint;
+                                            //Attenuate due to distance distance
+                                            isotopeActivity = ( ( isotopeActivity ) / ( 4 * Mathf.PI * Mathf.Pow( ( doseReceptor.getPosistion() - source.getPosistion() ).magnitude , 2 ) ) ) * doseReceptor.getSurfaceArea();
+                                          
+                                            if ( isotopeActivity > 0 ) { //No point in doing all of this if it has already been completely attenuated
+
+                                                isotopeActivity = materialAttenuate( isotopeActivity , airAttenuation , totalDistance ); //Attenuation due to air
+                                                
+                                                //Attenuation due to shielding
+                                                foreach ( string materialName in shieldThicknesses.Keys ) {
+
+                                                    float attenuationCoefficient = getMaterialAttenuationCoefficient( materialName , averageParticleEnergy );
+
+                                                    //Debug.Log( isotopeActivity + ">" + materialAttenuate( isotopeActivity , attenuationCoefficient , shieldThicknesses[ materialName ] ) + " " + materialName + "!" + shieldThicknesses[ materialName ] );
+
+                                                    isotopeActivity = materialAttenuate( isotopeActivity , attenuationCoefficient , shieldThicknesses[ materialName ] );
+                                                    
+                                                    
+                                                }
+                                                
+                                                if ( isotopeActivity > 0 ) {
+
+                                                    countRate += isotopeActivity;
+                                                    float isotopeDoseRate = ( isotopeActivity * averageParticleEnergy * 1000 * 3600 ) / ( 6241506479963235 * doseReceptor.getMass() );
+                                                    
+                                                    //Dose rate
+                                                    //averageActivity * particleEnergies[ i ] yields keV/s
+                                                    //keV/s / 6241506479963235 yields j/s, conversion factor
+                                                    //Dividing that by weight yields j/kg*s, and a Sv=j/kg
+                                                    doseRate += isotopeDoseRate; //Yields mSv/hr
+
+                                                    bool useAlbedo = true;
+
+                                                    if ( useAlbedo ) {
+
+                                                        float albedoDose = totalAlbedoFactor * isotopeDoseRate;
+                                                        doseRate += albedoDose < 0 ? 0 : albedoDose;
+                                                        
+                                                    }
+
+                                                }
+
+                                            }
 
                                         }
+                                        else {}
+
 
                                     }
 
+                                    foreach ( Reflector reflector in this.getReflectors() ) {
 
-
-                                    if ( debug ) {
-
-                                        DrawLine( origin , source.getPosistion() , Color.blue );
+                                        reflector.finalizeDoseAlbedo();
 
                                     }
-
-                                    yield return new WaitForSecondsRealtime( staggerTime );
-
-                                    attenuatedActivity = materialAttenuate( attenuatedActivity , airAttenuation , Vector3.Distance( origin , source.getPosistion() ) );
-
-                                    //Attenuate distance
-                                    attenuatedActivity = ( ( attenuatedActivity ) / ( 4 * Mathf.PI * Mathf.Pow( ( doseReceptor.getPosistion() - source.getPosistion() ).magnitude , 2 ) ) ) * doseReceptor.getSurfaceArea();
-
-
-                                    if ( applyCorrectionCode && !passedThroughShieldAny ) {
-
-
-                                        //Correction
-
-                                        float distanceDoseSource = ( doseReceptor.getPosistion() - source.GetComponent<Transform>().position ).magnitude * 100; //cm
-
-                                        float geometricFactor = 0.37f;
-
-                                        if ( distanceDoseSource < 3 ) { //Less than 3 centimeters
-
-                                            geometricFactor = ( float ) ( distanceDoseSource * ( ( -0.03180557 + ( 19.65851 - -0.03180557 ) / ( 1 + Mathf.Pow( ( distanceDoseSource / 1.494623f ) , 1.501856f ) ) ) / ( ( 0.00113283 + ( 12233.67 - 0.00113283 ) / ( 1 + Mathf.Pow( ( distanceDoseSource / 0.04303171f ) , 2.002215f ) ) ) ) ) );
-
-                                        }
-
-                                        attenuatedActivity *= doseBody.getEfficiency() * geometricFactor;
-
-                                    }
-
-
-
-                                    countRate += attenuatedActivity;
-
-                                    //Dose rate
-                                    //averageActivity * particleEnergies[ i ] yields keV/s
-                                    //keV/s / 6241506479963235 yields j/s, conversion factor
-                                    //Dividing that by weight yields j/kg*s, and a Sv=j/kg
-                                    doseRate += ( attenuatedActivity * averageParticleEnergy * 1000 * 3600 ) / ( 6241506479963235 * doseReceptor.getMass() ); //Yields mSv/hr
 
 
                                 }
@@ -261,11 +310,10 @@ public class DoseController : MonoBehaviour {
 
                             }
 
+                            doseBody.setCountRate( countRate );
+                            doseBody.setDoseRate( doseRate );
+
                         }
-
-
-                        doseBody.setCountRate( countRate );
-                        doseBody.setDoseRate( doseRate );
 
                     }
 
@@ -274,9 +322,16 @@ public class DoseController : MonoBehaviour {
                 t = 0;
 
             }
+            
 
         }
-        
+
+    }
+    
+
+    public float getAverageMaterialAttenuationCoefficient( string materialName ) {
+
+        return getMaterialAttenuationCoefficient(materialName , 1000); //1000 keV
 
     }
 
@@ -284,7 +339,7 @@ public class DoseController : MonoBehaviour {
 
         if ( knownAttenuationCoefficients.ContainsKey( materialName ) ) {
 
-            if ( knownAttenuationCoefficients[ materialName ].ContainsKey( averageParticleEnergy) ) {
+            if ( knownAttenuationCoefficients[ materialName ].ContainsKey( averageParticleEnergy ) ) {
                 
                 return knownAttenuationCoefficients[ materialName ][ averageParticleEnergy ];
 
@@ -402,9 +457,7 @@ public class DoseController : MonoBehaviour {
 
         //Checks to see if the source hit one face
         if ( collider.Raycast(new Ray(origin , ( ( origin - destination ) * -1f ).normalized) , out hitA , 1000f) ) {
-
-
-
+            
             if ( hitA.transform.name == shield.name ) {
 
                 startA = hitA.point;
@@ -523,64 +576,126 @@ public class DoseController : MonoBehaviour {
 
     }
 
-    //Finds all game objects with a 'Source' component and returns a list of type Source
-    public void updateListSources( GameObject[] allObjects ) {
-        
-        List<Source> sources = new List<Source>();
+    public List<Reflector> getReflectors() {
 
+        return listReflectors;
+
+    }
+
+    //Finds all game objects with a 'Source' component and returns a list of type Source
+    private void updateListSources( GameObject[] allObjects ) {
+        
         foreach ( GameObject gameObject in allObjects ) {
 
             if ( gameObject.GetComponent<Source>() != null ) {
 
-                sources.Add( gameObject.GetComponent<Source>() );
+                addSource( gameObject );
 
             }
 
         }
-
-        listSources = sources;
         
-
     }
 
     //Finds all game objects with a 'Shield' component and returns a list of type Shield
-    public void updateListShields( GameObject[] allObjects ) {
+    private void updateListShields( GameObject[] allObjects ) {
         
-        List<Shield> shields = new List<Shield>();
-
         foreach ( GameObject gameObject in allObjects ) {
 
             if ( gameObject.GetComponent<Shield>() != null ) {
 
-                shields.Add(gameObject.GetComponent<Shield>());
+                addShield( gameObject );
 
             }
 
         }
-
-        listShields = shields;
-        
 
     }
 
     //Finds all game objects with a 'DoseBody' component and returns a list of type DoseBody
-    public void updateListBodies( GameObject[] allObjects ) {
+    private void updateListBodies( GameObject[] allObjects ) {
         
-        List<DoseBody> doseBodies = new List<DoseBody>();
-
         foreach ( GameObject gameObject in allObjects ) {
             
             if ( gameObject.GetComponent<DoseBody>() != null ) {
 
-                doseBodies.Add( gameObject.GetComponent<DoseBody>() );
+                addDoseBody( gameObject );
 
             }
 
         }
 
-        listBodies = doseBodies;
         
+    }
+
+    private void updateListReflectors( GameObject[] allObjects ) {
+
+        foreach ( GameObject gameObject in allObjects ) {
+
+            if ( gameObject.GetComponent<Reflector>() != null ) {
+
+                addReflector( gameObject );
+
+            }
+
+        }
+
+
+    }
+
+    public void addSource( GameObject source ) {
+
+        if ( !listSources.Contains( source.GetComponent<Source>() ) ) {
+
+            listSources.Add( source.GetComponent<Source>() );
+
+        }
+
+
+    }
+
+    public void addDoseBody( GameObject doseBody ) {
+
+        if ( !listBodies.Contains( doseBody.GetComponent<DoseBody>() ) ) {
+
+            listBodies.Add( doseBody.GetComponent<DoseBody>() );
+
+        }
+
+    }
+
+    public void addShield( GameObject shield ) {
         
+        if ( !listShields.Contains( shield.GetComponent<Shield>() ) ) {
+
+
+            listShields.Add( shield.GetComponent<Shield>() );
+
+            GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+
+            foreach ( GameObject gameObject in allObjects ) {
+
+                if ( gameObject.GetComponent<PSOnTrigger_Minh>() != null ) {
+
+                    gameObject.GetComponent<PSOnTrigger_Minh>().reloadList();
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public void addReflector( GameObject reflector ) {
+
+        if ( !listReflectors.Contains( reflector.GetComponent<Reflector>() ) ) {
+            
+            listReflectors.Add( reflector.GetComponent<Reflector>() );
+
+
+        }
+
     }
 
     private void readCSV() {
@@ -617,7 +732,6 @@ public class DoseController : MonoBehaviour {
 
                     }
 
-
                     if ( !attenConstants[rawData[0 , y]].ContainsKey(float.Parse(rawData[2 , y])) ) {
 
                         //2 is for column Energy (kEV)
@@ -637,6 +751,8 @@ public class DoseController : MonoBehaviour {
 
 
     }
+
+
 
     private void DrawLine(Vector3 start , Vector3 end , Color color , float duration = 1f) {
         GameObject myLine = new GameObject();
@@ -661,14 +777,19 @@ public class DoseController : MonoBehaviour {
     private void createColumn() {
 
         Transform transform = GameObject.Find( "ColumnBase" ).transform;
-  
+
+        List<GameObject> generatedObjects = new List<GameObject>();
+
+        float mainThickness = 0.03f;
+        float maxRadius = 0.2f;
+
         for ( int c = 0 ; c < 2 ; c++ ) {
 
-            Vector3 offset = new Vector3( 0 , 0 , 0 );
+            Vector3 offset = new Vector3( c == 1 ? 0.038f : 0 , 0 , 0 );
         
-            float thickness = new float[]{ 0.03f , 0.01f }[ c ];
-            float radius = new float[] { 0.2f , 0.15f / 2 }[ c ]; 
-            float height = new float[] { 0.2435f * 2 , 0.18f }[ c ];
+            float thickness = new float[]{ mainThickness , 0.01f }[ c ];
+            float radius = new float[] { maxRadius - ( mainThickness / 2 ) , 0.15f / 2 }[ c ]; 
+            float height = new float[] { 0.2435f * 2 , 0.065f }[ c ];
 
             int n = new int[] { 18 , 18 }[ c ];
             int heightSplit = new int[] { 24 , 1 }[ c ];
@@ -718,7 +839,7 @@ public class DoseController : MonoBehaviour {
 
                         if ( cube.GetComponent<BoxCollider>() !=null ) {
 
-                            //Destroy( cube.GetComponent<BoxCollider>() );
+                            Destroy( cube.GetComponent<BoxCollider>() );
 
                         }
                         
@@ -739,48 +860,141 @@ public class DoseController : MonoBehaviour {
 
             Transform masterTransform = GameObject.Find( "GammaGun" ).transform;
             
-                CombineInstance[] combine = new CombineInstance[ filters.Count ];
-                for ( int i = 0 ; i < combine.Length ; i++ ) {
+            CombineInstance[] combine = new CombineInstance[ filters.Count ];
+            for ( int i = 0 ; i < combine.Length ; i++ ) {
 
-                    combine[ i ].mesh = filters[ i ].sharedMesh;
+                combine[ i ].mesh = filters[ i ].sharedMesh;
                 
 
-                    Vector3 local = filters[ i ].transform.localPosition;
-                    Quaternion localAngle = filters[ i ].transform.localRotation;
+                Vector3 local = filters[ i ].transform.localPosition;
+                Quaternion localAngle = filters[ i ].transform.localRotation;
 
-                    filters[ i ].transform.localPosition = filters[ i ].transform.position;
-                    filters[ i ].transform.localRotation = filters[ i ].transform.rotation;
-                    filters[ i ].transform.position = local;
-                    filters[ i ].transform.rotation = localAngle;
+                filters[ i ].transform.localPosition = filters[ i ].transform.position;
+                filters[ i ].transform.localRotation = filters[ i ].transform.rotation;
+                filters[ i ].transform.position = local;
+                filters[ i ].transform.rotation = localAngle;
                 
-                    combine[ i ].transform = ( filters[ i ].transform ).localToWorldMatrix;
-                    filters[ i ].gameObject.SetActive( false );
+                combine[ i ].transform = ( filters[ i ].transform ).localToWorldMatrix;
+                filters[ i ].gameObject.SetActive( false );
 
 
-                }
+            }
 
 
-                parentFilter.mesh = new Mesh();
+            parentFilter.mesh = new Mesh();
 
-                parentFilter.mesh.CombineMeshes( combine , true );
+            parentFilter.mesh.CombineMeshes( combine , true );
 
-                parentFilter.sharedMesh = parentFilter.mesh;
-                parentMeshCollider.sharedMesh = parentFilter.mesh;
-                parentMeshCollider.gameObject.GetComponent<Renderer>().enabled = false;
+            parentFilter.sharedMesh = parentFilter.mesh;
+            parentMeshCollider.sharedMesh = parentFilter.mesh;
+            //parentMeshCollider.gameObject.GetComponent<Renderer>().enabled = false;
 
-                parentFilter.gameObject.SetActive( true );
-
-                Shield cubeShield = parentObject.AddComponent<Shield>();
-                cubeShield.nom = "Lead";
-
+            parentFilter.gameObject.SetActive( true );
             
+            generatedObjects.Add( parentObject );
+            
+        }
+
+        GameObject scaleMatch = GameObject.Find( "Base-cylinder" );
+
+        float rad = scaleMatch.transform.localScale.x;
+
+        for ( int c = 0 ; c < 2 ; c++ ) {
+
+            GameObject endShields = GameObject.CreatePrimitive( PrimitiveType.Cylinder );
+            endShields.transform.parent = transform;
+            endShields.transform.localPosition = new Vector3( 0 , ( ( scaleMatch.transform.localScale.y / 1 ) - ( mainThickness / 2 ) ) * ( c == 1 ? -1 : 1 ) , 0 );
+            endShields.transform.localScale = new Vector3( rad , mainThickness / 2 , rad );
+
+            generatedObjects.Add( endShields );
+
+        }
+
+        CombineInstance[] combineSuper = new CombineInstance[ generatedObjects.Count ];
 
 
+        for ( int i = 0 ; i < combineSuper.Length ; i++ ) {
+
+            combineSuper[ i ].mesh = generatedObjects[ i ].GetComponent<MeshFilter>().sharedMesh;
+
+
+            Vector3 local = generatedObjects[ i ].transform.localPosition;
+            Quaternion localAngle = generatedObjects[ i ].transform.localRotation;
+
+            generatedObjects[ i ].transform.localPosition = generatedObjects[ i ].transform.position;
+            generatedObjects[ i ].transform.localRotation = generatedObjects[ i ].transform.rotation;
+            generatedObjects[ i ].transform.position = local;
+            generatedObjects[ i ].transform.rotation = localAngle;
+
+            combineSuper[ i ].transform = ( generatedObjects[ i ].transform ).localToWorldMatrix;
+            generatedObjects[ i ].gameObject.SetActive( false );
+            
+        }
+
+        GameObject grandObject = new GameObject();
+
+        grandObject.transform.parent = transform;
+        grandObject.transform.localPosition = new Vector3( 0 , 0 , 0 );
+        grandObject.transform.localScale = new Vector3( 1 , 1 , 1 );
+
+        MeshCollider grandMeshCollider = grandObject.AddComponent<MeshCollider>();
+        MeshFilter grandFilter = grandObject.AddComponent<MeshFilter>();
+        MeshRenderer grandRenderer = grandObject.AddComponent<MeshRenderer>();
+
+        grandFilter.mesh = new Mesh();
+
+        grandFilter.mesh.CombineMeshes( combineSuper , true );
+
+        grandFilter.sharedMesh = grandFilter.mesh;
+        grandMeshCollider.sharedMesh = grandFilter.mesh;
+        grandMeshCollider.gameObject.GetComponent<Renderer>().enabled = false;
+
+        grandFilter.gameObject.SetActive( true );
+
+        generatedObjects.Add( grandObject );
+
+        Shield cubeShield = grandObject.AddComponent<Shield>();
+        cubeShield.nom = "Lead";
+        //cubeShield.averageThickness = mainThickness;
+
+        grandObject.tag = "Barrier";
+
+        grandObject.name = "Gamma gun mega shield"; //Therefore my people shall know my name: therefore they shall know in that day that I am he that doth speak: behold, it is I.
+
+        addShield( grandObject );
+
+
+    }
+
+
+    void OnValidate() {
+
+        updateParticleSystemChoice();
+
+    }
+
+    private void updateParticleSystemChoice() {
+
+        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+
+        foreach ( GameObject gameObject in allObjects ) {
+
+            if (gameObject.GetComponent<PSOnTrigger_Minh>() != null ) {
+
+                gameObject.GetComponent<PSOnTrigger_Minh>().enabled = useMinhParticleSystem;
+
+            }
+
+            if ( gameObject.GetComponent<ParticleTrigger>() != null ) {
+
+                gameObject.GetComponent<ParticleTrigger>().enabled = !useMinhParticleSystem;
+
+            }
 
         }
 
 
-
     }
+
 
 }
