@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/_Scenes/ERC Basement Shielding Lab.unity
+  isLoaded: 1
+  isActive: 1
