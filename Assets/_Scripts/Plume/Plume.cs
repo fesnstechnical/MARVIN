@@ -16,7 +16,7 @@ public class Plume : MonoBehaviour {
     public float windSpeed = 10f;
 
     private float generationRate = 0.1f;
-    private int maxParticles = 1500;
+    private int maxParticles = 1000;
     private float maxDistance = 2.6f; 
     private float radius = 0.05f;
     private float speedFudgingNumber = 0.1f;
@@ -29,7 +29,7 @@ public class Plume : MonoBehaviour {
 
     private float scale = 0.02f;
 
-    private float rainSpeed = 1f; //m/s
+    public float rainSpeed = 0f; //m/s
     
     private float[] lateralIntensities = new float[] { 0.475f , 0.325f , 0.175f , 0.165f , 0.14f };
     private float[] verticalIntensities = new float[] { 0.35f , 0.125f , 0.065f , 0.05f , 0.015f };
@@ -104,6 +104,7 @@ public class Plume : MonoBehaviour {
                 sector.transform.localScale = new Vector3( sectorSize , sectorThickness , sectorSize );
                 sector.transform.localPosition = new Vector3( 0 , ( 0.1f + sectorThickness ) / 2 , 0 ) - new Vector3( fieldSize / 2 , 0 , fieldSize / 2 ) + new Vector3( x * sectorSize , 0 , z * sectorSize ) + new Vector3( sectorSize / 2 , 0 , sectorSize / 2 );
                 sector.GetComponent<Renderer>().material.shader = Shader.Find( "Transparent/Diffuse" );
+                sector.SetActive( false );
 
                 sectorGameObjects[ x , z ] = sector; //Sector ZZ9 Plural Z Alpha
 
@@ -139,6 +140,7 @@ public class Plume : MonoBehaviour {
                     sector.GetComponent<Renderer>().material.shader = Shader.Find( "Transparent/Diffuse" );
                     sector.GetComponent<Renderer>().material.color = new Color( 0 , 0 , 0 , 0 );
                     sectorAirGameObjects[ xI , y , z ] = sector;
+                    sector.SetActive( false );
 
 
                     sectorDeltaTimes[ xI , y , z ] = currentTime;
@@ -149,6 +151,9 @@ public class Plume : MonoBehaviour {
 
         }
         
+        int totalSectorCount = ( int ) ( fieldSize / initialSectorSize ) * sectorCount * sectorCount;
+
+        Debug.Log( "Plume model active, rendering " + totalSectorCount + " sectors" );
 
     }
 
@@ -164,7 +169,7 @@ public class Plume : MonoBehaviour {
         //windSpeed = GameObject.Find( "WindSpeedBoard" ).GetComponent<ControlInterface>().getValue();
         //verticalWindVelocity = GameObject.Find( "WindVerticalSpeedBoard" ).GetComponent<ControlInterface>().getValue();
         //thermalStratification = ( ThermalStratifications ) ( ( int ) GameObject.Find( "ThermalStratificationBoard" ).GetComponent<ControlInterface>().getValue() );
-
+        //rainSpeed = GameObject.Find( "RainSpeedBoard" ).GetComponent<ControlInterface>().getValue();
 
         float sectorHeight = maxSectorHeight / sectorCountVertical;
         float totalHeight = ( ( 3 * chimneyDiameter * verticalWindVelocity ) / windSpeed ) + chimneyHeight;
@@ -175,7 +180,8 @@ public class Plume : MonoBehaviour {
         x++;
         if ( x >= sectorCount ) { x = 0; }
 
-            //for ( int x = 0 ; x < sectorCount ; x++ ) {
+        //for ( int x = 0 ; x < sectorCount ; x++ ) {
+        
 
         for ( int z = 0 ; z < sectorCount ; z++ ) {
 
@@ -215,9 +221,13 @@ public class Plume : MonoBehaviour {
                     concentration = ( sourceActivityRate ) * gaussianFunction * ( 1 / ( 2 * Mathf.PI * sigmaSide * sigmaHeight ) );
 
                     gaussianFunction = gaussianFunction < 0.01f ? 0 : gaussianFunction;
-                    
-                    sector.GetComponent<Renderer>().material.color = new Color( gaussianFunction , 1 - gaussianFunction , 0 , gaussianFunction > 0 ? 0.1f : 0 );
 
+                    if ( gaussianFunction != 0 ) {
+
+                        sector.GetComponent<Renderer>().material.color = new Color( gaussianFunction , 1 - gaussianFunction , 0 , gaussianFunction > 0 ? 0.1f : 0 );
+
+                    }
+                    
                     float deposistionRate;
                     if ( rainSpeed > 0 ) { //Wet dposistion rate
 
@@ -237,6 +247,7 @@ public class Plume : MonoBehaviour {
                     
                 }
 
+                sector.SetActive( gaussianFunction != 0 );
                 airContamination[ x , y , z ] = concentration;
 
             }

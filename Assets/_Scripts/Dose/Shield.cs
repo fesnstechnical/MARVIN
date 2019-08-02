@@ -38,7 +38,7 @@ public class Shield : MonoBehaviour {
         return Controller.getController().getDoseController().getAverageMaterialAttenuationCoefficient( this.getName() );
 
     }
-
+    
 
     public enum Types {
 
