@@ -21,6 +21,16 @@ public class VisionModeEditor : Editor {
             Controller.getController().getVisionModeController().setModeXRay();
 
         }
+        else if ( GUILayout.Button( "Highlight on" ) ) {
+
+            Controller.getController().getVisionModeController().setInformationBlockHighlightState( true );
+
+        }
+        else if ( GUILayout.Button( "Highlight off" ) ) {
+
+            Controller.getController().getVisionModeController().setInformationBlockHighlightState( false );
+
+        }
 
 
     }

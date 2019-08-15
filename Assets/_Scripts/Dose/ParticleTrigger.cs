@@ -201,30 +201,80 @@ public class ParticleTrigger : MonoBehaviour {
             //Interates over particles that have collided
             for ( int i = 0 ; i < enterParticleNumber ; i++ ) {
 
+                bool particleAffected = false;
+
                 ParticleSystem.Particle p = enter[ i ]; //Gets the particle
                 Vector3 originalParticlePos = p.position;
 
                 Component triggeredShield = ps.trigger.GetCollider( 0 );
-                float maxDistance = ( ps.trigger.GetCollider( 0 ).transform.position - originalParticlePos ).magnitude;
 
-                for ( int k  = 1; k < ps.trigger.maxColliderCount ; k++ ) {
+                RaycastHit[] originalHits = Physics.RaycastAll( new Ray( originalParticlePos + ( -p.velocity.normalized * 0.01f ) , p.velocity.normalized ) );
+                bool foundCollider = false;
 
-                    Component collider = ps.trigger.GetCollider( k );
+                if ( originalHits.Length > 0 ) {
 
-                    if ( collider != null ) {
+                    float maxHitDistance = 10000;
 
-                        float roundDistance = ( ps.trigger.GetCollider( k ).transform.position - originalParticlePos ).magnitude;
-                        if ( roundDistance < maxDistance ) {
+                    for ( int k = 0 ; k < originalHits.Length ; k++ ) {
 
-                            maxDistance = roundDistance;
-                            triggeredShield = collider;
-                          
+                        bool isCollider = false;
+
+                        for ( int j = 0 ; j < ps.trigger.maxColliderCount ; j++ ) {
+
+                            if ( ps.trigger.GetCollider( j ) != null ) {
+
+                                if ( ps.trigger.GetCollider( j ).GetInstanceID() == originalHits[ k ].collider.GetInstanceID() ) {
+
+                                    isCollider = true;
+                                    foundCollider = true;
+
+                                    break;
+
+                                }
+
+                            }
+
+                        }
+
+                        if ( isCollider ) {
+
+                            float roundDistance = ( originalHits[ k ].point - originalParticlePos ).magnitude;
+                            if ( roundDistance < maxHitDistance ) {
+
+                                maxHitDistance = roundDistance;
+                                triggeredShield = originalHits[ k ].collider;
+
+                            }
+
                         }
 
                     }
 
                 }
-                
+
+                if ( !foundCollider ){
+
+                    float maxDistance = ( ps.trigger.GetCollider( 0 ).transform.position - originalParticlePos ).magnitude;
+
+                    for ( int k = 1 ; k < ps.trigger.maxColliderCount ; k++ ) {
+
+                        Component collider = ps.trigger.GetCollider( k );
+
+                        if ( collider != null ) {
+
+                            float roundDistance = ( ps.trigger.GetCollider( k ).transform.position - originalParticlePos ).magnitude;
+                            if ( roundDistance < maxDistance ) {
+
+                                maxDistance = roundDistance;
+                                triggeredShield = collider;
+
+                            }
+
+                        }
+
+                    }
+
+                }
 
                 if ( p.velocity.magnitude > 0 ) {
 
@@ -256,13 +306,40 @@ public class ParticleTrigger : MonoBehaviour {
 
                     float thickness = 0;
                     
-                    float castDistance = 10.0f;
+                    float castDistance = 1.0f;
 
                     RaycastHit hitInfo;
-                    if( triggeredShield.GetComponent<Collider>().Raycast( new Ray( p.position + ( p.velocity.normalized * castDistance ) , -p.velocity.normalized  ) , out hitInfo , castDistance  + 1 ) ) {
 
-                        thickness = ( hitInfo.point - originalParticlePos ).magnitude;
+                    RaycastHit[] hits = Physics.RaycastAll( new Ray( originalParticlePos + ( p.velocity.normalized * castDistance ) , -p.velocity.normalized ) );
 
+                    for ( int k = 0 ; k < hits.Length ; k++ ) {
+
+                        if ( hits[ k ].collider.GetInstanceID() == triggeredShield.GetInstanceID() ) {
+
+                            thickness = ( hits[ k ].point - originalParticlePos ).magnitude;
+                            break;
+
+                        }
+
+                    }
+
+                    if ( thickness == 0 ) {
+
+                        p.startColor = Color.yellow;
+
+                        if ( false ) {
+
+                            Debug.DrawRay( originalParticlePos + ( p.velocity.normalized * castDistance ) , -p.velocity.normalized , Color.yellow , 4f );
+                            //Debug.Log( "==========================" );
+                            //Debug.Log( hits.Length );
+
+                            for ( int k = 0 ; k < hits.Length ; k++ ) {
+
+                                //Debug.Log( triggeredShield.name + ":" + hits[ k ].collider.name );
+
+                            }
+
+                        }
 
                     }
                     
@@ -295,7 +372,7 @@ public class ParticleTrigger : MonoBehaviour {
                         }
 
 
-                        // if particle penetrates
+                        // if particle doesnt penetrates
                         if ( random < upperBound ) {
                             
                             //p.position = getName.point;
@@ -306,12 +383,25 @@ public class ParticleTrigger : MonoBehaviour {
                         }
                         else {
 
-                            //p.startColor = Color.blue;
+                            p.startColor = Color.blue;
 
                         }
 
+                        particleAffected = true;
+
+                    }
+                    else {
+
+                        
+
                     }
 
+
+                }
+
+                if ( !particleAffected ) {
+
+                    //p.startColor = Color.yellow;
 
                 }
 
@@ -349,8 +439,6 @@ public class ParticleTrigger : MonoBehaviour {
         lr.SetPosition(1 , end);
         GameObject.Destroy(myLine , duration);
     }
-
-
-
+    
 
 }

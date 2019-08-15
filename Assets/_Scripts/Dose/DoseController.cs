@@ -774,6 +774,7 @@ public class DoseController : MonoBehaviour {
         GameObject.Destroy(myLine , duration);
     }
 
+
     private void createColumn() {
 
         Transform transform = GameObject.Find( "ColumnBase" ).transform;
@@ -786,9 +787,9 @@ public class DoseController : MonoBehaviour {
         for ( int c = 0 ; c < 2 ; c++ ) {
 
             Vector3 offset = new Vector3( c == 1 ? 0.038f : 0 , 0 , 0 );
-        
-            float thickness = new float[]{ mainThickness , 0.01f }[ c ];
-            float radius = new float[] { maxRadius - ( mainThickness / 2 ) , 0.15f / 2 }[ c ]; 
+
+            float thickness = new float[] { mainThickness , 0.01f }[ c ];
+            float radius = new float[] { maxRadius - ( mainThickness / 2 ) , 0.15f / 2 }[ c ];
             float height = new float[] { 0.2435f * 2 , 0.065f }[ c ];
 
             int n = new int[] { 18 , 18 }[ c ];
@@ -830,19 +831,19 @@ public class DoseController : MonoBehaviour {
                         float y = radius * Mathf.Sin( Mathf.Deg2Rad * ( theta * i ) );
 
                         GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
-        
-                        cube.transform.SetParent(  parentObject.transform , false );
-                        
+
+                        cube.transform.SetParent( parentObject.transform , false );
+
                         cube.transform.localScale = new Vector3( length , thickness , heightInterval );
                         cube.transform.localPosition = new Vector3( x , -( height / 2 ) + ( heightInterval * h ) + ( heightInterval / 2 ) , y );
                         cube.transform.localEulerAngles = new Vector3( 90 , theta * -i + ( 90 ) , 0 );
 
-                        if ( cube.GetComponent<BoxCollider>() !=null ) {
+                        if ( cube.GetComponent<BoxCollider>() != null ) {
 
                             Destroy( cube.GetComponent<BoxCollider>() );
 
                         }
-                        
+
                         filters.Add( cube.GetComponent<MeshFilter>() );
 
 
@@ -859,12 +860,12 @@ public class DoseController : MonoBehaviour {
             }
 
             Transform masterTransform = GameObject.Find( "GammaGun" ).transform;
-            
+
             CombineInstance[] combine = new CombineInstance[ filters.Count ];
             for ( int i = 0 ; i < combine.Length ; i++ ) {
 
                 combine[ i ].mesh = filters[ i ].sharedMesh;
-                
+
 
                 Vector3 local = filters[ i ].transform.localPosition;
                 Quaternion localAngle = filters[ i ].transform.localRotation;
@@ -873,7 +874,7 @@ public class DoseController : MonoBehaviour {
                 filters[ i ].transform.localRotation = filters[ i ].transform.rotation;
                 filters[ i ].transform.position = local;
                 filters[ i ].transform.rotation = localAngle;
-                
+
                 combine[ i ].transform = ( filters[ i ].transform ).localToWorldMatrix;
                 filters[ i ].gameObject.SetActive( false );
 
@@ -890,9 +891,9 @@ public class DoseController : MonoBehaviour {
             //parentMeshCollider.gameObject.GetComponent<Renderer>().enabled = false;
 
             parentFilter.gameObject.SetActive( true );
-            
+
             generatedObjects.Add( parentObject );
-            
+
         }
 
         GameObject scaleMatch = GameObject.Find( "Base-cylinder" );
@@ -928,7 +929,7 @@ public class DoseController : MonoBehaviour {
 
             combineSuper[ i ].transform = ( generatedObjects[ i ].transform ).localToWorldMatrix;
             generatedObjects[ i ].gameObject.SetActive( false );
-            
+
         }
 
         GameObject grandObject = new GameObject();

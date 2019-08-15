@@ -16,6 +16,9 @@ public class MenuInterpretor : MonoBehaviour {
 
     }
 
+
+    //Wtf is a switch method, je ne sais pas
+
     public void sendMessage( string message ) {
         
         if ( message == "ToggleScintillatorDoor" ) {
@@ -91,8 +94,6 @@ public class MenuInterpretor : MonoBehaviour {
 
     }
 
-    //Wtf is a switch method, je ne sais pas
-   
 
     void SendMessage( string message ) {
 
