@@ -10,7 +10,7 @@ public class DoseReceptor {
     private float surfaceArea; //Constant
     private Transform receptorTransform;
 
-    public DoseReceptor( float mass , float surfaceArea , Transform receptorTransform) {
+    public DoseReceptor( float mass , float surfaceArea , Transform receptorTransform ) {
 
         this.mass = mass;
         this.surfaceArea = surfaceArea;

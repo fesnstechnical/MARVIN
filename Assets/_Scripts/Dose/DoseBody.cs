@@ -67,6 +67,7 @@ public abstract class DoseBody : MonoBehaviour {
 
     }
 
+    //mSv/hr
     public float getDoseRate() {
 
         return doseRate;
@@ -85,6 +86,7 @@ public abstract class DoseBody : MonoBehaviour {
 
     }
 
+    //mSv
     public float getAccumulatedDose() {
 
         return accululatedDose;

@@ -31,6 +31,11 @@ public class VisionModeEditor : Editor {
             Controller.getController().getVisionModeController().setInformationBlockHighlightState( false );
 
         }
+        else if ( GUILayout.Button( "Toggle menu" ) ) {
+
+            Controller.getController().getUserPointer().toggleMenu();
+
+        }
 
 
     }

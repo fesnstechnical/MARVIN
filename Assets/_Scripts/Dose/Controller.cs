@@ -19,6 +19,8 @@ public class Controller : MonoBehaviour {
     private GammaGunController gammaGunController;
     private PlatformMover platfomrMover;
     private VisionModeController visionModeController;
+    private UserPointer userPointer;
+    private User user;
 
     private bool particlesEnabled;
 
@@ -46,7 +48,10 @@ public class Controller : MonoBehaviour {
         }
 
         visionModeController = this.GetComponent<VisionModeController>();
-        
+        userPointer = GameObject.Find( "RightHand" ).GetComponent<UserPointer>();
+        user = GameObject.Find( "ShieldingPlayer" ).GetComponent<User>();
+
+
 
         particlesEnabled = particlesInitiallyEnalbed;
         updateParticleGenerators();
@@ -220,6 +225,12 @@ public class Controller : MonoBehaviour {
 
     }
 
+    public UserPointer getUserPointer() {
+
+        return userPointer;
+
+    }
+
     public GammaGunController getGammaGunController() {
 
         return gammaGunController;
@@ -235,6 +246,12 @@ public class Controller : MonoBehaviour {
     public VisionModeController getVisionModeController() {
 
         return visionModeController;
+
+    }
+
+    public User getUser() {
+
+        return user;
 
     }
 

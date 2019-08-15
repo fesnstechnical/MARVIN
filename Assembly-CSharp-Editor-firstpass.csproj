@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D10CBF03-EF98-8A4D-C9AA-89F9B0270E7B}</ProjectGuid>
+    <ProjectGuid>{BB399E02-6908-8CCA-6688-606B2C277018}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
@@ -57,19 +57,19 @@
      <None Include="Assets\Plugins\GitHub\Editor\credits.txt" />
      <None Include="Assets\Plugins\GitHub\Editor\eula.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -303,55 +303,55 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.10f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Bhaptics.Tact">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/bHapticsManager/Plugins/Bhaptics.Tact.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/bHapticsManager/Plugins/Bhaptics.Tact.dll</HintPath>
  </Reference>
  <Reference Include="AsyncBridge.Net35">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll</HintPath>
  </Reference>
  <Reference Include="GitHub.Api">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/Plugins/GitHub/Editor/GitHub.Api.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/GitHub.Api.dll</HintPath>
  </Reference>
  <Reference Include="GitHub.Logging">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
  </Reference>
  <Reference Include="GitHub.Unity">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/Plugins/GitHub/Editor/GitHub.Unity.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/GitHub.Unity.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/Plugins/GitHub/Editor/ICSharpCode.SharpZipLib.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Posix">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/Plugins/GitHub/Editor/Mono.Posix.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/Mono.Posix.dll</HintPath>
  </Reference>
  <Reference Include="ReadOnlyCollectionsInterfaces">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll</HintPath>
  </Reference>
  <Reference Include="sfw.net">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/Plugins/GitHub/Editor/System.Threading.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/System.Threading.dll</HintPath>
  </Reference>
  <Reference Include="Valve.Newtonsoft.Json">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="SyntaxTree.Mono.Cecil">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Assets/UnityVS/Editor/SyntaxTree.Mono.Cecil.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/UnityVS/Editor/SyntaxTree.Mono.Cecil.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+ <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
@@ -383,15 +383,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="SteamVR_Actions.csproj">
-      <Project>{E74286BD-7A54-D6AF-BEC3-8D2B621CA32B}</Project>      <Name>SteamVR_Actions</Name>    </ProjectReference>
+      <Project>{8B953C3E-EAC5-2A8F-82FB-39DAA54C1E3D}</Project>      <Name>SteamVR_Actions</Name>    </ProjectReference>
     <ProjectReference Include="SteamVR_Input_Editor.csproj">
-      <Project>{9384EF31-580B-A201-0FFA-6FEC7BD59EFA}</Project>      <Name>SteamVR_Input_Editor</Name>    </ProjectReference>
+      <Project>{6DFA3CB5-B11B-91C6-9A9E-5E8F29AFC5D0}</Project>      <Name>SteamVR_Input_Editor</Name>    </ProjectReference>
     <ProjectReference Include="SteamVR_Editor.csproj">
-      <Project>{060A4497-0F1A-DC96-6B6C-8D9376AEB80F}</Project>      <Name>SteamVR_Editor</Name>    </ProjectReference>
+      <Project>{7D926DFA-DE8C-1C9F-7258-DD003A6E632B}</Project>      <Name>SteamVR_Editor</Name>    </ProjectReference>
     <ProjectReference Include="SteamVR.csproj">
-      <Project>{41EAF5A0-4BDC-0C7B-E4D4-945BBF170BE8}</Project>      <Name>SteamVR</Name>    </ProjectReference>
+      <Project>{BA2DF6DB-3214-04B6-43E6-EDAD23C636C6}</Project>      <Name>SteamVR</Name>    </ProjectReference>
     <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
-      <Project>{825ACFBF-E56D-DAA3-056C-F2A535280F99}</Project>      <Name>SteamVR_Windows_EditorHelper</Name>    </ProjectReference>
+      <Project>{5789250B-0080-CCB9-CA92-E7C284A0CD9E}</Project>      <Name>SteamVR_Windows_EditorHelper</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

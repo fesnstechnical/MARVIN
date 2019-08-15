@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 using Valve.VR.Extras;
+using TMPro;
 
 public class UserPointer : MonoBehaviour {
 
@@ -11,14 +12,19 @@ public class UserPointer : MonoBehaviour {
     private bool menuObjectFocus = false;
     private bool lastMode = true;
 
+    private bool hudOpen = true;
+
     private bool laserPointer = false;
 
     private Canvas menu;
+    private Canvas hud;
 
     private InformationBlock selectedBlock;
 
     private GameObject[] objectFocused = new GameObject[] {};
     private GameObject[] nonObjectFocused = new GameObject[] { };
+
+    private TextMeshPro hudDoseRate;
 
     private void Update() {
 
@@ -29,8 +35,18 @@ public class UserPointer : MonoBehaviour {
                 menu = GameObject.Find( "UserInterface" ).GetComponent<Canvas>();
 
             }
-            
+
+           
+
         }
+
+        if ( GameObject.Find( "HUD" ) != null ) {
+
+            hud = GameObject.Find( "HUD" ).GetComponent<Canvas>();
+
+        }
+
+        hudDoseRate = GameObject.Find( "HUD Dose Rate" ).GetComponent<TextMeshPro>();
 
         if ( objectFocused.Length == 0 ) {
 
@@ -56,19 +72,12 @@ public class UserPointer : MonoBehaviour {
 
             if ( SteamVR_Actions._default.Menu.GetStateUp( SteamVR_Input_Sources.LeftHand ) ) { //Left hand opens & closes the menu
 
-                menuOpen = !menuOpen;
-                
-                menu.enabled = menuOpen;
-                menu.GetComponentInChildren<BoxCollider>().enabled = menuOpen;
-
-                if ( menuOpen ) { menuObjectFocus = false; }
-                
-                Controller.getController().getVisionModeController().setInformationBlockHighlightState( menuOpen );
-
+                toggleMenu();
 
             }
 
         }
+
 
         if ( SteamVR_Actions._default.Menu.GetStateUp( SteamVR_Input_Sources.RightHand ) ) { //Right hand controls laser pointer
 
@@ -187,9 +196,44 @@ public class UserPointer : MonoBehaviour {
             GetComponent<SteamVR_LaserPointer>().thickness = 0.0f;
 
         }
+        
+        if ( hud != null ) {
+
+            updateHUD();
+
+
+        }
+
+    }
+    
+    private void updateHUD() {
+        
+        float doseAccumulated = Controller.getController().getUser().getAccumulatedDose();
+        float doseRate = Controller.getController().getUser().getDoseRate();
+
+        Debug.Log( doseRate + ":" + Controller.getController().getUser().getCountRate() );
+
+        //Text
+
+        hudDoseRate.text = ( doseRate + " mSv/hr" );
 
     }
 
+    public void toggleMenu() {
+
+        menuOpen = !menuOpen;
+
+        menu.enabled = menuOpen;
+        hud.enabled = !hud.enabled;
+
+        menu.GetComponentInChildren<BoxCollider>().enabled = menuOpen;
+
+
+        if ( menuOpen ) { menuObjectFocus = false; }
+
+        Controller.getController().getVisionModeController().setInformationBlockHighlightState( menuOpen );
+
+    }
 
     void SendMessage( string message ) {
 

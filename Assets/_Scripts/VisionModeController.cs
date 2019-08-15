@@ -37,6 +37,8 @@ public class VisionModeController : MonoBehaviour {
 
     }
 
+
+
     public void setModeXRay() {
 
         setMode( "X-ray" );

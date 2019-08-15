@@ -11,8 +11,13 @@ public class User : DoseBody {
     
 
     public override void secondaryStart() {
-        
-        doseReceptors.Add( new DoseReceptor(77, 1.7f / 2 , getTransform()) );
+
+        //doseReceptors.Add( new DoseReceptor( 77 / 3 , 1.7f / 6 , GameObject.Find( "LeftHand" ).transform ) );
+        //doseReceptors.Add( new DoseReceptor( 77 / 3 , 1.7f / 6 , GameObject.Find( "RightHand" ).transform  ) );
+        //doseReceptors.Add( new DoseReceptor( 77 / 3 , 1.7f / 6 , GameObject.Find( "VR Camera" ).transform ) );
+
+        doseReceptors.Add( new DoseReceptor( 77 / 1 , 1.7f / 1 , getTransform() ) );
+
         setIsPlayer( true );
 
     }
