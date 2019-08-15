@@ -22,7 +22,7 @@ public class DoseController : MonoBehaviour {
     private List<Source> listSources = new List<Source>();
     private List<Reflector> listReflectors = new List<Reflector>();
 
-    public bool debug = false;
+    public bool debug = true;
 
     public bool useMinhParticleSystem = true;
 
@@ -113,6 +113,12 @@ public class DoseController : MonoBehaviour {
                                     RaycastHit[] forwardHits = Physics.RaycastAll( doseReceptor.getPosistion() , ( ( doseReceptor.getPosistion() - source.getPosistion() ) * -1f ).normalized , totalDistance );
                                     RaycastHit[] reverseHits = Physics.RaycastAll( source.getPosistion() , ( ( source.getPosistion() - doseReceptor.getPosistion() ) * -1f ).normalized , totalDistance );
                                 
+                                    if ( debug ) {
+
+                                        DrawLine( doseReceptor.getPosistion() , source.getPosistion() , Color.gray  , 2f  );
+
+                                    }
+
                                     Dictionary<string , float> shieldThicknesses = new Dictionary<string , float>();
                                     
                                     for ( int i = 0 ; i < forwardHits.Length ; i++ ) {
@@ -227,8 +233,12 @@ public class DoseController : MonoBehaviour {
                                                         float thetaIncidentRadians = Mathf.Acos( dotProductIncident );
                                                         float thetaIncident = thetaIncidentRadians * 180 / Mathf.PI;
 
-                                                        //DrawLine( hit.point , hit.point + hit.normal , Color.red , 1f );
-                                                        //DrawLine( source.getPosistion() , hit.point , Color.black , 1f );
+                                                        if ( debug ) {
+
+                                                            DrawLine( hit.point , hit.point + hit.normal , Color.red , 1f );
+                                                            DrawLine( source.getPosistion() , hit.point , Color.black , 1f );
+
+                                                        }
 
                                                         //8.18710565E-14f = Mass of electron * c2
                                                         float primeChilton = usePrimeChilton ? DataManager.getChiltonPrimeValue( reflector.getName() , energy ) : 0;
@@ -755,6 +765,7 @@ public class DoseController : MonoBehaviour {
 
 
     private void DrawLine(Vector3 start , Vector3 end , Color color , float duration = 1f) {
+        
         GameObject myLine = new GameObject();
         myLine.transform.position = start;
         myLine.AddComponent<LineRenderer>();
@@ -772,6 +783,9 @@ public class DoseController : MonoBehaviour {
         lr.SetPosition(0 , start);
         lr.SetPosition(1 , end);
         GameObject.Destroy(myLine , duration);
+
+        Debug.DrawRay( start , ( start - end ).normalized , color , duration );
+
     }
 
 

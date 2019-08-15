@@ -29,7 +29,7 @@ public class Plume : MonoBehaviour {
 
     private float scale = 0.02f;
 
-    public float rainSpeed = 0f; //m/s
+    public float rainSpeed = 5f; //m/s
 
     private float[] lateralIntensities = new float[] { 0.475f , 0.325f , 0.175f , 0.165f , 0.14f };
     private float[] verticalIntensities = new float[] { 0.35f , 0.125f , 0.065f , 0.05f , 0.015f };
@@ -258,6 +258,7 @@ public class Plume : MonoBehaviour {
             float adjustedContamination = relativeContamination[ x , z ] / ( 3.7E7f ); //Bq to mCi
 
             GameObject surfaceSector = sectorGameObjects[ x , z ];
+            surfaceSector.SetActive( adjustedContamination > 0 );
             surfaceSector.GetComponent<Renderer>().material.color = new Color( adjustedContamination , 1 - adjustedContamination , 0 , adjustedContamination > 0 ? 0.3f : 0 );
 
 

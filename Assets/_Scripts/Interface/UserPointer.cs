@@ -5,6 +5,7 @@ using Valve.VR;
 using Valve.VR.InteractionSystem;
 using Valve.VR.Extras;
 using TMPro;
+using System;
 
 public class UserPointer : MonoBehaviour {
 
@@ -25,6 +26,19 @@ public class UserPointer : MonoBehaviour {
     private GameObject[] nonObjectFocused = new GameObject[] { };
 
     private TextMeshPro hudDoseRate;
+    private Slider healthBar;
+
+    public AudioSource audioSource;
+    public AudioClip shieldRecharge;
+    public AudioClip shieldLow;
+
+
+
+    public void Start() {
+        
+
+
+    }
 
     private void Update() {
 
@@ -43,6 +57,12 @@ public class UserPointer : MonoBehaviour {
         if ( GameObject.Find( "HUD" ) != null ) {
 
             hud = GameObject.Find( "HUD" ).GetComponent<Canvas>();
+       
+        }
+
+        if ( GameObject.Find( "HUD HealthBar" ) != null ) {
+
+            healthBar = GameObject.Find( "HUD HealthBar" ).GetComponent<Slider>();
 
         }
 
@@ -194,6 +214,7 @@ public class UserPointer : MonoBehaviour {
         else {
             
             GetComponent<SteamVR_LaserPointer>().thickness = 0.0f;
+        
 
         }
         
@@ -205,17 +226,53 @@ public class UserPointer : MonoBehaviour {
         }
 
     }
-    
+
+    private bool isTakingSignificantDose = false;
+    private float minDoseTriggerRate = 10; //uSv
+    private float barSpeed = 0.01f;
+    private float healthBarProgression = 1;
+
     private void updateHUD() {
         
         float doseAccumulated = Controller.getController().getUser().getAccumulatedDose();
-        float doseRate = Controller.getController().getUser().getDoseRate();
+        float doseRate = Controller.getController().getUser().getDoseRate() * 1e3f;
 
-        Debug.Log( doseRate + ":" + Controller.getController().getUser().getCountRate() );
+        float setValue = healthBar.value;
+
+        if ( doseRate > minDoseTriggerRate ) {
+            
+            if ( !isTakingSignificantDose ) {
+
+                isTakingSignificantDose = true;
+                playSound( shieldLow , true );
+
+            }
+
+            setValue -= barSpeed;
+            if ( setValue < 0 ) { setValue = 0; }
+
+        }
+        else {
+
+            if ( isTakingSignificantDose ) {
+
+                stopSound();
+                playSound( shieldRecharge , false );
+                isTakingSignificantDose = false;
+                
+            }
+
+            setValue += barSpeed;
+            if ( setValue > 1 ) { setValue = 1; }
+
+        }
+
+
+        healthBar.value = setValue;
 
         //Text
 
-        hudDoseRate.text = ( doseRate + " mSv/hr" );
+        hudDoseRate.text = ( doseRate.ToString( "F2" ) + " uSv/hr" );
 
     }
 
@@ -279,6 +336,42 @@ public class UserPointer : MonoBehaviour {
                 return null;
 
             }
+
+        }
+
+    }
+
+    private void stopSound() {
+
+        if ( audioSource != null ) {
+            
+            audioSource.Stop();
+
+        }
+
+    }
+
+    private bool isPlaying() {
+
+        if ( audioSource!= null ) {
+
+            return audioSource.isPlaying;
+
+        }
+
+        return false;
+
+    }
+
+    private void playSound( AudioClip clip , bool loop ) {
+
+        if ( clip != null && audioSource != null ) {
+
+            stopSound();
+
+            audioSource.clip = clip;
+            audioSource.loop = loop;
+            audioSource.Play();
 
         }
 

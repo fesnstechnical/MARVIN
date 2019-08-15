@@ -12,11 +12,17 @@ public class User : DoseBody {
 
     public override void secondaryStart() {
 
-        //doseReceptors.Add( new DoseReceptor( 77 / 3 , 1.7f / 6 , GameObject.Find( "LeftHand" ).transform ) );
-        //doseReceptors.Add( new DoseReceptor( 77 / 3 , 1.7f / 6 , GameObject.Find( "RightHand" ).transform  ) );
-        //doseReceptors.Add( new DoseReceptor( 77 / 3 , 1.7f / 6 , GameObject.Find( "VR Camera" ).transform ) );
+        String[] tags = new String[] { "LeftHand" , "RightHand" , "VRCamera" , "BodyCollider" };
 
-        doseReceptors.Add( new DoseReceptor( 77 / 1 , 1.7f / 1 , getTransform() ) );
+        for ( int i = 0 ; i < tags.Length ; i++ ) {
+
+            doseReceptors.Add( new DoseReceptor( 77 / tags.Length , 1.7f / tags.Length , GameObject.Find( tags[ i ] ).transform ) );
+
+        }
+
+        
+
+        //doseReceptors.Add( new DoseReceptor( 77 / 1 , 1.7f / 1 , getTransform() ) );
 
         setIsPlayer( true );
 
