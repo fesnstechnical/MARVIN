@@ -17,20 +17,20 @@ public class Plume : MonoBehaviour {
 
     private float generationRate = 0.1f;
     private int maxParticles = 1000;
-    private float maxDistance = 2.6f; 
+    private float maxDistance = 2.6f;
     private float radius = 0.05f;
     private float speedFudgingNumber = 0.1f;
-    
+
     private float runningTime = 0f;
 
-    private float chimneySpread = 9; //Radially from center of stack
+    private float chimneySpread = 18f; //Radially from center of stack
     private float chimneyDiameter = 3;
     private float chimneyHeight = 40;
 
     private float scale = 0.02f;
 
     public float rainSpeed = 0f; //m/s
-    
+
     private float[] lateralIntensities = new float[] { 0.475f , 0.325f , 0.175f , 0.165f , 0.14f };
     private float[] verticalIntensities = new float[] { 0.35f , 0.125f , 0.065f , 0.05f , 0.015f };
 
@@ -48,6 +48,7 @@ public class Plume : MonoBehaviour {
     private float initialSectorSize = 0.1f;
     private float fieldSize = 3;
     private float sectorThickness = 0.05f;
+    private float fieldThickness = 0.1f;
 
     private float sourceActivityRate = 1000000f; //Bq/s, ie how many dunkaroos are we pumping into the air per second
 
@@ -78,7 +79,7 @@ public class Plume : MonoBehaviour {
 
         field = GameObject.CreatePrimitive( PrimitiveType.Cube );
         field.transform.parent = baseObject.transform;
-        field.transform.localScale = new Vector3( fieldSize , 0.1f , fieldSize );
+        field.transform.localScale = new Vector3( fieldSize , fieldThickness , fieldSize );
         field.transform.localPosition = new Vector3( 0 , 0 , 0 );
         field.GetComponent<Renderer>().material.color = new Color( 0 , 1 , 0 );
 
@@ -94,7 +95,7 @@ public class Plume : MonoBehaviour {
 
         sectorGameObjects = new GameObject[ sectorCount , sectorCount ];
         relativeContamination = new float[ sectorCount , sectorCount ];
-        
+
         for ( int x = 0 ; x < sectorCount ; x++ ) {
 
             for ( int z = 0 ; z < sectorCount ; z++ ) {
@@ -136,7 +137,7 @@ public class Plume : MonoBehaviour {
                     sector.transform.parent = baseObject.transform;
                     sector.transform.localScale = new Vector3( sectorSize , sectorHeight , sectorSize );
                     sector.transform.localPosition = relativePosistion;
-                    
+
                     sector.GetComponent<Renderer>().material.shader = Shader.Find( "Transparent/Diffuse" );
                     sector.GetComponent<Renderer>().material.color = new Color( 0 , 0 , 0 , 0 );
                     sectorAirGameObjects[ xI , y , z ] = sector;
@@ -150,7 +151,7 @@ public class Plume : MonoBehaviour {
             }
 
         }
-        
+
         int totalSectorCount = ( int ) ( fieldSize / initialSectorSize ) * sectorCount * sectorCount;
 
         Debug.Log( "Plume model active, rendering " + totalSectorCount + " sectors" );
@@ -158,7 +159,7 @@ public class Plume : MonoBehaviour {
     }
 
     int x = -1;
-    
+
     // Update is called once per frame
     void Update() {
 
@@ -181,7 +182,7 @@ public class Plume : MonoBehaviour {
         if ( x >= sectorCount ) { x = 0; }
 
         //for ( int x = 0 ; x < sectorCount ; x++ ) {
-        
+
 
         for ( int z = 0 ; z < sectorCount ; z++ ) {
 
@@ -196,7 +197,7 @@ public class Plume : MonoBehaviour {
                 float adjustedZ = ( relativePosistion.z * Mathf.Cos( -windDirection * Mathf.Deg2Rad ) ) + ( relativePosistion.x * Mathf.Sin( -windDirection * Mathf.Deg2Rad ) );
 
                 GameObject sector = sectorAirGameObjects[ x , y , z ];
-                 
+
                 float outDistance = adjustedX;
                 float concentration, gaussianFunction;
 
@@ -227,7 +228,7 @@ public class Plume : MonoBehaviour {
                         sector.GetComponent<Renderer>().material.color = new Color( gaussianFunction , 1 - gaussianFunction , 0 , gaussianFunction > 0 ? 0.1f : 0 );
 
                     }
-                    
+
                     float deposistionRate;
                     if ( rainSpeed > 0 ) { //Wet dposistion rate
 
@@ -244,7 +245,7 @@ public class Plume : MonoBehaviour {
 
                     surfaceContamination += ( deposistionRate * ( ( currentTime - sectorDeltaTimes[ x , y , z ] ) / ( float ) 1000 ) * timeAccelerationFactor );
                     sectorDeltaTimes[ x , y , z ] = currentTime;
-                    
+
                 }
 
                 sector.SetActive( gaussianFunction != 0 );
@@ -255,7 +256,7 @@ public class Plume : MonoBehaviour {
             relativeContamination[ x , z ] = relativeContamination[ x , z ] + surfaceContamination;
 
             float adjustedContamination = relativeContamination[ x , z ] / ( 3.7E7f ); //Bq to mCi
-                
+
             GameObject surfaceSector = sectorGameObjects[ x , z ];
             surfaceSector.GetComponent<Renderer>().material.color = new Color( adjustedContamination , 1 - adjustedContamination , 0 , adjustedContamination > 0 ? 0.3f : 0 );
 
@@ -300,7 +301,7 @@ public class Plume : MonoBehaviour {
 
                 }
 
-                
+
 
 
             }
@@ -310,18 +311,18 @@ public class Plume : MonoBehaviour {
 
                 float deltaHeight = ( 3 * chimneyDiameter * verticalWindVelocity * scale ) / windSpeed;
                 deltaHeights[ index ] = deltaHeight;
-                
+
                 GameObject particle = GameObject.CreatePrimitive( PrimitiveType.Sphere );
-                particle.transform.parent = stack.transform;
-                particle.transform.localPosition = new Vector3( 0 , 1 , 0 );
-                particle.transform.localScale = new Vector3( radius / stack.transform.localScale.x , radius / stack.transform.localScale.y , radius / stack.transform.localScale.z );
+                particle.transform.parent = baseObject.transform;
+                particle.transform.localPosition = new Vector3( 0 , ( chimneyHeight * scale ) + ( fieldThickness * 0.5f ) , 0 );
+                particle.transform.localScale = new Vector3( radius , radius , radius );
 
                 particles[ index ] = particle;
 
                 acceleration[ index ] = new Vector3( Mathf.Cos( windDirection * Mathf.Deg2Rad ) * chimneySpread * scale , deltaHeight , Mathf.Sin( windDirection * Mathf.Deg2Rad ) * chimneySpread * scale );
                 initialMovement[ index ] = true;
                 totalTime[ index ] = 0;
-                
+
             }
 
         }
@@ -330,7 +331,7 @@ public class Plume : MonoBehaviour {
         float maxLifetime = maxDistance / speed;
 
         for ( int i = 0 ; i < particles.Length ; i++ ) {
-            
+
             GameObject particle = particles[ i ];
 
             if ( particle != null ) {
@@ -350,8 +351,8 @@ public class Plume : MonoBehaviour {
 
                     if ( initialMovement[ i ] ) {
 
-                        float particleHeight = ( particle.transform.localPosition.y - 1 ) * stack.transform.localScale.y;
-                        
+                        float particleHeight = particle.transform.localPosition.y - ( chimneyHeight * scale ) + ( fieldThickness * 0.5f );
+
                         if ( particleHeight > deltaHeights[ i ] ) {
 
                             float outDistanceChimney = 1;
@@ -376,9 +377,9 @@ public class Plume : MonoBehaviour {
                         }
 
                     }
-              
-                    particle.transform.localPosition = particle.transform.localPosition + ( new Vector3( acceleration[ i ].x / stack.transform.localScale.x , acceleration[ i ].y / stack.transform.localScale.y , acceleration[ i ].z / stack.transform.localScale.z ) * Time.deltaTime * speed  );
-      
+
+                    particle.transform.localPosition = particle.transform.localPosition + ( new Vector3( acceleration[ i ].x , acceleration[ i ].y , acceleration[ i ].z ) * Time.deltaTime * speed );
+
                 }
 
             }
@@ -402,7 +403,7 @@ public class Plume : MonoBehaviour {
     private float exp( float x ) {
 
         return Mathf.Exp( x );
-        
+
 
     }
 
