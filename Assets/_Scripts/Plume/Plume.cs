@@ -27,7 +27,7 @@ public class Plume : MonoBehaviour {
     private float chimneyDiameter = 3;
     private float chimneyHeight = 40;
 
-    private float scale = 0.02f;
+    private float scale = 0.005f;
 
     public float rainSpeed = 5f; //m/s
 
@@ -225,7 +225,7 @@ public class Plume : MonoBehaviour {
 
                     if ( gaussianFunction != 0 ) {
 
-                        sector.GetComponent<Renderer>().material.color = new Color( gaussianFunction , 1 - gaussianFunction , 0 , gaussianFunction > 0 ? 0.1f : 0 );
+                        sector.GetComponent<Renderer>().material.color = new Color( 0 , gaussianFunction , 1 - gaussianFunction , gaussianFunction > 0 ? 0.1f : 0 );
 
                     }
 

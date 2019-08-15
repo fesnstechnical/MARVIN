@@ -25,9 +25,13 @@ public class VisionModeController : MonoBehaviour {
 
             foreach ( GameObject gameObject in originalMaterials.Keys ) {
 
-                if ( gameObject.GetComponent<Renderer>() != null ) { //Should never be null, but just in case of an oopsies
-                    
-                    gameObject.GetComponent<Renderer>().material = originalMaterials[ gameObject ];
+                if ( gameObject != null ) {
+
+                    if ( gameObject.GetComponent<Renderer>() != null ) { //Should never be null, but just in case of an oopsies
+
+                        gameObject.GetComponent<Renderer>().material = originalMaterials[ gameObject ];
+
+                    }
 
                 }
 

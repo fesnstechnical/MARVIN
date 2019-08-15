@@ -19432,9 +19432,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 0
   quality: 1
-  interactable: 1
-  blocksRaycasts: 1
-  raycastMyLayerOnly: 1
+  interactable: 0
+  blocksRaycasts: 0
+  raycastMyLayerOnly: 0
   forceUseBoxCollider: 0
   angle: 90
   preserveAspect: 0
@@ -19523,7 +19523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4051099914249012, guid: e7adc5ad67fb9704588ebc686c5e59e4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.002
+      value: 14.083
       objectReference: {fileID: 0}
     - target: {fileID: 4051099914249012, guid: e7adc5ad67fb9704588ebc686c5e59e4, type: 3}
       propertyPath: m_LocalRotation.x

@@ -13,6 +13,348 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 5
-  lastUpdatedAtString: 2019-08-15T14:57:26.351-04:00
-  initializedAtString: 2019-08-15T14:57:25.403-04:00
-  entries: []
+  lastUpdatedAtString: 2019-08-15T16:28:33.270-04:00
+  initializedAtString: 2019-08-15T16:28:32.323-04:00
+  entries:
+  - path: .vs\MARVIN\v15\.suo
+    fullPath: D:\MARVIN Reborn\MARVIN\.vs\MARVIN\v15\.suo
+    projectPath: .vs\MARVIN\v15\.suo
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: .vs\MARVIN\v15\Server\sqlite3\storage.ide
+    fullPath: D:\MARVIN Reborn\MARVIN\.vs\MARVIN\v15\Server\sqlite3\storage.ide
+    projectPath: .vs\MARVIN\v15\Server\sqlite3\storage.ide
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: .vs\MARVIN\v15\Server\sqlite3\storage.ide-shm
+    fullPath: D:\MARVIN Reborn\MARVIN\.vs\MARVIN\v15\Server\sqlite3\storage.ide-shm
+    projectPath: .vs\MARVIN\v15\Server\sqlite3\storage.ide-shm
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: .vs\MARVIN\v15\Server\sqlite3\storage.ide-wal
+    fullPath: D:\MARVIN Reborn\MARVIN\.vs\MARVIN\v15\Server\sqlite3\storage.ide-wal
+    projectPath: .vs\MARVIN\v15\Server\sqlite3\storage.ide-wal
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: actions.json
+    fullPath: D:\MARVIN Reborn\MARVIN\actions.json
+    projectPath: actions.json
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\_Scenes\ERC Basement Shielding Lab.unity
+    fullPath: D:\MARVIN Reborn\MARVIN\Assets\_Scenes\ERC Basement Shielding Lab.unity
+    projectPath: Assets\_Scenes\ERC Basement Shielding Lab.unity
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\_Scripts\Dose\DoseController.cs
+    fullPath: D:\MARVIN Reborn\MARVIN\Assets\_Scripts\Dose\DoseController.cs
+    projectPath: Assets\_Scripts\Dose\DoseController.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\_Scripts\Dose\Source.cs
+    fullPath: D:\MARVIN Reborn\MARVIN\Assets\_Scripts\Dose\Source.cs
+    projectPath: Assets\_Scripts\Dose\Source.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\_Scripts\Interface\UserPointer.cs
+    fullPath: D:\MARVIN Reborn\MARVIN\Assets\_Scripts\Interface\UserPointer.cs
+    projectPath: Assets\_Scripts\Interface\UserPointer.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\_Scripts\Plume\Plume.cs
+    fullPath: D:\MARVIN Reborn\MARVIN\Assets\_Scripts\Plume\Plume.cs
+    projectPath: Assets\_Scripts\Plume\Plume.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\_Scripts\VisionModeController.cs
+    fullPath: D:\MARVIN Reborn\MARVIN\Assets\_Scripts\VisionModeController.cs
+    projectPath: Assets\_Scripts\VisionModeController.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\SteamVR_Input\ActionSetClasses\SteamVR_Input_ActionSet_default.cs
+    fullPath: D:\MARVIN Reborn\MARVIN\Assets\SteamVR_Input\ActionSetClasses\SteamVR_Input_ActionSet_default.cs
+    projectPath: Assets\SteamVR_Input\ActionSetClasses\SteamVR_Input_ActionSet_default.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\SteamVR_Input\SteamVR_Input_Actions.cs
+    fullPath: D:\MARVIN Reborn\MARVIN\Assets\SteamVR_Input\SteamVR_Input_Actions.cs
+    projectPath: Assets\SteamVR_Input\SteamVR_Input_Actions.cs
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: bindings_vive_controller.json
+    fullPath: D:\MARVIN Reborn\MARVIN\bindings_vive_controller.json
+    projectPath: bindings_vive_controller.json
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\assetDatabase3
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\assetDatabase3
+    projectPath: Library\assetDatabase3
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\EditorInstance.json
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\EditorInstance.json
+    projectPath: Library\EditorInstance.json
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Library\gfu\cache\gitstatusentries.yaml
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\gfu\cache\gitstatusentries.yaml
+    projectPath: Library\gfu\cache\gitstatusentries.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\gfu\cache\gittrackingstatus.yaml
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\gfu\cache\gittrackingstatus.yaml
+    projectPath: Library\gfu\cache\gittrackingstatus.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\gfu\cache\repoinfo.yaml
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\gfu\cache\repoinfo.yaml
+    projectPath: Library\gfu\cache\repoinfo.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\InspectorExpandedItems.asset
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\InspectorExpandedItems.asset
+    projectPath: Library\InspectorExpandedItems.asset
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\metadata\05\050bb268ca2c1034faf56068211e141c
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\metadata\05\050bb268ca2c1034faf56068211e141c
+    projectPath: Library\metadata\05\050bb268ca2c1034faf56068211e141c
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\metadata\14\14b24a2785fdf214fb0d998a3576cdcb
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\metadata\14\14b24a2785fdf214fb0d998a3576cdcb
+    projectPath: Library\metadata\14\14b24a2785fdf214fb0d998a3576cdcb
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\metadata\19\19db66139f59b3c40b1d792f8e0b1816
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\metadata\19\19db66139f59b3c40b1d792f8e0b1816
+    projectPath: Library\metadata\19\19db66139f59b3c40b1d792f8e0b1816
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\metadata\61\614c29290d084fb4e9b3dc2758844124
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\metadata\61\614c29290d084fb4e9b3dc2758844124
+    projectPath: Library\metadata\61\614c29290d084fb4e9b3dc2758844124
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\metadata\63\63e9f24732dba3d44953d33c426611fc
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\metadata\63\63e9f24732dba3d44953d33c426611fc
+    projectPath: Library\metadata\63\63e9f24732dba3d44953d33c426611fc
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\metadata\c2\c26ce89690f49464ab1362eac51c8ded
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\metadata\c2\c26ce89690f49464ab1362eac51c8ded
+    projectPath: Library\metadata\c2\c26ce89690f49464ab1362eac51c8ded
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\metadata\d8\d852c89ff8654564e8ad4807e49e6fb0
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\metadata\d8\d852c89ff8654564e8ad4807e49e6fb0
+    projectPath: Library\metadata\d8\d852c89ff8654564e8ad4807e49e6fb0
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\ScriptAssemblies\Assembly-CSharp.dll
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\ScriptAssemblies\Assembly-CSharp.dll
+    projectPath: Library\ScriptAssemblies\Assembly-CSharp.dll
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\ScriptAssemblies\Assembly-CSharp.dll.mdb
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\ScriptAssemblies\Assembly-CSharp.dll.mdb
+    projectPath: Library\ScriptAssemblies\Assembly-CSharp.dll.mdb
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\ScriptAssemblies\SteamVR_Actions.dll
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\ScriptAssemblies\SteamVR_Actions.dll
+    projectPath: Library\ScriptAssemblies\SteamVR_Actions.dll
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\ScriptAssemblies\SteamVR_Actions.dll.mdb
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\ScriptAssemblies\SteamVR_Actions.dll.mdb
+    projectPath: Library\ScriptAssemblies\SteamVR_Actions.dll.mdb
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\shadercompiler-UnityShaderCompiler.exe0.log
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\shadercompiler-UnityShaderCompiler.exe0.log
+    projectPath: Library\shadercompiler-UnityShaderCompiler.exe0.log
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\StateCache\Hierarchy\78e86f-mainStage.json
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\StateCache\Hierarchy\78e86f-mainStage.json
+    projectPath: Library\StateCache\Hierarchy\78e86f-mainStage.json
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\StateCache\SceneView\ca812f-mainStage.json
+    fullPath: D:\MARVIN Reborn\MARVIN\Library\StateCache\SceneView\ca812f-mainStage.json
+    projectPath: Library\StateCache\SceneView\ca812f-mainStage.json
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Temp\__Backupscenes\0.backup
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\__Backupscenes\0.backup
+    projectPath: Temp\__Backupscenes\0.backup
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\ProcessJobs\8dade8df3236da7864605695e57a89af.bakert
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\ProcessJobs\8dade8df3236da7864605695e57a89af.bakert
+    projectPath: Temp\ProcessJobs\8dade8df3236da7864605695e57a89af.bakert
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\ProcessJobs\cf27f2aaa579d51f0d64e3de9d3421b8.bakert
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\ProcessJobs\cf27f2aaa579d51f0d64e3de9d3421b8.bakert
+    projectPath: Temp\ProcessJobs\cf27f2aaa579d51f0d64e3de9d3421b8.bakert
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityLockfile
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityLockfile
+    projectPath: Temp\UnityLockfile
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-07d5fa070bdc516459f7122ab9a32804
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-07d5fa070bdc516459f7122ab9a32804
+    projectPath: Temp\UnityTempFile-07d5fa070bdc516459f7122ab9a32804
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-18dc6796e94bfc44099ca5f6f2fae4b2
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-18dc6796e94bfc44099ca5f6f2fae4b2
+    projectPath: Temp\UnityTempFile-18dc6796e94bfc44099ca5f6f2fae4b2
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-20134f02e822c814ea9f424b4bc6f4fd
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-20134f02e822c814ea9f424b4bc6f4fd
+    projectPath: Temp\UnityTempFile-20134f02e822c814ea9f424b4bc6f4fd
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-231cac35bb9aa2e4c97ebb86998f157f
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-231cac35bb9aa2e4c97ebb86998f157f
+    projectPath: Temp\UnityTempFile-231cac35bb9aa2e4c97ebb86998f157f
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-254a3d013a6f20240a444294f62aa718
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-254a3d013a6f20240a444294f62aa718
+    projectPath: Temp\UnityTempFile-254a3d013a6f20240a444294f62aa718
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-5a3c878784592944e9446b43b1de220a
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-5a3c878784592944e9446b43b1de220a
+    projectPath: Temp\UnityTempFile-5a3c878784592944e9446b43b1de220a
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-6bd2714b06fbe8547a57a34592a16841
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-6bd2714b06fbe8547a57a34592a16841
+    projectPath: Temp\UnityTempFile-6bd2714b06fbe8547a57a34592a16841
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-750a12f20389b43478e23a87c149569e
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-750a12f20389b43478e23a87c149569e
+    projectPath: Temp\UnityTempFile-750a12f20389b43478e23a87c149569e
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-8ee206804b33d00478f14b744c63f61b
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-8ee206804b33d00478f14b744c63f61b
+    projectPath: Temp\UnityTempFile-8ee206804b33d00478f14b744c63f61b
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-91d705ea64f4f214da7a836c5d616125
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-91d705ea64f4f214da7a836c5d616125
+    projectPath: Temp\UnityTempFile-91d705ea64f4f214da7a836c5d616125
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-a0cc2d3d8f560b64cb5945670371dda7
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-a0cc2d3d8f560b64cb5945670371dda7
+    projectPath: Temp\UnityTempFile-a0cc2d3d8f560b64cb5945670371dda7
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-a27080989e3b39f449fe63ecbcc576c3
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-a27080989e3b39f449fe63ecbcc576c3
+    projectPath: Temp\UnityTempFile-a27080989e3b39f449fe63ecbcc576c3
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-b87b55d1284f7334080b9171977686af
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-b87b55d1284f7334080b9171977686af
+    projectPath: Temp\UnityTempFile-b87b55d1284f7334080b9171977686af
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-c51d2b00b054f82428e9d2c3f4a8c71d
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-c51d2b00b054f82428e9d2c3f4a8c71d
+    projectPath: Temp\UnityTempFile-c51d2b00b054f82428e9d2c3f4a8c71d
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-ce4d85357d1eaa04c9feb20a167d2618
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-ce4d85357d1eaa04c9feb20a167d2618
+    projectPath: Temp\UnityTempFile-ce4d85357d1eaa04c9feb20a167d2618
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-d3dd2d3de4c441140b52ba1616239b71
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-d3dd2d3de4c441140b52ba1616239b71
+    projectPath: Temp\UnityTempFile-d3dd2d3de4c441140b52ba1616239b71
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-dabe7da785457ea4bb0395466908fce0
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-dabe7da785457ea4bb0395466908fce0
+    projectPath: Temp\UnityTempFile-dabe7da785457ea4bb0395466908fce0
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-ecdc890fffa7b6647a3d075e108905ad
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-ecdc890fffa7b6647a3d075e108905ad
+    projectPath: Temp\UnityTempFile-ecdc890fffa7b6647a3d075e108905ad
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-f708a4d75ad937b49a140643c69f5e1e
+    fullPath: D:\MARVIN Reborn\MARVIN\Temp\UnityTempFile-f708a4d75ad937b49a140643c69f5e1e
+    projectPath: Temp\UnityTempFile-f708a4d75ad937b49a140643c69f5e1e
+    originalPath: 
+    status: 1
+    staged: 0

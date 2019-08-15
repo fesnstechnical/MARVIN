@@ -98,7 +98,8 @@ public class UserPointer : MonoBehaviour {
 
         }
 
-
+        //Vector2 radialPosistion = SteamVR_Actions._default.Radial.GetAxis( SteamVR_Input_Sources.RightHand );
+        
         if ( SteamVR_Actions._default.Menu.GetStateUp( SteamVR_Input_Sources.RightHand ) ) { //Right hand controls laser pointer
 
             laserPointer = !laserPointer;
@@ -232,6 +233,10 @@ public class UserPointer : MonoBehaviour {
     private float barSpeed = 0.01f;
     private float healthBarProgression = 1;
 
+    private int framesSinceStateChange = 0;
+    private int minFramesToChangeState = 90;
+    private bool stateChangeAllowed = true;
+
     private void updateHUD() {
         
         float doseAccumulated = Controller.getController().getUser().getAccumulatedDose();
@@ -239,31 +244,67 @@ public class UserPointer : MonoBehaviour {
 
         float setValue = healthBar.value;
 
-        if ( doseRate > minDoseTriggerRate ) {
-            
-            if ( !isTakingSignificantDose ) {
+        if ( !stateChangeAllowed ) {
 
-                isTakingSignificantDose = true;
-                playSound( shieldLow , true );
+            if ( framesSinceStateChange < minFramesToChangeState ) {
+
+                framesSinceStateChange++;
+
+            }
+            else {
+
+                stateChangeAllowed = true;
+                framesSinceStateChange = 0;
 
             }
 
-            setValue -= barSpeed;
-            if ( setValue < 0 ) { setValue = 0; }
+        }
+
+        if ( doseRate > minDoseTriggerRate ) {
+            
+
+            if ( !isTakingSignificantDose ) {
+
+                if ( stateChangeAllowed ) {
+
+                    isTakingSignificantDose = true;
+                    playSound( shieldLow , true );
+
+                    stateChangeAllowed = false;
+
+
+                }
+
+            }
+            else {
+
+                setValue -= barSpeed;
+                if ( setValue < 0 ) { setValue = 0; }
+
+            }
 
         }
         else {
 
             if ( isTakingSignificantDose ) {
 
-                stopSound();
-                playSound( shieldRecharge , false );
-                isTakingSignificantDose = false;
-                
-            }
+                if ( stateChangeAllowed ) {
 
-            setValue += barSpeed;
-            if ( setValue > 1 ) { setValue = 1; }
+
+                    stopSound();
+                    playSound( shieldRecharge , false );
+                    isTakingSignificantDose = false;
+
+                }
+               
+
+            }
+            else {
+
+                setValue += barSpeed;
+                if ( setValue > 1 ) { setValue = 1; }
+
+            }
 
         }
 

@@ -45,6 +45,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/Radial",
+      "type": "vector2"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },

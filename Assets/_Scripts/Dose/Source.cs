@@ -238,6 +238,12 @@ public class Source : MonoBehaviour {
 
     }
 
+    public bool hasNullTransform() {
+
+        return sourceTransform == null;
+
+    }
+
     //Returns Bq
     public float getActivity( string isotopeName ) {
 
