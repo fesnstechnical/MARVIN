@@ -27,7 +27,7 @@ public class Plume : MonoBehaviour {
     private float chimneyDiameter = 3;
     private float chimneyHeight = 40;
 
-    private float scale = 0.005f;
+    private float scale = 0.01f;
 
     public float rainSpeed = 5f; //m/s
 
@@ -51,9 +51,7 @@ public class Plume : MonoBehaviour {
     private float fieldThickness = 0.1f;
 
     private float sourceActivityRate = 1000000f; //Bq/s, ie how many dunkaroos are we pumping into the air per second
-
-    private float maxSectorHeight = 2f;
-    private int sectorCountVertical = 10;
+    
 
     private float timeAccelerationFactor = 3600;//1 second to 1 hour
 
@@ -114,12 +112,11 @@ public class Plume : MonoBehaviour {
         }
 
         //Calculate air concentration;
-        sectorDeltaTimes = new long[ sectorCount , sectorCountVertical , sectorCount ];
+        sectorDeltaTimes = new long[ sectorCount , sectorCount , sectorCount ];
 
-        airContamination = new float[ sectorCount , sectorCountVertical , sectorCount ];
-        sectorAirGameObjects = new GameObject[ sectorCount , sectorCountVertical , sectorCount ];
-
-        float sectorHeight = maxSectorHeight / sectorCountVertical;
+        airContamination = new float[ sectorCount , sectorCount, sectorCount ];
+        sectorAirGameObjects = new GameObject[ sectorCount , sectorCount, sectorCount ];
+        
         float totalHeight = ( ( 3 * chimneyDiameter * verticalWindVelocity ) / windSpeed ) + chimneyHeight;
 
         long currentTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerMillisecond;
@@ -128,14 +125,14 @@ public class Plume : MonoBehaviour {
 
             for ( int z = 0 ; z < sectorCount ; z++ ) {
 
-                for ( int y = 0 ; y < sectorCountVertical ; y++ ) {
+                for ( int y = 0 ; y < sectorCount ; y++ ) {
 
 
-                    Vector3 relativePosistion = new Vector3( 0 , ( 0.1f + sectorHeight ) / 2 , 0 ) - new Vector3( fieldSize / 2 , 0 , fieldSize / 2 ) + new Vector3( xI * sectorSize , sectorHeight * y , z * sectorSize ) + new Vector3( sectorSize / 2 , 0 , sectorSize / 2 );
+                    Vector3 relativePosistion = new Vector3( 0 , ( 0.1f + sectorSize ) / 2 , 0 ) - new Vector3( fieldSize / 2 , 0 , fieldSize / 2 ) + new Vector3( xI * sectorSize , sectorSize * y , z * sectorSize ) + new Vector3( sectorSize / 2 , 0 , sectorSize / 2 );
 
                     GameObject sector = GameObject.CreatePrimitive( PrimitiveType.Cube );
                     sector.transform.parent = baseObject.transform;
-                    sector.transform.localScale = new Vector3( sectorSize , sectorHeight , sectorSize );
+                    sector.transform.localScale = new Vector3( sectorSize , sectorSize , sectorSize );
                     sector.transform.localPosition = relativePosistion;
 
                     sector.GetComponent<Renderer>().material.shader = Shader.Find( "Transparent/Diffuse" );
@@ -171,8 +168,7 @@ public class Plume : MonoBehaviour {
         //verticalWindVelocity = GameObject.Find( "WindVerticalSpeedBoard" ).GetComponent<ControlInterface>().getValue();
         //thermalStratification = ( ThermalStratifications ) ( ( int ) GameObject.Find( "ThermalStratificationBoard" ).GetComponent<ControlInterface>().getValue() );
         //rainSpeed = GameObject.Find( "RainSpeedBoard" ).GetComponent<ControlInterface>().getValue();
-
-        float sectorHeight = maxSectorHeight / sectorCountVertical;
+        
         float totalHeight = ( ( 3 * chimneyDiameter * verticalWindVelocity ) / windSpeed ) + chimneyHeight;
         int sectorCount = ( int ) ( fieldSize / initialSectorSize );
         float sectorSize = fieldSize / sectorCount;
@@ -188,9 +184,9 @@ public class Plume : MonoBehaviour {
 
             float surfaceContamination = 0f;
 
-            for ( int y = 0 ; y < sectorCountVertical ; y++ ) {
+            for ( int y = 0 ; y < sectorCount ; y++ ) {
 
-                Vector3 relativePosistion = new Vector3( 0 , ( 0.1f + sectorHeight ) / 2 , 0 ) - new Vector3( fieldSize / 2 , 0 , fieldSize / 2 ) + new Vector3( x * sectorSize , sectorHeight * y , z * sectorSize ) + new Vector3( sectorSize / 2 , 0 , sectorSize / 2 );
+                Vector3 relativePosistion = new Vector3( 0 , ( 0.1f + sectorSize ) / 2 , 0 ) - new Vector3( fieldSize / 2 , 0 , fieldSize / 2 ) + new Vector3( x * sectorSize , sectorSize * y , z * sectorSize ) + new Vector3( sectorSize / 2 , 0 , sectorSize / 2 );
                 relativePosistion.Scale( new Vector3( 1 / scale , 1 / scale , 1 / scale ) );
 
                 float adjustedX = ( relativePosistion.x * Mathf.Cos( -windDirection * Mathf.Deg2Rad ) ) - ( relativePosistion.z * Mathf.Sin( -windDirection * Mathf.Deg2Rad ) );

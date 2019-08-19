@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 using Valve.VR.Extras;
-using TMPro;
 using System;
 
 public class UserPointer : MonoBehaviour {
@@ -25,7 +24,7 @@ public class UserPointer : MonoBehaviour {
     private GameObject[] objectFocused = new GameObject[] {};
     private GameObject[] nonObjectFocused = new GameObject[] { };
 
-    private TextMeshPro hudDoseRate;
+    private Text hudDoseRate;
     private Slider healthBar;
 
     public AudioSource audioSource;
@@ -66,7 +65,7 @@ public class UserPointer : MonoBehaviour {
 
         }
 
-        hudDoseRate = GameObject.Find( "HUD Dose Rate" ).GetComponent<TextMeshPro>();
+        hudDoseRate = GameObject.Find( "HUD Dose Rate" ).GetComponent<Text>();
 
         if ( objectFocused.Length == 0 ) {
 
