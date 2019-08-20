@@ -13,61 +13,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 5
-  lastUpdatedAtString: 2019-08-19T15:31:49.537-04:00
-  initializedAtString: 2019-08-19T15:27:06.753-04:00
+  lastUpdatedAtString: 2019-08-20T12:36:36.997-04:00
+  initializedAtString: 2019-08-20T12:26:49.695-04:00
   entries:
-  - path: .vs\MARVIN_2.0\v15\Server\sqlite3\db.lock
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\.vs\MARVIN_2.0\v15\Server\sqlite3\db.lock
-    projectPath: .vs\MARVIN_2.0\v15\Server\sqlite3\db.lock
+  - path: .vs\MARVIN_2.0\v15\.suo
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\.vs\MARVIN_2.0\v15\.suo
+    projectPath: .vs\MARVIN_2.0\v15\.suo
     originalPath: 
-    status: 1
+    status: 3
     staged: 0
   - path: .vs\MARVIN_2.0\v15\Server\sqlite3\storage.ide
     fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\.vs\MARVIN_2.0\v15\Server\sqlite3\storage.ide
     projectPath: .vs\MARVIN_2.0\v15\Server\sqlite3\storage.ide
     originalPath: 
-    status: 1
+    status: 3
     staged: 0
   - path: .vs\MARVIN_2.0\v15\Server\sqlite3\storage.ide-shm
     fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\.vs\MARVIN_2.0\v15\Server\sqlite3\storage.ide-shm
     projectPath: .vs\MARVIN_2.0\v15\Server\sqlite3\storage.ide-shm
     originalPath: 
-    status: 1
+    status: 3
     staged: 0
   - path: .vs\MARVIN_2.0\v15\Server\sqlite3\storage.ide-wal
     fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\.vs\MARVIN_2.0\v15\Server\sqlite3\storage.ide-wal
     projectPath: .vs\MARVIN_2.0\v15\Server\sqlite3\storage.ide-wal
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Assembly-CSharp.csproj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assembly-CSharp.csproj
-    projectPath: Assembly-CSharp.csproj
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Assembly-CSharp-Editor.csproj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assembly-CSharp-Editor.csproj
-    projectPath: Assembly-CSharp-Editor.csproj
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Assembly-CSharp-Editor-firstpass.csproj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assembly-CSharp-Editor-firstpass.csproj
-    projectPath: Assembly-CSharp-Editor-firstpass.csproj
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Assets\_Scenes\ERC Basement Shielding Lab.unity
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\_Scenes\ERC Basement
-      Shielding Lab.unity
-    projectPath: Assets\_Scenes\ERC Basement Shielding Lab.unity
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Assets\_Scripts\Interface\UserPointer.cs
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\_Scripts\Interface\UserPointer.cs
-    projectPath: Assets\_Scripts\Interface\UserPointer.cs
     originalPath: 
     status: 3
     staged: 0
@@ -77,155 +46,45 @@ MonoBehaviour:
     originalPath: 
     status: 3
     staged: 0
-  - path: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\About\Scripts.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\About\Scripts.meta
-    projectPath: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\About\Scripts.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Materials.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Materials.meta
-    projectPath: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Materials.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Decor.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Decor.meta
-    projectPath: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Decor.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Props.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Props.meta
-    projectPath: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Props.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Doors_Windows.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Doors_Windows.meta
-    projectPath: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Doors_Windows.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Floors_Ceilings.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Floors_Ceilings.meta
-    projectPath: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Floors_Ceilings.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Pillars_Supports.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Pillars_Supports.meta
-    projectPath: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Pillars_Supports.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Stairs_Ramps.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Stairs_Ramps.meta
-    projectPath: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Stairs_Ramps.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Walls.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Walls.meta
-    projectPath: Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\SciFi_Industrial\Prefabs\Structure\Walls.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\Environment Props\quarter.blend.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter.blend.meta
-    projectPath: Assets\Environment Props\quarter.blend.meta
+  - path: Assets\Environment Props\cone.blend
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\cone.blend
+    projectPath: Assets\Environment Props\cone.blend
     originalPath: 
     status: 1
     staged: 0
-  - path: Assets\Environment Props\quarter.mtl
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter.mtl
-    projectPath: Assets\Environment Props\quarter.mtl
+  - path: Assets\Environment Props\cone.blend.meta
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\cone.blend.meta
+    projectPath: Assets\Environment Props\cone.blend.meta
     originalPath: 
     status: 1
     staged: 0
-  - path: Assets\Environment Props\quarter.mtl.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter.mtl.meta
-    projectPath: Assets\Environment Props\quarter.mtl.meta
+  - path: Assets\Environment Props\cone.mtl
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\cone.mtl
+    projectPath: Assets\Environment Props\cone.mtl
     originalPath: 
     status: 1
     staged: 0
-  - path: Assets\Environment Props\quarter.obj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter.obj
-    projectPath: Assets\Environment Props\quarter.obj
+  - path: Assets\Environment Props\cone.mtl.meta
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\cone.mtl.meta
+    projectPath: Assets\Environment Props\cone.mtl.meta
     originalPath: 
     status: 1
     staged: 0
-  - path: Assets\Environment Props\quarter.obj.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter.obj.meta
-    projectPath: Assets\Environment Props\quarter.obj.meta
+  - path: Assets\Resources\cone.obj
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Resources\cone.obj
+    projectPath: Assets\Resources\cone.obj
     originalPath: 
     status: 1
     staged: 0
-  - path: Assets\Environment Props\quarter_cylinder.blend
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter_cylinder.blend
-    projectPath: Assets\Environment Props\quarter_cylinder.blend
+  - path: Assets\Resources\cone.obj.meta
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Resources\cone.obj.meta
+    projectPath: Assets\Resources\cone.obj.meta
     originalPath: 
     status: 1
-    staged: 0
-  - path: Assets\Environment Props\quarter_cylinder.blend.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter_cylinder.blend.meta
-    projectPath: Assets\Environment Props\quarter_cylinder.blend.meta
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Assets\Environment Props\quarter_cylinder.mtl
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter_cylinder.mtl
-    projectPath: Assets\Environment Props\quarter_cylinder.mtl
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Assets\Environment Props\quarter_cylinder.mtl.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter_cylinder.mtl.meta
-    projectPath: Assets\Environment Props\quarter_cylinder.mtl.meta
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Assets\Environment Props\quarter_cylinder.obj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter_cylinder.obj
-    projectPath: Assets\Environment Props\quarter_cylinder.obj
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Assets\Environment Props\quarter_cylinder.obj.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\Environment Props\quarter_cylinder.obj.meta
-    projectPath: Assets\Environment Props\quarter_cylinder.obj.meta
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Assets\TextMesh Pro\Editor Resources.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\TextMesh Pro\Editor
-      Resources.meta
-    projectPath: Assets\TextMesh Pro\Editor Resources.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\TextMesh Pro\Examples & Extras\Resources.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\TextMesh Pro\Examples
-      & Extras\Resources.meta
-    projectPath: Assets\TextMesh Pro\Examples & Extras\Resources.meta
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Assets\TextMesh Pro\Plugins.meta
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\TextMesh Pro\Plugins.meta
-    projectPath: Assets\TextMesh Pro\Plugins.meta
-    originalPath: 
-    status: 5
     staged: 0
   - path: Library\assetDatabase3
     fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\assetDatabase3
     projectPath: Library\assetDatabase3
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\CurrentLayout.dwlt
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\CurrentLayout.dwlt
-    projectPath: Library\CurrentLayout.dwlt
     originalPath: 
     status: 3
     staged: 0
@@ -234,12 +93,6 @@ MonoBehaviour:
     projectPath: Library\EditorInstance.json
     originalPath: 
     status: 1
-    staged: 0
-  - path: Library\expandedItems
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\expandedItems
-    projectPath: Library\expandedItems
-    originalPath: 
-    status: 3
     staged: 0
   - path: Library\gfu\cache\gitstatusentries.yaml
     fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\gfu\cache\gitstatusentries.yaml
@@ -259,243 +112,45 @@ MonoBehaviour:
     originalPath: 
     status: 3
     staged: 0
-  - path: Library\LastSceneManagerSetup.txt
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\LastSceneManagerSetup.txt
-    projectPath: Library\LastSceneManagerSetup.txt
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\metadata\07\07f591cb3baf52c4fae19c5c31e253ea
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\07\07f591cb3baf52c4fae19c5c31e253ea
-    projectPath: Library\metadata\07\07f591cb3baf52c4fae19c5c31e253ea
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\07\07f591cb3baf52c4fae19c5c31e253ea.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\07\07f591cb3baf52c4fae19c5c31e253ea.info
-    projectPath: Library\metadata\07\07f591cb3baf52c4fae19c5c31e253ea.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\24\24aacc9a73e9343429770736b8d4af01
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\24\24aacc9a73e9343429770736b8d4af01
-    projectPath: Library\metadata\24\24aacc9a73e9343429770736b8d4af01
+  - path: Library\metadata\2b\2bf5c2b283bb03544a0ad670c2a96f3e
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\2b\2bf5c2b283bb03544a0ad670c2a96f3e
+    projectPath: Library\metadata\2b\2bf5c2b283bb03544a0ad670c2a96f3e
     originalPath: 
     status: 1
     staged: 0
-  - path: Library\metadata\24\24aacc9a73e9343429770736b8d4af01.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\24\24aacc9a73e9343429770736b8d4af01.info
-    projectPath: Library\metadata\24\24aacc9a73e9343429770736b8d4af01.info
+  - path: Library\metadata\2b\2bf5c2b283bb03544a0ad670c2a96f3e.info
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\2b\2bf5c2b283bb03544a0ad670c2a96f3e.info
+    projectPath: Library\metadata\2b\2bf5c2b283bb03544a0ad670c2a96f3e.info
     originalPath: 
     status: 1
     staged: 0
-  - path: Library\metadata\32\321e84505243b514298c5a8abc6b91d6
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\32\321e84505243b514298c5a8abc6b91d6
-    projectPath: Library\metadata\32\321e84505243b514298c5a8abc6b91d6
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\32\321e84505243b514298c5a8abc6b91d6.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\32\321e84505243b514298c5a8abc6b91d6.info
-    projectPath: Library\metadata\32\321e84505243b514298c5a8abc6b91d6.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\57\575ed7b3a53e431498d5e93e4aa938a8
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\57\575ed7b3a53e431498d5e93e4aa938a8
-    projectPath: Library\metadata\57\575ed7b3a53e431498d5e93e4aa938a8
+  - path: Library\metadata\b0\b09eaf677f1d8bc44813dfe8587d8047
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\b0\b09eaf677f1d8bc44813dfe8587d8047
+    projectPath: Library\metadata\b0\b09eaf677f1d8bc44813dfe8587d8047
     originalPath: 
     status: 1
     staged: 0
-  - path: Library\metadata\57\575ed7b3a53e431498d5e93e4aa938a8.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\57\575ed7b3a53e431498d5e93e4aa938a8.info
-    projectPath: Library\metadata\57\575ed7b3a53e431498d5e93e4aa938a8.info
+  - path: Library\metadata\b0\b09eaf677f1d8bc44813dfe8587d8047.info
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\b0\b09eaf677f1d8bc44813dfe8587d8047.info
+    projectPath: Library\metadata\b0\b09eaf677f1d8bc44813dfe8587d8047.info
     originalPath: 
     status: 1
     staged: 0
-  - path: Library\metadata\61\614c29290d084fb4e9b3dc2758844124
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\61\614c29290d084fb4e9b3dc2758844124
-    projectPath: Library\metadata\61\614c29290d084fb4e9b3dc2758844124
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\metadata\6e\6e8ada5775f26b7498f72649cbb84fe0
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\6e\6e8ada5775f26b7498f72649cbb84fe0
-    projectPath: Library\metadata\6e\6e8ada5775f26b7498f72649cbb84fe0
+  - path: Library\metadata\ca\ca1d04ae5c88c6b40a6df0df0f4a53fd
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\ca\ca1d04ae5c88c6b40a6df0df0f4a53fd
+    projectPath: Library\metadata\ca\ca1d04ae5c88c6b40a6df0df0f4a53fd
     originalPath: 
     status: 1
     staged: 0
-  - path: Library\metadata\6e\6e8ada5775f26b7498f72649cbb84fe0.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\6e\6e8ada5775f26b7498f72649cbb84fe0.info
-    projectPath: Library\metadata\6e\6e8ada5775f26b7498f72649cbb84fe0.info
+  - path: Library\metadata\ca\ca1d04ae5c88c6b40a6df0df0f4a53fd.info
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\ca\ca1d04ae5c88c6b40a6df0df0f4a53fd.info
+    projectPath: Library\metadata\ca\ca1d04ae5c88c6b40a6df0df0f4a53fd.info
     originalPath: 
     status: 1
-    staged: 0
-  - path: Library\metadata\84\84a0afd091f91de47aa6075a6df8263d
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\84\84a0afd091f91de47aa6075a6df8263d
-    projectPath: Library\metadata\84\84a0afd091f91de47aa6075a6df8263d
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\84\84a0afd091f91de47aa6075a6df8263d.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\84\84a0afd091f91de47aa6075a6df8263d.info
-    projectPath: Library\metadata\84\84a0afd091f91de47aa6075a6df8263d.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\94\940e034620b6db949b8e657f59a52ecd
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\94\940e034620b6db949b8e657f59a52ecd
-    projectPath: Library\metadata\94\940e034620b6db949b8e657f59a52ecd
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\94\940e034620b6db949b8e657f59a52ecd.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\94\940e034620b6db949b8e657f59a52ecd.info
-    projectPath: Library\metadata\94\940e034620b6db949b8e657f59a52ecd.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\a4\a41d054a727b30546bd286265aca16f0
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\a4\a41d054a727b30546bd286265aca16f0
-    projectPath: Library\metadata\a4\a41d054a727b30546bd286265aca16f0
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\a4\a41d054a727b30546bd286265aca16f0.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\a4\a41d054a727b30546bd286265aca16f0.info
-    projectPath: Library\metadata\a4\a41d054a727b30546bd286265aca16f0.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\b3\b3d8f5e9b27e8534e8aafbebfd8f9bd7
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\b3\b3d8f5e9b27e8534e8aafbebfd8f9bd7
-    projectPath: Library\metadata\b3\b3d8f5e9b27e8534e8aafbebfd8f9bd7
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\b3\b3d8f5e9b27e8534e8aafbebfd8f9bd7.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\b3\b3d8f5e9b27e8534e8aafbebfd8f9bd7.info
-    projectPath: Library\metadata\b3\b3d8f5e9b27e8534e8aafbebfd8f9bd7.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\bd\bdfc8633117a35c4384cd45c0126a3da
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\bd\bdfc8633117a35c4384cd45c0126a3da
-    projectPath: Library\metadata\bd\bdfc8633117a35c4384cd45c0126a3da
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Library\metadata\bd\bdfc8633117a35c4384cd45c0126a3da.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\bd\bdfc8633117a35c4384cd45c0126a3da.info
-    projectPath: Library\metadata\bd\bdfc8633117a35c4384cd45c0126a3da.info
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Library\metadata\c4\c48ded6bb99f47244b1f5bff2a88e8e2
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\c4\c48ded6bb99f47244b1f5bff2a88e8e2
-    projectPath: Library\metadata\c4\c48ded6bb99f47244b1f5bff2a88e8e2
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Library\metadata\c4\c48ded6bb99f47244b1f5bff2a88e8e2.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\c4\c48ded6bb99f47244b1f5bff2a88e8e2.info
-    projectPath: Library\metadata\c4\c48ded6bb99f47244b1f5bff2a88e8e2.info
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Library\metadata\c8\c8af4721254403b41be99e69049443af
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\c8\c8af4721254403b41be99e69049443af
-    projectPath: Library\metadata\c8\c8af4721254403b41be99e69049443af
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Library\metadata\c8\c8af4721254403b41be99e69049443af.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\c8\c8af4721254403b41be99e69049443af.info
-    projectPath: Library\metadata\c8\c8af4721254403b41be99e69049443af.info
-    originalPath: 
-    status: 1
-    staged: 0
-  - path: Library\metadata\d7\d75ed011402b4dd438515c901181ffd1
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\d7\d75ed011402b4dd438515c901181ffd1
-    projectPath: Library\metadata\d7\d75ed011402b4dd438515c901181ffd1
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\d7\d75ed011402b4dd438515c901181ffd1.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\d7\d75ed011402b4dd438515c901181ffd1.info
-    projectPath: Library\metadata\d7\d75ed011402b4dd438515c901181ffd1.info
-    originalPath: 
-    status: 5
     staged: 0
   - path: Library\metadata\d8\d852c89ff8654564e8ad4807e49e6fb0
     fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\d8\d852c89ff8654564e8ad4807e49e6fb0
     projectPath: Library\metadata\d8\d852c89ff8654564e8ad4807e49e6fb0
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\metadata\e6\e6c0b2c8c73a66a4ebcc11ebaf76836c
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\e6\e6c0b2c8c73a66a4ebcc11ebaf76836c
-    projectPath: Library\metadata\e6\e6c0b2c8c73a66a4ebcc11ebaf76836c
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\e6\e6c0b2c8c73a66a4ebcc11ebaf76836c.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\e6\e6c0b2c8c73a66a4ebcc11ebaf76836c.info
-    projectPath: Library\metadata\e6\e6c0b2c8c73a66a4ebcc11ebaf76836c.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\e7\e7c7f8194f32dff4d8eccbf31f62cb14
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\e7\e7c7f8194f32dff4d8eccbf31f62cb14
-    projectPath: Library\metadata\e7\e7c7f8194f32dff4d8eccbf31f62cb14
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\e7\e7c7f8194f32dff4d8eccbf31f62cb14.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\e7\e7c7f8194f32dff4d8eccbf31f62cb14.info
-    projectPath: Library\metadata\e7\e7c7f8194f32dff4d8eccbf31f62cb14.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\e8\e8b6a22e076a79646bef504c339d0868
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\e8\e8b6a22e076a79646bef504c339d0868
-    projectPath: Library\metadata\e8\e8b6a22e076a79646bef504c339d0868
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\e8\e8b6a22e076a79646bef504c339d0868.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\e8\e8b6a22e076a79646bef504c339d0868.info
-    projectPath: Library\metadata\e8\e8b6a22e076a79646bef504c339d0868.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\e8\e8ea21f070d62ee4fbb78e284a6e6802
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\e8\e8ea21f070d62ee4fbb78e284a6e6802
-    projectPath: Library\metadata\e8\e8ea21f070d62ee4fbb78e284a6e6802
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\e8\e8ea21f070d62ee4fbb78e284a6e6802.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\e8\e8ea21f070d62ee4fbb78e284a6e6802.info
-    projectPath: Library\metadata\e8\e8ea21f070d62ee4fbb78e284a6e6802.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\f9\f9818fe500787bf4d971611ecf78c9aa
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\f9\f9818fe500787bf4d971611ecf78c9aa
-    projectPath: Library\metadata\f9\f9818fe500787bf4d971611ecf78c9aa
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\metadata\f9\f9818fe500787bf4d971611ecf78c9aa.info
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\metadata\f9\f9818fe500787bf4d971611ecf78c9aa.info
-    projectPath: Library\metadata\f9\f9818fe500787bf4d971611ecf78c9aa.info
-    originalPath: 
-    status: 5
-    staged: 0
-  - path: Library\ProjectSettings.asset
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ProjectSettings.asset
-    projectPath: Library\ProjectSettings.asset
     originalPath: 
     status: 3
     staged: 0
@@ -511,81 +166,51 @@ MonoBehaviour:
     originalPath: 
     status: 3
     staged: 0
-  - path: Library\ScriptAssemblies\Assembly-CSharp-Editor.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\Assembly-CSharp-Editor.dll.mdb
-    projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor.dll.mdb
+  - path: Library\ShaderCache\1\1157050fbb66d64d21edb594f1016a69.bin
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ShaderCache\1\1157050fbb66d64d21edb594f1016a69.bin
+    projectPath: Library\ShaderCache\1\1157050fbb66d64d21edb594f1016a69.bin
     originalPath: 
-    status: 3
+    status: 1
     staged: 0
-  - path: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll.mdb
-    projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll.mdb
+  - path: Library\ShaderCache\2\244e436cd79bfcfbcdb95a3fd23bbeb3.bin
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ShaderCache\2\244e436cd79bfcfbcdb95a3fd23bbeb3.bin
+    projectPath: Library\ShaderCache\2\244e436cd79bfcfbcdb95a3fd23bbeb3.bin
     originalPath: 
-    status: 3
+    status: 1
     staged: 0
-  - path: Library\ScriptAssemblies\SteamVR.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\SteamVR.dll.mdb
-    projectPath: Library\ScriptAssemblies\SteamVR.dll.mdb
+  - path: Library\ShaderCache\3\335610a9ea9109e7bf46f8ebad82be0f.bin
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ShaderCache\3\335610a9ea9109e7bf46f8ebad82be0f.bin
+    projectPath: Library\ShaderCache\3\335610a9ea9109e7bf46f8ebad82be0f.bin
     originalPath: 
-    status: 3
+    status: 1
     staged: 0
-  - path: Library\ScriptAssemblies\SteamVR_Actions.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\SteamVR_Actions.dll.mdb
-    projectPath: Library\ScriptAssemblies\SteamVR_Actions.dll.mdb
+  - path: Library\ShaderCache\7\71779b46c06f9ea361da755be38a3246.bin
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ShaderCache\7\71779b46c06f9ea361da755be38a3246.bin
+    projectPath: Library\ShaderCache\7\71779b46c06f9ea361da755be38a3246.bin
     originalPath: 
-    status: 3
+    status: 1
     staged: 0
-  - path: Library\ScriptAssemblies\SteamVR_Editor.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\SteamVR_Editor.dll.mdb
-    projectPath: Library\ScriptAssemblies\SteamVR_Editor.dll.mdb
+  - path: Library\ShaderCache\8\85a4f8f502034f3e5292d80b8d4f33c3.bin
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ShaderCache\8\85a4f8f502034f3e5292d80b8d4f33c3.bin
+    projectPath: Library\ShaderCache\8\85a4f8f502034f3e5292d80b8d4f33c3.bin
     originalPath: 
-    status: 3
+    status: 1
     staged: 0
-  - path: Library\ScriptAssemblies\SteamVR_Input_Editor.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\SteamVR_Input_Editor.dll.mdb
-    projectPath: Library\ScriptAssemblies\SteamVR_Input_Editor.dll.mdb
+  - path: Library\ShaderCache\f\f5b95bbe9f4ec0bd4af8767ee4d8a733.bin
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ShaderCache\f\f5b95bbe9f4ec0bd4af8767ee4d8a733.bin
+    projectPath: Library\ShaderCache\f\f5b95bbe9f4ec0bd4af8767ee4d8a733.bin
     originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\ScriptAssemblies\SteamVR_Windows_EditorHelper.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\SteamVR_Windows_EditorHelper.dll.mdb
-    projectPath: Library\ScriptAssemblies\SteamVR_Windows_EditorHelper.dll.mdb
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll.mdb
-    projectPath: Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll.mdb
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll.mdb
-    projectPath: Library\ScriptAssemblies\Unity.CollabProxy.Editor.dll.mdb
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\ScriptAssemblies\Unity.PackageManagerUI.Editor.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\Unity.PackageManagerUI.Editor.dll.mdb
-    projectPath: Library\ScriptAssemblies\Unity.PackageManagerUI.Editor.dll.mdb
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\ScriptAssemblies\Unity.TextMeshPro.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\Unity.TextMeshPro.dll.mdb
-    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.dll.mdb
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll.mdb
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll.mdb
-    projectPath: Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll.mdb
-    originalPath: 
-    status: 3
+    status: 1
     staged: 0
   - path: Library\shadercompiler-UnityShaderCompiler.exe0.log
     fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\shadercompiler-UnityShaderCompiler.exe0.log
     projectPath: Library\shadercompiler-UnityShaderCompiler.exe0.log
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\StateCache\Hierarchy\78e86f-mainStage.json
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\StateCache\Hierarchy\78e86f-mainStage.json
+    projectPath: Library\StateCache\Hierarchy\78e86f-mainStage.json
     originalPath: 
     status: 3
     staged: 0
@@ -595,137 +220,11 @@ MonoBehaviour:
     originalPath: 
     status: 3
     staged: 0
-  - path: MARVIN_2.0.sln
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\MARVIN_2.0.sln
-    projectPath: MARVIN_2.0.sln
+  - path: Temp\__Backupscenes\0.backup
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\__Backupscenes\0.backup
+    projectPath: Temp\__Backupscenes\0.backup
     originalPath: 
     status: 1
-    staged: 0
-  - path: obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-    projectPath: obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\Assembly-CSharp-Editor-firstpass.csproj.CoreCompileInputs.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\Assembly-CSharp-Editor-firstpass.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\Assembly-CSharp-Editor-firstpass.csproj.CoreCompileInputs.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\SteamVR.csproj.CoreCompileInputs.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\SteamVR.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\SteamVR.csproj.CoreCompileInputs.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\SteamVR.csprojAssemblyReference.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\SteamVR.csprojAssemblyReference.cache
-    projectPath: obj\Debug\SteamVR.csprojAssemblyReference.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\SteamVR_Actions.csproj.CoreCompileInputs.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\SteamVR_Actions.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\SteamVR_Actions.csproj.CoreCompileInputs.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\SteamVR_Actions.csprojAssemblyReference.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\SteamVR_Actions.csprojAssemblyReference.cache
-    projectPath: obj\Debug\SteamVR_Actions.csprojAssemblyReference.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\SteamVR_Editor.csproj.CoreCompileInputs.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\SteamVR_Editor.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\SteamVR_Editor.csproj.CoreCompileInputs.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\SteamVR_Editor.csprojAssemblyReference.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\SteamVR_Editor.csprojAssemblyReference.cache
-    projectPath: obj\Debug\SteamVR_Editor.csprojAssemblyReference.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\SteamVR_Input_Editor.csproj.CoreCompileInputs.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\SteamVR_Input_Editor.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\SteamVR_Input_Editor.csproj.CoreCompileInputs.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\SteamVR_Input_Editor.csprojAssemblyReference.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\SteamVR_Input_Editor.csprojAssemblyReference.cache
-    projectPath: obj\Debug\SteamVR_Input_Editor.csprojAssemblyReference.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: obj\Debug\SteamVR_Windows_EditorHelper.csproj.CoreCompileInputs.cache
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\obj\Debug\SteamVR_Windows_EditorHelper.csproj.CoreCompileInputs.cache
-    projectPath: obj\Debug\SteamVR_Windows_EditorHelper.csproj.CoreCompileInputs.cache
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: ProjectSettings\ProjectSettings.asset
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\ProjectSettings\ProjectSettings.asset
-    projectPath: ProjectSettings\ProjectSettings.asset
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: ProjectSettings\QualitySettings.asset
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\ProjectSettings\QualitySettings.asset
-    projectPath: ProjectSettings\QualitySettings.asset
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: ProjectSettings\UnityConnectSettings.asset
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\ProjectSettings\UnityConnectSettings.asset
-    projectPath: ProjectSettings\UnityConnectSettings.asset
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: SteamVR.csproj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\SteamVR.csproj
-    projectPath: SteamVR.csproj
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: SteamVR_Actions.csproj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\SteamVR_Actions.csproj
-    projectPath: SteamVR_Actions.csproj
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: SteamVR_Editor.csproj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\SteamVR_Editor.csproj
-    projectPath: SteamVR_Editor.csproj
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: SteamVR_Input_Editor.csproj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\SteamVR_Input_Editor.csproj
-    projectPath: SteamVR_Input_Editor.csproj
-    originalPath: 
-    status: 3
-    staged: 0
-  - path: SteamVR_Windows_EditorHelper.csproj
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\SteamVR_Windows_EditorHelper.csproj
-    projectPath: SteamVR_Windows_EditorHelper.csproj
-    originalPath: 
-    status: 3
     staged: 0
   - path: Temp\ProcessJobs\8dade8df3236da7864605695e57a89af.bakert
     fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\ProcessJobs\8dade8df3236da7864605695e57a89af.bakert
@@ -745,9 +244,165 @@ MonoBehaviour:
     originalPath: 
     status: 1
     staged: 0
-  - path: unityProject.vrmanifest
-    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\unityProject.vrmanifest
-    projectPath: unityProject.vrmanifest
+  - path: Temp\UnityTempFile-064f24d56281423469e6d0d927f4206e
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-064f24d56281423469e6d0d927f4206e
+    projectPath: Temp\UnityTempFile-064f24d56281423469e6d0d927f4206e
     originalPath: 
-    status: 3
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-07bfe6ebe8847a2409ff656f6a832d06
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-07bfe6ebe8847a2409ff656f6a832d06
+    projectPath: Temp\UnityTempFile-07bfe6ebe8847a2409ff656f6a832d06
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-0f37d006cb53dcc44953265cad485272
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-0f37d006cb53dcc44953265cad485272
+    projectPath: Temp\UnityTempFile-0f37d006cb53dcc44953265cad485272
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-1d12aa0faddaa6b46841342f29ac4114
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-1d12aa0faddaa6b46841342f29ac4114
+    projectPath: Temp\UnityTempFile-1d12aa0faddaa6b46841342f29ac4114
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-243b1d07db90e4d4788535c7f13229a6
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-243b1d07db90e4d4788535c7f13229a6
+    projectPath: Temp\UnityTempFile-243b1d07db90e4d4788535c7f13229a6
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-4094f7cb182dd9447ae32bb1424290d1
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-4094f7cb182dd9447ae32bb1424290d1
+    projectPath: Temp\UnityTempFile-4094f7cb182dd9447ae32bb1424290d1
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-40c8feea1089d344e86ffa4e7d9d39cf
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-40c8feea1089d344e86ffa4e7d9d39cf
+    projectPath: Temp\UnityTempFile-40c8feea1089d344e86ffa4e7d9d39cf
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-43ccffe50f921e7488259e0cccf49a17
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-43ccffe50f921e7488259e0cccf49a17
+    projectPath: Temp\UnityTempFile-43ccffe50f921e7488259e0cccf49a17
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-51b523a61c20b7e4a91cb6b9b4e73568
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-51b523a61c20b7e4a91cb6b9b4e73568
+    projectPath: Temp\UnityTempFile-51b523a61c20b7e4a91cb6b9b4e73568
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-5e3cfbf96eed1b84dbcaad39fd0ade80
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-5e3cfbf96eed1b84dbcaad39fd0ade80
+    projectPath: Temp\UnityTempFile-5e3cfbf96eed1b84dbcaad39fd0ade80
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-60d0c9c010f3e854c8ea34a38064771b
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-60d0c9c010f3e854c8ea34a38064771b
+    projectPath: Temp\UnityTempFile-60d0c9c010f3e854c8ea34a38064771b
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-676138b2a658fad45a7055d3213e98a2
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-676138b2a658fad45a7055d3213e98a2
+    projectPath: Temp\UnityTempFile-676138b2a658fad45a7055d3213e98a2
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-70ffd1dcfdcff5e409e5ed1d78f953ee
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-70ffd1dcfdcff5e409e5ed1d78f953ee
+    projectPath: Temp\UnityTempFile-70ffd1dcfdcff5e409e5ed1d78f953ee
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-715f3d40b4189924dbf75f393783c6e3
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-715f3d40b4189924dbf75f393783c6e3
+    projectPath: Temp\UnityTempFile-715f3d40b4189924dbf75f393783c6e3
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-71a07281742381b4fa06c77ab371685f
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-71a07281742381b4fa06c77ab371685f
+    projectPath: Temp\UnityTempFile-71a07281742381b4fa06c77ab371685f
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-73bb8d6227e4c3d439d58f1d7753587e
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-73bb8d6227e4c3d439d58f1d7753587e
+    projectPath: Temp\UnityTempFile-73bb8d6227e4c3d439d58f1d7753587e
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-915fb918bddc6f4479b0c08c624b3dad
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-915fb918bddc6f4479b0c08c624b3dad
+    projectPath: Temp\UnityTempFile-915fb918bddc6f4479b0c08c624b3dad
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-9a65c4de77c809a4a89b04b7b01c73f6
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-9a65c4de77c809a4a89b04b7b01c73f6
+    projectPath: Temp\UnityTempFile-9a65c4de77c809a4a89b04b7b01c73f6
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-a1c4a598c45c68142822c69f935d8032
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-a1c4a598c45c68142822c69f935d8032
+    projectPath: Temp\UnityTempFile-a1c4a598c45c68142822c69f935d8032
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-aac4ee85b347dee46941408762837a69
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-aac4ee85b347dee46941408762837a69
+    projectPath: Temp\UnityTempFile-aac4ee85b347dee46941408762837a69
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-ad3b136ee07872348962cb9360031ab5
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-ad3b136ee07872348962cb9360031ab5
+    projectPath: Temp\UnityTempFile-ad3b136ee07872348962cb9360031ab5
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-adb6a6503983226408fee83bbff26bb1
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-adb6a6503983226408fee83bbff26bb1
+    projectPath: Temp\UnityTempFile-adb6a6503983226408fee83bbff26bb1
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-b0a88f37087a94946a0c209cc0731cad
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-b0a88f37087a94946a0c209cc0731cad
+    projectPath: Temp\UnityTempFile-b0a88f37087a94946a0c209cc0731cad
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-b6c5f0c3f43a6ec43ad4c37f999ed685
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-b6c5f0c3f43a6ec43ad4c37f999ed685
+    projectPath: Temp\UnityTempFile-b6c5f0c3f43a6ec43ad4c37f999ed685
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-b9fcb33e249525c49bc9f0cff095a205
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-b9fcb33e249525c49bc9f0cff095a205
+    projectPath: Temp\UnityTempFile-b9fcb33e249525c49bc9f0cff095a205
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-ef636aa738003224fa06c6bce93da786
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-ef636aa738003224fa06c6bce93da786
+    projectPath: Temp\UnityTempFile-ef636aa738003224fa06c6bce93da786
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityTempFile-f51e177e292576048ad68fb9bf37e44a
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityTempFile-f51e177e292576048ad68fb9bf37e44a
+    projectPath: Temp\UnityTempFile-f51e177e292576048ad68fb9bf37e44a
+    originalPath: 
+    status: 1
     staged: 0
