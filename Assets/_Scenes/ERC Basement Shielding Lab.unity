@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17307645, g: 0.21631584, b: 0.29831928, a: 1}
+  m_IndirectSpecularColor: {r: 0.17307624, g: 0.21631548, b: 0.29831868, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -498,7 +498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &51549812
 Transform:
   m_ObjectHideFlags: 0
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!1 &52969106 stripped
 GameObject:
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5cc6447590da44fb480f976c91c6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  information: Control interface for moveable platform
+  information: 
   executables: []
 --- !u!4 &55623043 stripped
 Transform:
@@ -1344,7 +1344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 6
+  shield: 0
   nom: 
 --- !u!64 &139524828
 MeshCollider:
@@ -3186,7 +3186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af5cbe125b11904e88f7373b7ff1b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflector: 1
+  reflector: 0
 --- !u!1 &233213370
 GameObject:
   m_ObjectHideFlags: 0
@@ -3796,7 +3796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!1001 &283302588
 PrefabInstance:
@@ -4262,7 +4262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &307449075
 Transform:
   m_ObjectHideFlags: 0
@@ -4426,7 +4426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!1001 &320779197
 PrefabInstance:
@@ -4777,8 +4777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
-  nom: Concrete (Ordinary)
+  shield: 0
+  nom: 
 --- !u!1 &339027858
 GameObject:
   m_ObjectHideFlags: 0
@@ -5652,7 +5652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!1 &426246445
 GameObject:
@@ -6009,7 +6009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!65 &434639471
 BoxCollider:
@@ -6913,7 +6913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!1 &520339718
 GameObject:
@@ -7146,17 +7146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe41f7badaae7f49a20e53a61a711ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveClip: {fileID: 8300000, guid: ba52b96115adfab40a5fae3eb025563e, type: 3}
-  stopClip: {fileID: 8300000, guid: c8db7f2051dcea7468e1de95b14e1917, type: 3}
-  gammaShields:
-  - thickness: 0.03
-    types: 10
-  - thickness: 0.0033333334
-    types: 11
-  - thickness: 0.01
-    types: 10
-  - thickness: 0.013333334
-    types: 10
+  moveClip: {fileID: 0}
+  stopClip: {fileID: 0}
+  gammaShields: []
 --- !u!1001 &530986684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7585,7 +7577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!1 &551004806 stripped
 GameObject:
@@ -7664,7 +7656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!65 &557997603
 BoxCollider:
@@ -7828,7 +7820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!1 &589933455
 GameObject:
@@ -8345,7 +8337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a245cd2285383f4bb87a95736f6629a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intervals: 45
+  intervals: 0
 --- !u!1 &636962979
 GameObject:
   m_ObjectHideFlags: 0
@@ -8541,8 +8533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
-  nom: Concrete (Ordinary)
+  shield: 0
+  nom: 
 --- !u!1 &651184244
 GameObject:
   m_ObjectHideFlags: 0
@@ -9236,8 +9228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 3
-  nom: Concrete (Ordinary)
+  shield: 0
+  nom: 
 --- !u!1 &711781100
 GameObject:
   m_ObjectHideFlags: 0
@@ -9437,11 +9429,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d852c89ff8654564e8ad4807e49e6fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thermalStratification: 2
+  thermalStratification: 0
   windDirection: 0
   verticalWindVelocity: 10
   windSpeed: 10
-  rainSpeed: 0
+  rainSpeed: 5
 --- !u!1001 &719987672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10515,12 +10507,47 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6065427501502761242, guid: b0916c4c59597bd479565216637187b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6065427501502761222, guid: b0916c4c59597bd479565216637187b3,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6065427501502761242, guid: b0916c4c59597bd479565216637187b3,
+    - target: {fileID: 6065427501084554353, guid: b0916c4c59597bd479565216637187b3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065427501095124524, guid: b0916c4c59597bd479565216637187b3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6177170972742225096, guid: b0916c4c59597bd479565216637187b3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 183727267831821137, guid: b0916c4c59597bd479565216637187b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054629459959828991, guid: b0916c4c59597bd479565216637187b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8264308418481389501, guid: b0916c4c59597bd479565216637187b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504849976151441544, guid: b0916c4c59597bd479565216637187b3,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -10605,11 +10632,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SendMessage
       objectReference: {fileID: 0}
-    - target: {fileID: 6065427501084554353, guid: b0916c4c59597bd479565216637187b3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6597525619371412954, guid: b0916c4c59597bd479565216637187b3,
         type: 3}
       propertyPath: m_Text
@@ -10686,36 +10708,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_MinSize
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 183727267831821137, guid: b0916c4c59597bd479565216637187b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054629459959828991, guid: b0916c4c59597bd479565216637187b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8264308418481389501, guid: b0916c4c59597bd479565216637187b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504849976151441544, guid: b0916c4c59597bd479565216637187b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6065427501095124524, guid: b0916c4c59597bd479565216637187b3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6177170972742225096, guid: b0916c4c59597bd479565216637187b3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0916c4c59597bd479565216637187b3, type: 3}
@@ -10949,11 +10941,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -61.50028, y: 0.00008010864, z: -0.000008599276}
+  savedPos: {x: -117.70031, y: 153.80002, z: -0.000015298841}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 160, y: 30}
-  savedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  savedTextUV0: {x: 0.640625, y: 0.08984375}
+  savedColor: {r: 0.36320752, g: 0.5971304, b: 1, a: 1}
+  savedTextUV0: {x: 0.6015625, y: 0.0546875}
   savedFill: 0
 --- !u!114 &816307469
 MonoBehaviour:
@@ -11419,10 +11411,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47dbf1db4a905b478336bf257c66398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 881076154}
-  openClip: {fileID: 8300000, guid: 28825aa25192c4342aff18705522c2e0, type: 3}
-  closeClip: {fileID: 8300000, guid: 95a8bf0c02ab9504a928e7170b961cfd, type: 3}
-  clickClip: {fileID: 8300000, guid: 7b68062da7da1da46844855489894863, type: 3}
+  rigidBody: {fileID: 0}
+  openClip: {fileID: 0}
+  closeClip: {fileID: 0}
+  clickClip: {fileID: 0}
 --- !u!65 &870405341
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11938,7 +11930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!1001 &903702905
 PrefabInstance:
@@ -12481,8 +12473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
-  nom: Concrete (Ordinary)
+  shield: 0
+  nom: 
 --- !u!1 &938103251
 GameObject:
   m_ObjectHideFlags: 0
@@ -12528,7 +12520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a245cd2285383f4bb87a95736f6629a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intervals: 5
+  intervals: 0
 --- !u!1 &944809009
 GameObject:
   m_ObjectHideFlags: 0
@@ -12574,7 +12566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a245cd2285383f4bb87a95736f6629a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intervals: 5
+  intervals: 0
 --- !u!1 &954208272
 GameObject:
   m_ObjectHideFlags: 0
@@ -12956,7 +12948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!4 &994397527 stripped
 Transform:
@@ -13017,7 +13009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1002242209
 Transform:
   m_ObjectHideFlags: 0
@@ -13048,13 +13040,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804df4814f58c494eb0c5d792536be3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshPro: {fileID: 1087426507}
-  rotaingHandle: {fileID: 620077567}
+  textMeshPro: {fileID: 0}
+  rotaingHandle: {fileID: 0}
   minValue: 0
-  maxValue: 5
-  text: 'RAIN SPEED
-
-    {x} M/S'
+  maxValue: 0
+  text: 
   textArray: []
 --- !u!1001 &1020554265
 PrefabInstance:
@@ -14083,7 +14073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!1 &1097557302
 GameObject:
@@ -14131,7 +14121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!65 &1097557305
 BoxCollider:
@@ -14207,7 +14197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1116147447
 Transform:
   m_ObjectHideFlags: 0
@@ -14238,19 +14228,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804df4814f58c494eb0c5d792536be3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshPro: {fileID: 1209766212}
-  rotaingHandle: {fileID: 2117810117}
+  textMeshPro: {fileID: 0}
+  rotaingHandle: {fileID: 0}
   minValue: 0
-  maxValue: 4
-  text: 'Thermal Stratification
-
-    {x}'
-  textArray:
-  - Extremely stable
-  - Moderately stable
-  - Neutral
-  - Moderately unstable
-  - Extremely unstable
+  maxValue: 0
+  text: 
+  textArray: []
 --- !u!1 &1122992235
 GameObject:
   m_ObjectHideFlags: 0
@@ -14817,7 +14800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5cc6447590da44fb480f976c91c6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  information: Plume model
+  information: 
   executables: []
 --- !u!1 &1175483372
 GameObject:
@@ -14923,8 +14906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
-  nom: Wood
+  shield: 0
+  nom: 
 --- !u!1 &1191183451
 GameObject:
   m_ObjectHideFlags: 0
@@ -15154,7 +15137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!1 &1200064037
 GameObject:
@@ -15172,7 +15155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1200064038
 Transform:
   m_ObjectHideFlags: 0
@@ -15201,7 +15184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a245cd2285383f4bb87a95736f6629a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intervals: 5
+  intervals: 0
 --- !u!1 &1202439222
 GameObject:
   m_ObjectHideFlags: 0
@@ -15218,7 +15201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1202439223
 Transform:
   m_ObjectHideFlags: 0
@@ -15249,13 +15232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804df4814f58c494eb0c5d792536be3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshPro: {fileID: 230001357}
-  rotaingHandle: {fileID: 938103253}
+  textMeshPro: {fileID: 0}
+  rotaingHandle: {fileID: 0}
   minValue: 0
-  maxValue: 5
-  text: 'Wind Speed (vertical)
-
-    {x} m/s'
+  maxValue: 0
+  text: 
   textArray: []
 --- !u!1 &1208085529
 GameObject:
@@ -15361,8 +15342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
-  nom: Wood
+  shield: 0
+  nom: 
 --- !u!1 &1209766210
 GameObject:
   m_ObjectHideFlags: 0
@@ -16400,8 +16381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
-  nom: Wood
+  shield: 0
+  nom: 
 --- !u!1 &1316414686
 GameObject:
   m_ObjectHideFlags: 0
@@ -16550,7 +16531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1323728264
 Transform:
   m_ObjectHideFlags: 0
@@ -16801,7 +16782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 6
+  shield: 0
   nom: 
 --- !u!64 &1357213409
 MeshCollider:
@@ -16910,7 +16891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1364912146
 Transform:
   m_ObjectHideFlags: 0
@@ -16941,13 +16922,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804df4814f58c494eb0c5d792536be3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshPro: {fileID: 63619910}
-  rotaingHandle: {fileID: 1200064039}
+  textMeshPro: {fileID: 0}
+  rotaingHandle: {fileID: 0}
   minValue: 0
-  maxValue: 30
-  text: 'Wind Speed
-
-    {x} m/s'
+  maxValue: 0
+  text: 
   textArray: []
 --- !u!1 &1365931226
 GameObject:
@@ -19125,8 +19104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
-  nom: Wood
+  shield: 0
+  nom: 
 --- !u!1 &1472738100
 GameObject:
   m_ObjectHideFlags: 0
@@ -19231,7 +19210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!1 &1474737578
 GameObject:
@@ -19290,12 +19269,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 0
   quality: 1
-  interactable: 0
-  blocksRaycasts: 0
-  raycastMyLayerOnly: 0
+  interactable: 1
+  blocksRaycasts: 1
+  raycastMyLayerOnly: 1
   forceUseBoxCollider: 0
-  angle: 1
-  preserveAspect: 0
+  angle: 90
+  preserveAspect: 1
   vertAngle: 90
   ringFill: 0.5
   ringExternalDiamater: 1000
@@ -19532,7 +19511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!1 &1509438408
 GameObject:
@@ -19988,7 +19967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shield: 0
-  nom: Concrete (Ordinary)
+  nom: 
 --- !u!1 &1544923831
 GameObject:
   m_ObjectHideFlags: 0
@@ -20170,7 +20149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!65 &1570891100
 BoxCollider:
@@ -20276,8 +20255,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialActivity: 15
   unit: 0
-  firstUse: 0
-  originalDate: 2010-04-22 12:00
+  firstUse: 1
+  originalDate: 
   enableComposistionEvolution: 1
   isotopes:
   - concentration: 1
@@ -20335,14 +20314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5cc6447590da44fb480f976c91c6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  information: 'Hopewell G-10 Cs-137 gamma irradiator
-
-    Contains a 1 mCi Cs-137 encapsulated source
-
-    Features attenuator plates composed on lead with varying thicknesses'
-  executables:
-  - buttonText: Toggle attenuation plates
-    controllerTriggerName: ToggleGammaAll
+  information: 
+  executables: []
 --- !u!1001 &1597045517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20632,10 +20605,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c231c20d72577e14bb79b0a1221b6c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 1611337760}
-  adjustCountRate: 0
+  ps: {fileID: 1683241980}
+  adjustCountRate: 1
   useAccurateParticleModel: 0
-  taylorApproximation: 0
+  taylorApproximation: 1
 --- !u!199 &1611337759
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -25314,7 +25287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f512ba590986e6e43a5595be92a852dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 1611337760}
+  ps: {fileID: 1683241980}
 --- !u!1 &1633280050
 GameObject:
   m_ObjectHideFlags: 0
@@ -25523,7 +25496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!65 &1641516566
 BoxCollider:
@@ -26019,6 +25992,12 @@ Transform:
   m_Father: {fileID: 881076153}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1683241980 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19818464, guid: 496fa247adc61d44ebaeaf9d72671287,
+    type: 3}
+  m_PrefabInstance: {fileID: 1639602233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1690896607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26874,7 +26853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!1001 &1729207410
 PrefabInstance:
@@ -27992,7 +27971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1875871850
 Transform:
   m_ObjectHideFlags: 0
@@ -28023,13 +28002,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804df4814f58c494eb0c5d792536be3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshPro: {fileID: 662001998}
-  rotaingHandle: {fileID: 944809011}
+  textMeshPro: {fileID: 0}
+  rotaingHandle: {fileID: 0}
   minValue: 0
-  maxValue: 360
-  text: 'Wind Direction
-
-    {x} deg'
+  maxValue: 0
+  text: 
   textArray: []
 --- !u!1 &1876524458
 GameObject:
@@ -28048,7 +28025,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1876524459
 Transform:
   m_ObjectHideFlags: 0
@@ -28293,7 +28270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!4 &1900750550 stripped
 Transform:
@@ -28507,11 +28484,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
   savedPos: {x: 0, y: 0, z: 0}
-  savedUp: {x: 0, y: 1, z: 0}
-  savedRectSize: {x: 800, y: 600}
-  savedColor: {r: 1, g: 1, b: 1, a: 0.392}
+  savedUp: {x: 0, y: 0, z: 0}
+  savedRectSize: {x: 0, y: 0}
+  savedColor: {r: 0, g: 0, b: 0, a: 0}
   savedTextUV0: {x: 0, y: 0}
-  savedFill: 1
+  savedFill: 0
 --- !u!114 &1902557283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28601,7 +28578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 4
+  shield: 0
   nom: 
 --- !u!65 &1922239271
 BoxCollider:
@@ -28765,7 +28742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
+  shield: 0
   nom: 
 --- !u!1 &1933175483
 GameObject:
@@ -28782,7 +28759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1933175484
 Transform:
   m_ObjectHideFlags: 0
@@ -29006,7 +28983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 3
+  shield: 0
   nom: 
 --- !u!1 &1958846968
 GameObject:
@@ -30860,8 +30837,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfab21589c5d924381411c032543042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: 1
-  nom: Wood
+  shield: 0
+  nom: 
 --- !u!4 &2105820348 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4673545020077960, guid: cfe19d9e308fd5a4085266dbdb2316a9,
@@ -31164,7 +31141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a0075e985c02a4390ca979fedabb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflector: {fileID: 230804255}
+  reflector: {fileID: 0}
 --- !u!1 &2117810115
 GameObject:
   m_ObjectHideFlags: 0
@@ -31210,7 +31187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a245cd2285383f4bb87a95736f6629a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intervals: 45
+  intervals: 0
 --- !u!1 &2118807318
 GameObject:
   m_ObjectHideFlags: 0
