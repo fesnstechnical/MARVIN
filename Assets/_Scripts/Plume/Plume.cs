@@ -76,24 +76,94 @@ public class Plume : MonoBehaviour {
         baseObject.transform.localScale = new Vector3( 1 , 1 , 1 );
         baseObject.transform.localPosition = new Vector3( 0 , 2.55f , 0 );
 
-        field = GameObject.CreatePrimitive( PrimitiveType.Cube );
-        field.transform.parent = baseObject.transform;
-        field.transform.localScale = new Vector3( fieldSize , fieldThickness , fieldSize );
-        field.transform.localPosition = new Vector3( 0 , 0 , 0 );
-        field.GetComponent<Renderer>().material.color = new Color( 0 , 1 , 0 );
+        //field = GameObject.CreatePrimitive( PrimitiveType.Cube );
+        //field.transform.parent = baseObject.transform;
+        //field.transform.localScale = new Vector3( fieldSize , fieldThickness , fieldSize );
+        //field.transform.localPosition = new Vector3( 0 , 0 , 0 );
+        //field.GetComponent<Renderer>().material.color = new Color( 0 , 1 , 0 );
+
+        //Create the sectors
+        int sectorCount = (int)(fieldSize / initialSectorSize);
+        float sectorSize = fieldSize / sectorCount;
+
+        sectorGameObjects = new GameObject[sectorCount, sectorCount];
+        relativeContamination = new float[sectorCount, sectorCount];
+
+
+        //terrain floor
+        float[,] terrainHeights = new float[sectorCount + 1, sectorCount + 1];
+        float bumbiness = 0.4f;
+
+        for (int x = 0; x < sectorCount + 1; x++) {
+
+            for (int z = 0; z < sectorCount + 1; z++) {
+
+                terrainHeights[x, z] = Random.Range(-1f, 1f) * bumbiness;
+
+            }
+
+        }
+
+        for (int x = 0; x < sectorCount; x++) {
+
+            for (int z = 0; z < sectorCount; z++) {
+
+                GameObject sec = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                sec.transform.parent = baseObject.transform;
+                sec.transform.localScale = new Vector3(sectorSize, sectorThickness, sectorSize);
+                sec.transform.localPosition = new Vector3(0, (0.1f + sectorThickness) / 2, 0) - new Vector3(fieldSize / 2, 0, fieldSize / 2) + new Vector3(x * sectorSize, 0, z * sectorSize) + new Vector3(sectorSize / 2, 0, sectorSize / 2) + new Vector3(0, -sectorThickness, 0);
+
+                Vector3[] vertices = {
+                    new Vector3 (0, 0, 0),
+                    new Vector3 (1, 0, 0),
+                    //new Vector3 (1, 1 + terrainHeights[x,z], 0), //
+                    //new Vector3 (0, 1 + terrainHeights[x+1,z], 0), //
+                    //new Vector3 (0, 1 + terrainHeights[x+1,z+1], 1), //
+                    //new Vector3 (1, 1 + terrainHeights[x,z+1], 1), //
+                    new Vector3 (1, 1 + terrainHeights[ x + 1 , z ] , 0), //Bottom right
+                    new Vector3 (0, 1 + terrainHeights[ x , z ] , 0), //Bottom left
+                    new Vector3 (0, 1 + terrainHeights[ x , z + 1 ] , 1), //Top left
+                    new Vector3 (1, 1 + terrainHeights[ x  + 1, z + 1 ] , 1), //Top right
+                    new Vector3 (1, 0, 1),
+                    new Vector3 (0, 0, 1),
+                };
+
+                int[] triangles = {
+                    0, 2, 1, //face front
+			        0, 3, 2,
+                    2, 3, 4, //face top
+			        2, 4, 5,
+                    1, 2, 5, //face right
+			        1, 5, 6,
+                    0, 7, 4, //face left
+			        0, 4, 3,
+                    5, 4, 7, //face back
+			        5, 7, 6,
+                    0, 6, 7, //face bottom
+			        0, 1, 6
+                };
+
+                Mesh mesh = sec.GetComponent<MeshFilter>().mesh;
+                mesh.Clear();
+                mesh.name = x + ":" + z;
+                mesh.vertices = vertices;
+                mesh.triangles = triangles;
+                mesh.RecalculateNormals();
+                Material mat = Resources.Load("GrassMaterial", typeof(Material)) as Material;
+                mat.SetFloat("_Metallic/Smoothness", 0);
+                sec.GetComponent<Renderer>().material = mat;
+
+            }
+
+        }
+
 
         stack = GameObject.CreatePrimitive( PrimitiveType.Cylinder );
         stack.transform.parent = baseObject.transform;
         stack.transform.localScale = new Vector3( chimneyDiameter * scale , ( chimneyHeight / 2 ) * scale , chimneyDiameter * scale );
-        stack.transform.localPosition = new Vector3( 0 , ( ( chimneyHeight / 2 ) * scale ) + ( field.transform.localScale.y / 2 ) , 0 );
+        stack.transform.localPosition = new Vector3( 0 , ( ( chimneyHeight / 2 ) * scale ) + ( fieldThickness / 2 ) , 0 );
         stack.GetComponent<Renderer>().material.color = new Color( 0.3f , 0.3f , 0.3f );
 
-        //Create the sectors
-        int sectorCount = ( int ) ( fieldSize / initialSectorSize );
-        float sectorSize = fieldSize / sectorCount;
-
-        sectorGameObjects = new GameObject[ sectorCount , sectorCount ];
-        relativeContamination = new float[ sectorCount , sectorCount ];
 
         for ( int x = 0 ; x < sectorCount ; x++ ) {
 
@@ -106,93 +176,21 @@ public class Plume : MonoBehaviour {
                 sector.GetComponent<Renderer>().material.shader = Shader.Find( "Transparent/Diffuse" );
                 sector.SetActive( false );
 
-                sectorGameObjects[ x , z ] = sector; //Sector ZZ9 Plural Z Alpha
-
-            }
-
-        }
-
-        //Calculate air concentration;
-        sectorDeltaTimes = new long[ sectorCount , sectorCount , sectorCount ];
-
-        airContamination = new float[ sectorCount , sectorCount , sectorCount ];
-        sectorAirGameObjects = new GameObject[ sectorCount , sectorCount , sectorCount ];
-
-        float totalHeight = ( ( 3 * chimneyDiameter * verticalWindVelocity ) / windSpeed ) + chimneyHeight;
-
-        long currentTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerMillisecond;
-
-        for ( int xI = 0 ; xI < sectorCount ; xI++ ) {
-
-            for ( int z = 0 ; z < sectorCount ; z++ ) {
-
-                for ( int y = 0 ; y < sectorCount ; y++ ) {
-
-
-                    Vector3 relativePosistion = new Vector3( 0 , ( 0.1f + sectorSize ) / 2 , 0 ) - new Vector3( fieldSize / 2 , 0 , fieldSize / 2 ) + new Vector3( xI * sectorSize , sectorSize * y , z * sectorSize ) + new Vector3( sectorSize / 2 , 0 , sectorSize / 2 );
-
-                    GameObject sector = GameObject.CreatePrimitive( PrimitiveType.Cube );
-                    sector.transform.parent = baseObject.transform;
-                    sector.transform.localScale = new Vector3( sectorSize , sectorSize , sectorSize );
-                    sector.transform.localPosition = relativePosistion;
-
-                    sector.GetComponent<Renderer>().material.shader = Shader.Find( "Transparent/Diffuse" );
-                    sector.GetComponent<Renderer>().material.color = new Color( 0 , 0 , 0 , 0 );
-                    sectorAirGameObjects[ xI , y , z ] = sector;
-                    sector.SetActive( false );
-
-
-                    sectorDeltaTimes[ xI , y , z ] = currentTime;
-
-                }
-
-            }
-
-        }
-
-        int totalSectorCount = ( int ) ( fieldSize / initialSectorSize ) * sectorCount * sectorCount;
-
-        Debug.Log( "Plume model active, rendering " + totalSectorCount + " sectors" );
-
-        //Environmental details
-        //Reactor building
-
-        GameObject reactorHall = GameObject.CreatePrimitive( PrimitiveType.Cylinder );
-        reactorHall.transform.parent = baseObject.transform;
-        reactorHall.transform.localScale = new Vector3( chimneyHeight / 3 , chimneyHeight / 4 , chimneyHeight / 3 ) * scale;
-        reactorHall.transform.localPosition = new Vector3( reactorHall.transform.localScale.x / 2 , reactorHall.transform.localScale.y , 0 );
-
-        GameObject reactorCap = GameObject.CreatePrimitive( PrimitiveType.Sphere );
-        reactorCap.transform.parent = baseObject.transform;
-        reactorCap.transform.localScale = new Vector3( chimneyHeight / 3 , chimneyHeight / 3 , chimneyHeight / 3 ) * scale;
-        reactorCap.transform.localPosition = new Vector3( reactorHall.transform.localScale.x / 2 , reactorHall.transform.localScale.y * 2 , 0 );
-
-        //GameObject tree = createTree(3, 45, 0.2f, 1);
-        //tree.transform.parent = baseObject.transform;
-        //tree.transform.localPosition = new Vector3(0, 0, 0);
-        //tree.name = "TREE";
-
-        float[,] terrainHeights = new float[ sectorCount + 1 , sectorCount + 1 ];
-
-        for ( int x = 0 ; x < sectorCount + 1 ; x++ ) {
-
-            for ( int z = 0 ; z < sectorCount + 1 ; z++ ) {
-
-                terrainHeights[ x , z ] = Random.Range( -1f , 1f ) * 0.2f;
-
-            }
-
-        }
-
-        for ( int x = 0 ; x < sectorCount ; x++ ) {
-
-            for ( int z = 0 ; z < sectorCount ; z++ ) {
-
-                GameObject sec = GameObject.CreatePrimitive( PrimitiveType.Cube );
-                sec.transform.parent = baseObject.transform;
-                sec.transform.localScale = new Vector3( sectorSize , sectorThickness , sectorSize );
-                sec.transform.localPosition = new Vector3( 0 , ( 0.1f + sectorThickness ) / 2 , 0 ) - new Vector3( fieldSize / 2 , 0 , fieldSize / 2 ) + new Vector3( x * sectorSize , 0 , z * sectorSize ) + new Vector3( sectorSize / 2 , 0 , sectorSize / 2 ) + new Vector3( 0 , 1 , 0 );
                 
+
+            }
+
+        }
+
+        for (int x = 0; x < sectorCount; x++) {
+
+            for (int z = 0; z < sectorCount; z++) {
+
+                GameObject sec = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                sec.transform.parent = baseObject.transform;
+                sec.transform.localScale = new Vector3(sectorSize, sectorThickness, sectorSize);
+                sec.transform.localPosition = new Vector3(0, (0.1f + sectorThickness) / 2, 0) - new Vector3(fieldSize / 2, 0, fieldSize / 2) + new Vector3(x * sectorSize, 0, z * sectorSize) + new Vector3(sectorSize / 2, 0, sectorSize / 2) + new Vector3(0, 0, 0);
+
                 Vector3[] vertices = {
                     new Vector3 (0, 0, 0),
                     new Vector3 (1, 0, 0),
@@ -230,9 +228,96 @@ public class Plume : MonoBehaviour {
                 mesh.triangles = triangles;
                 mesh.RecalculateNormals();
 
+
+                sec.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
+                sec.SetActive(false);
+                sectorGameObjects[x, z] = sec; //Sector ZZ9 Plural Z Alpha
+
             }
 
         }
+
+        //Calculate air concentration;
+        sectorDeltaTimes = new long[ sectorCount , sectorCount , sectorCount ];
+
+        airContamination = new float[ sectorCount , sectorCount , sectorCount ];
+        sectorAirGameObjects = new GameObject[ sectorCount , sectorCount , sectorCount ];
+
+        float totalHeight = ( ( 3 * chimneyDiameter * verticalWindVelocity ) / windSpeed ) + chimneyHeight;
+
+        long currentTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerMillisecond;
+
+        for ( int xI = 0 ; xI < sectorCount ; xI++ ) {
+
+            for ( int z = 0 ; z < sectorCount ; z++ ) {
+
+                for ( int y = 0 ; y < sectorCount ; y++ ) {
+
+
+                    Vector3 relativePosistion = new Vector3( 0 , ( 0.1f + sectorSize ) / 2 , 0 ) - new Vector3( fieldSize / 2 , 0 , fieldSize / 2 ) + new Vector3( xI * sectorSize , sectorSize * y , z * sectorSize ) + new Vector3( sectorSize / 2 , 0 , sectorSize / 2 );
+
+                    GameObject sector = GameObject.CreatePrimitive( PrimitiveType.Cube );
+                    sector.transform.parent = baseObject.transform;
+                    sector.transform.localScale = new Vector3( sectorSize , sectorSize , sectorSize );
+                    sector.transform.localPosition = relativePosistion;
+
+                    sector.GetComponent<Renderer>().material.shader = Shader.Find( "Transparent/Diffuse" );
+                    sector.GetComponent<Renderer>().material.color = new Color( 0 , 0 , 0 , 0 );
+                    sectorAirGameObjects[ xI , y , z ] = sector;
+                    sector.SetActive( false );
+                    
+                    sectorDeltaTimes[ xI , y , z ] = currentTime;
+
+                }
+
+            }
+
+        }
+
+        int totalSectorCount = ( int ) ( fieldSize / initialSectorSize ) * sectorCount * sectorCount;
+
+        Debug.Log( "Plume model active, rendering " + totalSectorCount + " sectors" );
+
+        //Environmental details
+        //Reactor building
+
+        GameObject reactorHall = GameObject.CreatePrimitive( PrimitiveType.Cylinder );
+        reactorHall.transform.parent = baseObject.transform;
+        reactorHall.transform.localScale = new Vector3( chimneyHeight / 3 , chimneyHeight / 4 , chimneyHeight / 3 ) * scale;
+        reactorHall.transform.localPosition = new Vector3( reactorHall.transform.localScale.x / 2 , reactorHall.transform.localScale.y , 0 );
+
+        GameObject reactorCap = GameObject.CreatePrimitive( PrimitiveType.Sphere );
+        reactorCap.transform.parent = baseObject.transform;
+        reactorCap.transform.localScale = new Vector3( chimneyHeight / 3 , chimneyHeight / 3 , chimneyHeight / 3 ) * scale;
+        reactorCap.transform.localPosition = new Vector3( reactorHall.transform.localScale.x / 2 , reactorHall.transform.localScale.y * 2 , 0 );
+
+        //Trees
+
+        float exclusionZone = 50; //Meters
+        float reducedFieldSize = fieldSize * 0.8f;
+
+        int treeCount = Mathf.RoundToInt( Random.Range(0, 240) );
+
+        for ( int i = 0; i < treeCount; i++) {
+
+            GameObject tree = createTree(3 + Random.Range( -0.2f , 0.2f ) , 45, 0.2f, 1 + Random.Range( -0.1f , 0.1f ) );
+            tree.transform.parent = baseObject.transform;
+            tree.transform.localScale = new Vector3(scale, scale, scale);
+            tree.transform.localPosition = new Vector3(Random.Range( -reducedFieldSize / 2 , reducedFieldSize / 2 ) , (fieldThickness / 1) - (3 * scale * 0.5f) + Random.Range( -0.1f * fieldThickness , 0.1f * fieldThickness ) , Random.Range(-reducedFieldSize / 2, reducedFieldSize / 2));
+            tree.name = "TREE";
+            
+            if ( tree.transform.localPosition.magnitude / scale < exclusionZone ) {
+
+                Destroy(tree);
+
+            }
+
+        }
+
+        
+
+        
+
 
 
 
@@ -243,12 +328,22 @@ public class Plume : MonoBehaviour {
 
     private GameObject createTree( float height , float angle , float trunkWidth , float baseWidth ) {
 
+        GameObject tree = new GameObject();
+        
         UnityEngine.Object conePrefab = Resources.Load( "cone" );
 
-        GameObject gameObject = ( GameObject ) GameObject.Instantiate( conePrefab , new Vector3( 0 , 0 , 0 ) , Quaternion.identity );
+        GameObject cone = ( GameObject ) GameObject.Instantiate( conePrefab , new Vector3( 0 , 0 , 0 ) , Quaternion.identity );
+        cone.transform.localScale = new Vector3( baseWidth, height * 0.75f, baseWidth);
+        cone.transform.localPosition = new Vector3(0, cone.transform.localScale.y / 2, 0);
+        cone.transform.parent = tree.transform;
 
-
-        return gameObject;
+        GameObject trunk = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        trunk.transform.localScale.Set(trunkWidth, height / 8, trunkWidth);
+        trunk.transform.localPosition = new Vector3(0, -trunk.transform.localScale.y, 0);
+        trunk.transform.parent = tree.transform;
+        trunk.GetComponent<Renderer>().material.color = new Color(139/255f, 69/255f, 19/255f);
+        
+        return tree;
 
 
     }

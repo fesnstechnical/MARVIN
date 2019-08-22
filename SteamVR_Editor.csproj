@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{7D926DFA-DE8C-1C9F-7258-DD003A6E632B}</ProjectGuid>
+    <ProjectGuid>{E1ABA6E9-355D-684B-9A5E-1BE5B656A516}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>SteamVR_Editor</AssemblyName>
@@ -295,55 +295,55 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.10f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Bhaptics.Tact">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/bHapticsManager/Plugins/Bhaptics.Tact.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/bHapticsManager/Plugins/Bhaptics.Tact.dll</HintPath>
  </Reference>
  <Reference Include="AsyncBridge.Net35">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll</HintPath>
  </Reference>
  <Reference Include="GitHub.Api">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/GitHub.Api.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/Plugins/GitHub/Editor/GitHub.Api.dll</HintPath>
  </Reference>
  <Reference Include="GitHub.Logging">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
  </Reference>
  <Reference Include="GitHub.Unity">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/GitHub.Unity.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/Plugins/GitHub/Editor/GitHub.Unity.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/ICSharpCode.SharpZipLib.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/Plugins/GitHub/Editor/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Posix">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/Mono.Posix.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/Plugins/GitHub/Editor/Mono.Posix.dll</HintPath>
  </Reference>
  <Reference Include="ReadOnlyCollectionsInterfaces">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll</HintPath>
  </Reference>
  <Reference Include="sfw.net">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/Plugins/GitHub/Editor/System.Threading.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/Plugins/GitHub/Editor/System.Threading.dll</HintPath>
  </Reference>
  <Reference Include="Valve.Newtonsoft.Json">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="SyntaxTree.Mono.Cecil">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/UnityVS/Editor/SyntaxTree.Mono.Cecil.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/UnityVS/Editor/SyntaxTree.Mono.Cecil.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
@@ -375,7 +375,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="SteamVR.csproj">
-      <Project>{BA2DF6DB-3214-04B6-43E6-EDAD23C636C6}</Project>      <Name>SteamVR</Name>    </ProjectReference>
+      <Project>{83A9EF49-0ADB-1204-F8B5-24799227CCE1}</Project>      <Name>SteamVR</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

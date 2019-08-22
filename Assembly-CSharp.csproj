@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4CE3F036-7F66-74B5-0AF9-DB705A651036}</ProjectGuid>
+    <ProjectGuid>{33C99E4F-BFB6-8E91-96D0-90B6B5429D14}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -222,19 +222,19 @@
      <None Include="Assets\File\results.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -438,19 +438,19 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.10f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Bhaptics.Tact">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/bHapticsManager/Plugins/Bhaptics.Tact.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/bHapticsManager/Plugins/Bhaptics.Tact.dll</HintPath>
  </Reference>
  <Reference Include="Valve.Newtonsoft.Json">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>C:/Users/Julia/Projects/MARVIN_Cloud/MARVIN Old/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>C:/Users/wallervr/Documents/GitHub/MARVIN_2.0/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
@@ -482,15 +482,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="SteamVR_Actions.csproj">
-      <Project>{8B953C3E-EAC5-2A8F-82FB-39DAA54C1E3D}</Project>      <Name>SteamVR_Actions</Name>    </ProjectReference>
+      <Project>{39A83058-4FE5-B2E3-DAE6-EADA44933775}</Project>      <Name>SteamVR_Actions</Name>    </ProjectReference>
     <ProjectReference Include="SteamVR_Input_Editor.csproj">
-      <Project>{6DFA3CB5-B11B-91C6-9A9E-5E8F29AFC5D0}</Project>      <Name>SteamVR_Input_Editor</Name>    </ProjectReference>
+      <Project>{55A712DE-DD03-E7AB-2532-57D64A320E7E}</Project>      <Name>SteamVR_Input_Editor</Name>    </ProjectReference>
     <ProjectReference Include="SteamVR_Editor.csproj">
-      <Project>{7D926DFA-DE8C-1C9F-7258-DD003A6E632B}</Project>      <Name>SteamVR_Editor</Name>    </ProjectReference>
+      <Project>{E1ABA6E9-355D-684B-9A5E-1BE5B656A516}</Project>      <Name>SteamVR_Editor</Name>    </ProjectReference>
     <ProjectReference Include="SteamVR.csproj">
-      <Project>{BA2DF6DB-3214-04B6-43E6-EDAD23C636C6}</Project>      <Name>SteamVR</Name>    </ProjectReference>
+      <Project>{83A9EF49-0ADB-1204-F8B5-24799227CCE1}</Project>      <Name>SteamVR</Name>    </ProjectReference>
     <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
-      <Project>{5789250B-0080-CCB9-CA92-E7C284A0CD9E}</Project>      <Name>SteamVR_Windows_EditorHelper</Name>    </ProjectReference>
+      <Project>{0C899526-91B1-5C37-2BB0-00D7F4659721}</Project>      <Name>SteamVR_Windows_EditorHelper</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
