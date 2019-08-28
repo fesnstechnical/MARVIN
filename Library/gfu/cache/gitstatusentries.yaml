@@ -13,6 +13,79 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 5
-  lastUpdatedAtString: 2019-08-22T13:42:06.642-04:00
-  initializedAtString: 2019-08-22T13:42:04.767-04:00
-  entries: []
+  lastUpdatedAtString: 2019-08-28T11:43:58.760-04:00
+  initializedAtString: 2019-08-28T11:42:36.548-04:00
+  entries:
+  - path: .vs\MARVIN_2.0\v15\.suo
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\.vs\MARVIN_2.0\v15\.suo
+    projectPath: .vs\MARVIN_2.0\v15\.suo
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Assets\_Scenes\ERC Basement Shielding Lab.unity
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Assets\_Scenes\ERC Basement
+      Shielding Lab.unity
+    projectPath: Assets\_Scenes\ERC Basement Shielding Lab.unity
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\assetDatabase3
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\assetDatabase3
+    projectPath: Library\assetDatabase3
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\CrashedAssetImports.txt
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\CrashedAssetImports.txt
+    projectPath: Library\CrashedAssetImports.txt
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Library\EditorInstance.json
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\EditorInstance.json
+    projectPath: Library\EditorInstance.json
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Library\gfu\cache\gitstatusentries.yaml
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\gfu\cache\gitstatusentries.yaml
+    projectPath: Library\gfu\cache\gitstatusentries.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\gfu\cache\gittrackingstatus.yaml
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\gfu\cache\gittrackingstatus.yaml
+    projectPath: Library\gfu\cache\gittrackingstatus.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\gfu\cache\repoinfo.yaml
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\gfu\cache\repoinfo.yaml
+    projectPath: Library\gfu\cache\repoinfo.yaml
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Library\shadercompiler-UnityShaderCompiler.exe0.log
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Library\shadercompiler-UnityShaderCompiler.exe0.log
+    projectPath: Library\shadercompiler-UnityShaderCompiler.exe0.log
+    originalPath: 
+    status: 3
+    staged: 0
+  - path: Temp\ProcessJobs\8dade8df3236da7864605695e57a89af.bakert
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\ProcessJobs\8dade8df3236da7864605695e57a89af.bakert
+    projectPath: Temp\ProcessJobs\8dade8df3236da7864605695e57a89af.bakert
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\ProcessJobs\cf27f2aaa579d51f0d64e3de9d3421b8.bakert
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\ProcessJobs\cf27f2aaa579d51f0d64e3de9d3421b8.bakert
+    projectPath: Temp\ProcessJobs\cf27f2aaa579d51f0d64e3de9d3421b8.bakert
+    originalPath: 
+    status: 1
+    staged: 0
+  - path: Temp\UnityLockfile
+    fullPath: C:\Users\wallervr\Documents\GitHub\MARVIN_2.0\Temp\UnityLockfile
+    projectPath: Temp\UnityLockfile
+    originalPath: 
+    status: 1
+    staged: 0
